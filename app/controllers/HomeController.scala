@@ -37,7 +37,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   def readMovies = Action.async { implicit request => MovieDAO.readAll() map(idunnoYeah => Ok(views.html.listingsgallery(idunnoYeah))) }
 
-  def readID(id: Int) = Action.async( implicit request =>
-    MovieDAO.readById(id) map(id => Ok(views.html.moviedesc(id)))
-  )
+//  def readID(id: Int) = Action.async( implicit request =>
+//    MovieDAO.readById(id) map(id => Ok(views.html.moviedesc(id)))
+//  )
 }

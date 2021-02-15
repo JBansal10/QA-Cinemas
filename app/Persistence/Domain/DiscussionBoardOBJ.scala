@@ -9,18 +9,27 @@ import slick.lifted.TableQuery
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import slick.jdbc.MySQLProfile.api._
-import java.time.{LocalDate, LocalTime}
 
-case class DiscussionBoard(id: Int, content: String, date: LocalDate, time: LocalTime, postChecker: Boolean)
+import java.time.{LocalDate, LocalDateTime, LocalTime}
+
+object DiscussionBoardOBJ{
+
+case class DiscussionBoard(id: Int, content: String, datetime: LocalDateTime, movieID: Int, mRating: Int, postChecker: Boolean)
+
+val movies = TableQuery[Movies]
 
 case class DiscussionBoards(tag: Tag) extends Table[DiscussionBoard] (tag, "discussionboard") {
   def id = column[Int]("POST_ID", O.AutoInc, O.PrimaryKey)
   def content = column[String]("CONTENT")
-  def date = column[LocalDate]("POST_DATE")
-  def time = column[LocalTime]("POST_TIME")
+  def datetime = column[LocalDateTime]("POST_DATETIME")
+  def movieID = column[Int]("MOVIE_ID")
+  def mRating = column[Int]("MOVIE_RATING")
   def postChecker = column[Boolean]("POST_CHECKER")
-  def * = (id, content, date, time, postChecker) <> (DiscussionBoard.tupled, DiscussionBoard.unapply)
+
+  def movie = foreignKey("fk_movie_id", movieID, movies)(_.id, onDelete = ForeignKeyAction.Cascade)
+  def * = (id, content, datetime, movieID, mRating, postChecker) <> (DiscussionBoard.tupled, DiscussionBoard.unapply)
 }
+
 
 object boardForm {
   val submitForm =
@@ -28,9 +37,11 @@ object boardForm {
       mapping(
         "id" -> number,
         "content" -> nonEmptyText,
-        "date" -> localDate,
-        "time" -> localTime,
+        "datetime" -> localDateTime,
+        "movieID" -> number,
+        "mRating" -> number,
         "postChecker" -> boolean
       )(DiscussionBoard.apply)(DiscussionBoard.unapply)
     )
+}
 }

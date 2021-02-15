@@ -17,4 +17,4 @@ GET     /temp                       controllers.HomeController.tempToDo
 
 GET     /listgallery                controllers.HomeController.listingsGallery
 
-GET     /movie/$id<[0-9]+>          controllers.HomeController.readID(id: Int)
+#GET     /movie/$id<[0-9]+>          controllers.HomeController.readID(id: Int)

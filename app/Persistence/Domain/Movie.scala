@@ -9,7 +9,7 @@ case class Movie(id: Int, mName: String, year: Int, genre: String, desc: String,
 
 }
 
-case class Movies(tag: Tag) extends Table[Movie] (tag, "movies") {
+case class Movies(tag: Tag) extends Table[Movie] (tag, "movie") {
   def id = column[Int]("MOVIE_ID", O.PrimaryKey, O.AutoInc)
   def mName = column[String]("MOVIE_NAME")
   def year = column[Int]("YEAR")

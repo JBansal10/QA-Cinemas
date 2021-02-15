@@ -20,8 +20,15 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.index("Welcome to QA Cinemas!"))
   }
 
-def homepage = Action{
- Ok(views.html.homepage("Welcome to QA Cinemas!"))
-}
-  def tempToDo = TODO
-}
+
+  def homepage = Action{
+   Ok(views.html.homepage("Welcome to QA Cinemas!"))
+  }
+
+  def aboutUs = Action {
+    Ok(views.html.aboutUs())
+  }
+
+ 
+    def tempToDo = TODO
+  }

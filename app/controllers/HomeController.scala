@@ -4,11 +4,14 @@ import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.mvc.Results.{BadRequest, Redirect}
 import Persistence.DAO.MovieDAO
+import Persistence.Domain.Movie
+
 import scala.concurrent.ExecutionContext.Implicits.global
 import javax.inject._
 import play.api.mvc._
 import play.mvc.Action
 
+import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.{Future, TimeoutException}
 import scala.util.{Failure, Success}
 /**
@@ -31,20 +34,26 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   def tempToDo = TODO
 
-  def listingsGallery = Action {
-    Ok(views.html.listingsgallery("This is the Listings Gallery!"))
+  def listingsGallery = Action.async { implicit request =>
+    MovieDAO.readAll() map(movies => {
+      var counter = 0
+      val nested = new ArrayBuffer[Seq[Movie]]
+      val row = new ArrayBuffer[Movie]
+      val it = movies.iterator
+      while (it.hasNext) {
+        row addOne it.next
+        counter += 1
+        if (!it.hasNext) nested addOne row.toSeq
+        if (counter == 3) { counter = 0; nested addOne row.toSeq; row.clear()}
+      }
+      Ok(views.html.listingsgallery(nested.toSeq))
+    })
   }
-
-  def readMovies = Action.async { implicit request => MovieDAO.readAll() map(idunnoYeah => Ok(views.html.listingsgallery(idunnoYeah))) }
 
   def readID(id: Int) = Action.async ( implicit request =>
     MovieDAO.readById(id) map(movie =>
-        movie.isDefined match {
-          case true =>
-            Ok(views.html.movie(movie.get))
-          case false =>
-            Ok(views.html.index("ERROR")) // TODO send to error page
-        }
+        if (movie.isDefined) Ok(views.html.movie(movie.get))
+        else Ok(views.html.index("ERROR"))
       )
   )
 }

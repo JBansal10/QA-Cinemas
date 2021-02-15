@@ -1,113 +1,39 @@
-@(movies: Seq[Any])
+@import Persistence.Domain.Movie
+@(movies: Seq[Seq[Movie]])
 
 
 @main("Welcome to Play") {
-    <!-- TODO make this dynamically take from database -->
-
+    <!-- cards are not centered in their columns for some reason -->
     <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-
-                <div class="panel panel-primary">
-                    <div class="panel-heading" style="text-align: center ">
-                        <h4>Titanic</h4>
+        <div class="card-deck m-2 mb-20">
+            <div class="row">
+                @for(row <- movies) {
+                    <div class="row">
+                    @for(movie <- row) {
+                        <div class="col">
+                            <div class="card text-center m-2" style="width: 22rem;">
+                                <a href="/movie/@movie.id">
+                                    <img class="card-image-top" src='@routes.Assets.versioned("images/" + movie.imageURL)' alt="movie poster">
+                                </a>
+                                <div class="card-body">
+                                    <div class="Rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <h5 class="card-title">@movie.mName</h5>
+                                    <p class="card-text">@movie.desc</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
                     </div>
-                    <div class="panel-body">]
-                        <a href="/movie/1">
-                        <img src="@routes.Assets.versioned("images/titanic.png")"  class="img-responsive"  alt="Titanic">
-                        </a>
-                    </div>
-                    <div class="Rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <div class="panel-footer" style="text-align: center">
-                        <strong>Sad sinking ship.</strong></br>
-                        Romance on a sinking ship.
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading" style="text-align: center "><h4>Finding Nemo</h4></div>
-                    <div class="panel-body"><img src="@routes.Assets.versioned("images/Nemo.png")" class="img-responsive"  alt="Finding Nemo"></div>
-                    <div class="Rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                    </div>
-                    <div class="panel-footer" style="text-align: center "><strong>Lost Fish</strong></br>Fish are friends not food. </div>
-
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading" style="text-align: center "><h4>Toy Story 4</h4></div>
-                    <div class="panel-body"><img src="@routes.Assets.versioned("images/ToyStory.png")" class="img-responsive"   alt="Toy Story"></div>
-                    <div class="Rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                    </div>
-                    <div class="panel-footer" style="text-align: center "><strong>Lost Toy</strong></br>You have a friend in me. </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading" style="text-align: center "><h4>Transformers</h4></div>
-                    <div class="panel-body"><img src="@routes.Assets.versioned("images/Transformers.png")" class="img-responsive"  alt="Transformers"></div>
-                    <div class="Rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                    </div>
-                    <div class="panel-footer" style="text-align: center"><strong>Angry Robots.</strong></div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading" style="text-align: center "><h4>Transformers</h4></div>
-                    <div class="panel-body"><img src="@routes.Assets.versioned("images/Transformers.png")"  class="img-responsive" alt="Titanic"></div>
-                    <div class="Rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                    </div>
-                    <div class="panel-footer" style="text-align: center"><strong>Angry Robots.</strong></div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading" style="text-align: center "><h4>Transformers</h4></div>
-                    <div class="panel-body"><img src="@routes.Assets.versioned("images/Transformers.png")"  class="img-responsive"  alt="Titanic"></div>
-                    <div class="Rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                    </div>
-                    <div class="panel-footer" style="text-align: center"><strong>Angry Robots.</strong></div>
-                </div>
+                }
             </div>
         </div>
     </div>
+
 
 }

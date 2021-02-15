@@ -12,6 +12,16 @@ scalaVersion := "2.13.4"
 
 libraryDependencies ++= Seq( jdbc , ehcache , ws , specs2 % Test , guice )
 
-unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
+unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )
 
-      
+libraryDependencies += "org.scalatestplus" %% "selenium-3-141" % "3.2.2.0" % "test"
+
+libraryDependencies += "org.scalatest" %% "scalatest-flatspec" % "3.2.2" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest-shouldmatchers" % "3.2.2" % "test"
+
+libraryDependencies ++= Seq(
+  "com.typesafe.slick" %% "slick" % "3.3.3",
+  "org.slf4j" % "slf4j-nop" % "1.6.4",
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.3.3",
+  "mysql" % "mysql-connector-java" % "8.0.11"
+)

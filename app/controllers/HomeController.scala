@@ -31,9 +31,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.index("Welcome to QA Cinemas!"))
   }
 
-
-  def tempToDo = TODO
-
   def listingsGallery = Action.async { implicit request =>
     MovieDAO.readAll() map(movies => {
       var counter = 0
@@ -53,7 +50,17 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def readID(id: Int) = Action.async ( implicit request =>
     MovieDAO.readById(id) map(movie =>
         if (movie.isDefined) Ok(views.html.movie(movie.get))
-        else Ok(views.html.index("ERROR"))
+        else Ok(views.html.index("ERROR")) // TODO needs to send to an error page for movie not found
       )
   )
+
+  def homepage = Action{
+   Ok(views.html.homepage("Welcome to QA Cinemas!"))
+  }
+
+  def aboutUs = Action {
+    Ok(views.html.aboutUs())
+  }
+
+  def tempToDo = TODO
 }

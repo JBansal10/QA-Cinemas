@@ -15,4 +15,4 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 GET     /temp                       controllers.HomeController.tempToDo
 
-      
+GET     /listgallery                controllers.HomeController.listingsGallery

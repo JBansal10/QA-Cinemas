@@ -22,4 +22,8 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
 
   def tempToDo = TODO
+
+  def listingsGallery = Action {
+    Ok(views.html.listingsgallery("This is the Listings Gallery!"))
+  }
 }

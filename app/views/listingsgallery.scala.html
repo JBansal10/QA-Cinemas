@@ -2,14 +2,21 @@
 
 
 @main("Welcome to Play") {
-
+    <!-- TODO make this dynamically take from database -->
 
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
+
                 <div class="panel panel-primary">
-                    <div class="panel-heading" style="text-align: center "><h4>Titanic</h4></div>
-                    <div class="panel-body"><img src="@routes.Assets.versioned("images/titanic.png")"  class="img-responsive"  alt="Titanic"></div>
+                    <div class="panel-heading" style="text-align: center ">
+                        <h4>Titanic</h4>
+                    </div>
+                    <div class="panel-body">]
+                        <a href="/movie/1">
+                        <img src="@routes.Assets.versioned("images/titanic.png")"  class="img-responsive"  alt="Titanic">
+                        </a>
+                    </div>
                     <div class="Rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -17,8 +24,12 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                     </div>
-                    <div class="panel-footer" style="text-align: center"><strong>Sad sinking ship.</strong></br>Romance on a sinking ship.</div>
+                    <div class="panel-footer" style="text-align: center">
+                        <strong>Sad sinking ship.</strong></br>
+                        Romance on a sinking ship.
+                    </div>
                 </div>
+
             </div>
 
             <div class="col-sm-4">

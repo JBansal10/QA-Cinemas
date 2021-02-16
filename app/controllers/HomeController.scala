@@ -38,7 +38,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       val row = new ArrayBuffer[Movie]
       val it = movies.iterator
       while (it.hasNext) {
-        row addOne it.next
+        row addOne it.next()
         counter += 1
         if (!it.hasNext) nested addOne row.toSeq
         if (counter == 3) { counter = 0; nested addOne row.toSeq; row.clear()}

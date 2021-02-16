@@ -1,4 +1,4 @@
-name := "untitled2"
+name := "QA-Cinemas"
  
 version := "1.0" 
       

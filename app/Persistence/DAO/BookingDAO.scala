@@ -14,8 +14,11 @@ object BookingDAO {
   lazy val bookingTable = TableQuery[Bookings]
 
   def create (bookForm: Booking): Future[String] ={
-    db.run(bookingTable += bookForm)
+    db.run(bookingTable += bookForm).map(res => "Booking succesfully added").recover {
+      case ex: Exception =>
+        ex.getCause.getMessage
+    }
   }
-
+  def readById (id: Int): Future[Option[Booking]] = db.run(bookingTable.filter(_.id === id).result.headOption)
 
 }

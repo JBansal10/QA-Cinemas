@@ -32,6 +32,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def listingsGallery = Action.async { implicit request =>
+    
     MovieDAO.readAll() map (movies => {
       var counter = 0
       val nested = new ArrayBuffer[Seq[Movie]]
@@ -47,6 +48,9 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       }
       Ok(views.html.listingsgallery(nested.toSeq))
     })
+
+    MovieDAO.readAll() map(movies => Ok(views.html.listingsgallery(movies)))
+
   }
 
   def readID(id: Int) = Action.async(implicit request =>
@@ -75,3 +79,4 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def tempToDo = TODO
 
 }
+

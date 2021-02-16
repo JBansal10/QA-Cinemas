@@ -1,0 +1,47 @@
+
+
+
+@(message: String)
+
+
+@main("Welcome to Play") {
+
+
+<div class= "container" id="Description" style=" text-align: center"><h5>At QA Cinemas you can pay less to see the films that everyone’s raving about.<br>
+    That means you’ll have more to spend on other things. Popcorn, anyone?.<br>
+    Navigate to our Ticket Bookings page to book a ticket now! </h5>
+</div>
+
+<!-- Slideshow container -->
+<div class="slideshow-container">
+
+    <div class="slideshow-container" style="max-width:500px">
+        <img class="mySlides" src="@routes.Assets.versioned("images/ToyStory.png")" style="width:100%">
+        <img class="mySlides" src="@routes.Assets.versioned("images/Transformers.png")" style="width:100%">
+        <img class="mySlides" src="@routes.Assets.versioned("images/Nemo.png")" style="width:100%">
+
+    </div>
+
+    <div style="color: #f2f2f2">
+        <img class="mySlides" src="@routes.Assets.versioned("images/inside.png")" style="width:100%">
+        <p><h3>Welcome to the future of Movies with our premium screens.</h3></p>
+    </div>
+
+    <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) {myIndex = 1}
+            x[myIndex-1].style.display = "block";
+            setTimeout(carousel, 3000); // Change image every 2 seconds
+        }
+    </script>
+
+}

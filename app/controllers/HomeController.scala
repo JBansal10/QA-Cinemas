@@ -31,6 +31,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.index("Welcome to QA Cinemas!"))
   }
 
+
   def listingsGallery = Action.async { implicit request =>
     MovieDAO.readAll() map(movies => Ok(views.html.listingsgallery(movies)))
   }
@@ -50,5 +51,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.aboutUs())
   }
 
-  def tempToDo = TODO
-}
+   def contactUs = Action {
+   Ok(views.html.contactUs())
+   }
+ 
+    def tempToDo = TODO
+  }
+

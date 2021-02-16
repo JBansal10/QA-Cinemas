@@ -19,7 +19,11 @@
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/listinggallery.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/homepage.css")">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/contactUs.css")">
+        <!-- Adding  Stars-->
+
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
 
@@ -39,8 +43,9 @@
                                 About
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="aboutusDropdown">
-                                <li><a id="aboutUs" class="dropdown-item" href="/aboutUs">About QA Cinemas</a></li>
-                                <li><a class="dropdown-item" href="/temp">Contact Us!</a></li>
+
+                                <li><a class="dropdown-item" href="/aboutUs">About QA Cinemas</a></li>
+                                <li><a class="dropdown-item" href="/contactUs" id="contactUsHeader">Contact Us</a></li>
                                 <li><a class="dropdown-item" href="/temp">Opening Times</a></li>
                             </ul>
                         </li>
@@ -80,7 +85,7 @@
                     <a id="aboutUsFooter"  class="nav-link" href="/aboutUs">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/temp">Contact Us</a>
+                    <a class="nav-link" href="/contactUs" id="contactUsFooter">Contact Us</a>
                 </li>
             </ul>
         </footer>

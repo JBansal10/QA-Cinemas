@@ -31,6 +31,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.index("Welcome to QA Cinemas!"))
   }
 
+
   def listingsGallery = Action.async { implicit request =>
     MovieDAO.readAll() map(movies => {
       var counter = 0
@@ -62,10 +63,13 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.aboutUs())
   }
 
+   def contactUs = Action {
+   Ok(views.html.contactUs())
+   }
+ 
+    def tempToDo = TODO
+  }
 
-//  def readID(id: Int) = Action.async( implicit request =>
-//    MovieDAO.readById(id) map(id => Ok(views.html.moviedesc(id)))
-//  )
 
   def tempToDo = TODO
 

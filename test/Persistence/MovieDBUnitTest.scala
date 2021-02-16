@@ -1,11 +1,11 @@
-package Persistence.DAO
+package Persistence
 
-import Persistence.Domain.Movies
+import Persistence.DAO.MovieDAO
 import org.scalatest.BeforeAndAfter
 import org.scalatest.flatspec.AnyFlatSpec
-import slick.lifted.TableQuery
+
+import slick.jdbc.H2Profile.api._
 import slick.jdbc.MySQLProfile.backend.Database
-import slick.driver.H2Driver.api._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.io.Source
@@ -14,7 +14,6 @@ class MovieDBUnitTest extends AnyFlatSpec with BeforeAndAfter {
 
 
   lazy val db = Database.forConfig("mysqlDB")
-  lazy val movieTable: TableQuery[Movies] = TableQuery[Movies]
 
   behavior of "Movie table"
 

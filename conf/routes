@@ -15,4 +15,7 @@ GET     /                           controllers.HomeController.homepage
 
 GET    /aboutus                    controllers.HomeController.aboutUs
 
+GET   /gettingthere             controllers.HomeController.gettingThere
+
 GET   /contactus                 controllers.HomeController.contactUs
+

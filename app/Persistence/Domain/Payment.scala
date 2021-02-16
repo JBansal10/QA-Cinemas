@@ -10,7 +10,7 @@ object paymentObj {
   case class Payment(id: Int, cardHolderName: String, cardNo: Int, expiryDate: String, securityCode: Int)
 
   case class Payments(tag: Tag) extends Table[Payment] (tag, "payment"){
-    def id = column[Int]("POST_ID", O.AutoInc, O.PrimaryKey)
+    def id = column[Int]("PAYMENT_ID", O.AutoInc, O.PrimaryKey)
     def cardHolderName = column[String]("CARD_HOLDER_NAME")
     def cardNo = column[Int]("CARD_NO")
     def expiryDate = column[String]("EXPIRY_DATE")

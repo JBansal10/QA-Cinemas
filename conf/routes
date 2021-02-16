@@ -13,9 +13,9 @@ GET     /movie/$id<[0-9]+>          controllers.HomeController.readID(id: Int)
 
 GET     /                           controllers.HomeController.homepage
 
-GET    /aboutus                    controllers.HomeController.aboutUs
+GET     /aboutus                    controllers.HomeController.aboutUs
 
-GET   /gettingthere             controllers.HomeController.gettingThere
+GET     /gettingthere               controllers.HomeController.gettingThere
 
-GET   /contactus                 controllers.HomeController.contactUs
+GET     /contactus                  controllers.HomeController.contactUs
 

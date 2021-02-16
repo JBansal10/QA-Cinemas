@@ -26,6 +26,7 @@ object BookingFormOBJ {
     def screentimes = foreignKey("fk_screentime_id", screenID, screentime)(_.id, onDelete = ForeignKeyAction.Cascade)
 
     def * = (id, screenDate, cName, adults, childs, concession, screenID) <> (Booking.tupled, Booking.unapply)
+
   }
 
   object bookingForm {

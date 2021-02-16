@@ -17,4 +17,5 @@ object BookingDAO {
     db.run(bookingTable += bookForm)
   }
 
+
 }

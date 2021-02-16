@@ -1,6 +1,6 @@
 package Persistence.DAO
 
-import Persistence.Domain.BookingFormOBJ.Booking
+import Persistence.Domain.BookingFormOBJ.{Booking, Bookings}
 import slick.jdbc.MySQLProfile.backend.Database
 import slick.lifted.TableQuery
 
@@ -11,6 +11,10 @@ import slick.jdbc.MySQLProfile.api._
 object BookingDAO {
 
   lazy val db = Database.forConfig("mysqlDB")
-  lazy val bookingTable = TableQuery[Booking]
+  lazy val bookingTable = TableQuery[Bookings]
+
+  def create (bookForm: Booking): Future[String] ={
+    db.run(bookingTable += bookForm)
+  }
 
 }

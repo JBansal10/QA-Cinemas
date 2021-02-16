@@ -62,5 +62,11 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.aboutUs())
   }
 
+
+//  def readID(id: Int) = Action.async( implicit request =>
+//    MovieDAO.readById(id) map(id => Ok(views.html.moviedesc(id)))
+//  )
+
   def tempToDo = TODO
+
 }

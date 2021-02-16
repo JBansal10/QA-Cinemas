@@ -21,7 +21,7 @@ class AboutUsPageTest extends flatspec.AnyFlatSpec with BeforeAndAfter with shou
   "clicking on About Us in navbar" should "take you to About Us page" in {
     go to host
     click on id("aboutusDropdown")
-    click on id("aboutUs")
+    click on id("aboutus")
     pageTitle should be ("About Us")
   }
 

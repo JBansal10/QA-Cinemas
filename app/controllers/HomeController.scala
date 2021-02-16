@@ -31,9 +31,8 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.index("Welcome to QA Cinemas!"))
   }
 
-
   def listingsGallery = Action.async { implicit request =>
-    MovieDAO.readAll() map(movies => {
+    MovieDAO.readAll() map (movies => {
       var counter = 0
       val nested = new ArrayBuffer[Seq[Movie]]
       val row = new ArrayBuffer[Movie]
@@ -42,34 +41,36 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
         row addOne it.next
         counter += 1
         if (!it.hasNext) nested addOne row.toSeq
-        if (counter == 3) { counter = 0; nested addOne row.toSeq; row.clear()}
+        if (counter == 3) {
+          counter = 0; nested addOne row.toSeq; row.clear()
+        }
       }
       Ok(views.html.listingsgallery(nested.toSeq))
     })
   }
 
-  def readID(id: Int) = Action.async ( implicit request =>
-    MovieDAO.readById(id) map(movie =>
-        if (movie.isDefined) Ok(views.html.movie(movie.get))
-        else Ok(views.html.index("ERROR")) // TODO needs to send to an error page for movie not found
+  def readID(id: Int) = Action.async(implicit request =>
+    MovieDAO.readById(id) map (movie =>
+      if (movie.isDefined) Ok(views.html.movie(movie.get))
+      else Ok(views.html.index("ERROR")) // TODO needs to send to an error page for movie not found
       )
   )
 
-  def homepage = Action{
-   Ok(views.html.homepage("Welcome to QA Cinemas!"))
+  def homepage = Action {
+    Ok(views.html.homepage("Welcome to QA Cinemas!"))
   }
 
   def aboutUs = Action {
     Ok(views.html.aboutUs())
   }
 
-   def contactUs = Action {
-   Ok(views.html.contactUs())
-   }
- 
-    def tempToDo = TODO
+  def contactUs = Action {
+    Ok(views.html.contactUs())
   }
 
+  def gettingThere = Action {
+    Ok(views.html.gettingThere())
+  }
 
   def tempToDo = TODO
 

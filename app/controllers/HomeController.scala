@@ -68,9 +68,17 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.aboutUs())
   }
 
-  def contactUs = Action {
-    Ok(views.html.contactUs())
+
+   def contactUs = Action {
+   Ok(views.html.contactUs())
+   }
+
+  def screens = Action {
+    Ok(views.html.screens())
   }
+ 
+    def tempToDo = TODO
+
 
   def gettingThere = Action {
     Ok(views.html.gettingThere())

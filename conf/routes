@@ -22,3 +22,5 @@ GET     /                           controllers.HomeController.homepage
 GET    /aboutus                    controllers.HomeController.aboutUs
 
 GET   /contactus                 controllers.HomeController.contactUs
+
+GET   /screens                   controllers.HomeController.screens

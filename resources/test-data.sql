@@ -24,36 +24,24 @@ CREATE TABLE `qacinemas`.`screentime` (
   FOREIGN KEY (`SCREENTIME_MOVIE`) REFERENCES `qacinemas`.`movie`(`MOVIE_ID`)
 );
 
--- CREATE TABLE `qacinemas`.`payment` (
---     `PAYMENT_ID` INT NOT NULL AUTO_INCREMENT,
---     `CARD_HOLDER_NAME` VARCHAR(255),
---     `CARD_NO` INT NOT NULL,
---     `EXPIRY_DATE` VARCHAR(255),
---     `SECURITY_CODE` INT NOT NULL,
---     PRIMARY KEY (`PAYMENT_ID`),
---
---
---
--- )
-
 /* insert data */
 INSERT INTO `qacinemas`.`movie` (`MOVIE_ID`, `MOVIE_NAME`, `YEAR`, `GENRE`, `AGE_RATING`, `ACTORS`, `DIRECTOR`, `IMAGE_URL`, `DESC`)
 VALUES
-    (1, "Titanic", 123, "Sad", 3, "Fish probably", "Jeff Bezos", "titanic.png", "Boat drowning"),
-    (2, "Nemo", 432, "Scary", 5, "Fish", "Steve Erwin", "Nemo.png", "Fish looking for fish"),
-    (3, "Toy Story", 2000, "Happy", 6, "Toys", "Guy Fieri", "ToyStory.png", "Toys running away from their owner and doing other stuff"),
-    (4, "Transformers", 2002, "Epic", 7, "Robots", "Human", "Transformers.png", "Robots fighting other robots and humans are present");
+(1, "Titanic", 123, "Sad", 3, "Fish probably", "Jeff Bezos", "titanic.png", "Boat drowning"),
+(2, "Nemo", 432, "Scary", 5, "Fish", "Steve Erwin", "Nemo.png", "Fish looking for fish"),
+(3, "Toy Story", 2000, "Happy", 6, "Toys", "Guy Fieri", "ToyStory.png", "Toys running away from their owner and doing other stuff"),
+(4, "Transformers", 2002, "Epic", 7, "Robots", "Human", "Transformers.png", "Robots fighting other robots and humans are present");
 INSERT INTO `qacinemas`.`screentime` (`SCREENTIME_ID`, `SCREENTIME_MOVIE`, `SCREENTIME_DAY`, `SCREENTIME_TIME`, `SCREEN_TYPE`)
 VALUES
-    (1, 1, "Monday", "19:30", "Standard"),
-    (2, 1, "Monday", "21:00", "Standard"),
-    (3, 1, "Tuesday", "20:15", "Deluxe"),
-    (4, 1, "Wednesday", "18:00", "Standard"),
-    (5, 1, "Wednesday", "20:20", "Deluxe"),
-    (6, 1, "Thursday", "21:00", "Standard"),
-    (7, 1, "Friday", "18:00", "Standard"),
-    (8, 1, "Friday", "20:00", "Standard"),
-    (9, 1, "Friday", "21:45", "Deluxe"),
-    (10, 1, "Saturday", "19:30", "Deluxe"),
-    (11, 1, "Sunday", "18:15", "Standard"),
-    (12, 1, "Sunday", "20:30", "Standard");
+(1, 1, "Monday", "19:30", "Standard"),
+(2, 1, "Monday", "21:00", "Standard"),
+(3, 1, "Tuesday", "20:15", "Deluxe"),
+(4, 1, "Wednesday", "18:00", "Standard"),
+(5, 1, "Wednesday", "20:20", "Deluxe"),
+(6, 1, "Thursday", "21:00", "Standard"),
+(7, 1, "Friday", "18:00", "Standard"),
+(8, 1, "Friday", "20:00", "Standard"),
+(9, 1, "Friday", "21:45", "Deluxe"),
+(10, 1, "Saturday", "19:30", "Deluxe"),
+(11, 1, "Sunday", "18:15", "Standard"),
+(12, 1, "Sunday", "20:30", "Standard");

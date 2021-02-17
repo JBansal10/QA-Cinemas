@@ -3,6 +3,8 @@ package controllers
 import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.mvc.Results.{BadRequest, Redirect}
+import Persistence.DAO.{MovieDAO, PaymentDAO}
+import Persistence.Domain.paymentObj.{Payment, PaymentForm}
 import Persistence.DAO.{MovieDAO, ScreenTimeDAO}
 import Persistence.Domain.Movie
 import Persistence.Domain.ScreenTimesOBJ.ScreenTime
@@ -20,7 +22,7 @@ import scala.util.{Failure, Success}
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) with I18nSupport{
 
   /**
    * Create an Action to render an HTML page with a welcome message.
@@ -68,6 +70,23 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.gettingThere())
   }
 
+  def createPayment() = Action { implicit request =>
+    PaymentForm.submitForm.bindFromRequest.fold({ formWithErrors =>
+      BadRequest(views.html.payment(formWithErrors))
+    }, { widget =>
+      createP(widget)
+      Redirect("/payment")
+    })
+  }
+
+  def createP(pay: Payment): Unit = {
+    PaymentDAO.create(pay).onComplete {
+      case Success(value) =>
+        println(value)
+      case Failure(exception) =>
+        exception.printStackTrace()
+    }
+  }
  
   def tempToDo = TODO
 }

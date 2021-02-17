@@ -1,29 +1,56 @@
 /* drop tables (do higher order tables first)*/
+DROP TABLE IF EXISTS `qacinemas`.`payment`;
+DROP TABLE IF EXISTS `qacinemas`.`booking`;
 DROP TABLE IF EXISTS `qacinemas`.`screentime`;
+DROP TABLE IF EXISTS `qacinemas`.`discussionboard`;
 DROP TABLE IF EXISTS `qacinemas`.`movie`;
+
 /*create new tables*/
 CREATE TABLE `qacinemas`.`movie` (
-    `MOVIE_ID` INT NOT NULL AUTO_INCREMENT,
-    `MOVIE_NAME` VARCHAR(255) NULL,
-    `YEAR` INT NULL,
-    `GENRE` VARCHAR(45) NULL,
-    `AGE_RATING` VARCHAR(45) NULL,
-    `ACTORS` VARCHAR(500) NULL,
-    `DIRECTOR` VARCHAR(45) NULL,
-    `IMAGE_URL` VARCHAR(255) NULL,
-    `DESC` VARCHAR(1000) NULL,
-    PRIMARY KEY (`MOVIE_ID`)
-  );
+ `MOVIE_ID` INT NOT NULL AUTO_INCREMENT,
+ `MOVIE_NAME` VARCHAR(255) NULL,
+ `YEAR` INT NULL,
+ `GENRE` VARCHAR(45) NULL,
+ `AGE_RATING` VARCHAR(45) NULL,
+ `ACTORS` VARCHAR(500) NULL,
+ `DIRECTOR` VARCHAR(45) NULL,
+ `IMAGE_URL` VARCHAR(255) NULL,
+ `DESC` VARCHAR(1000) NULL,
+ PRIMARY KEY (`MOVIE_ID`)
+);
 
 CREATE TABLE `qacinemas`.`screentime` (
-    `SCREENTIME_ID` INT NOT NULL AUTO_INCREMENT,
-    `SCREENTIME_MOVIE` INT NOT NULL,
-    `SCREENTIME_DAY` VARCHAR(9),
-    `SCREENTIME_TIME` VARCHAR(5),
-    `SCREEN_TYPE` VARCHAR(10),
-    PRIMARY KEY (`SCREENTIME_ID`),
-    FOREIGN KEY (`SCREENTIME_MOVIE`) REFERENCES `qacinemas`.`movie`(`MOVIE_ID`)
-  );
+  `SCREENTIME_ID` INT NOT NULL AUTO_INCREMENT,
+  `SCREENTIME_MOVIE` INT NOT NULL,
+  `SCREENTIME_DAY` VARCHAR(9),
+  `SCREENTIME_TIME` VARCHAR(5),
+  `SCREEN_TYPE` VARCHAR(10),
+  PRIMARY KEY (`SCREENTIME_ID`),
+  FOREIGN KEY (`SCREENTIME_MOVIE`) REFERENCES `qacinemas`.`movie`(`MOVIE_ID`) ON DELETE CASCADE
+);
+
+CREATE TABLE `booking` (
+   `FORM_ID`       int NOT NULL AUTO_INCREMENT,
+   `CUSTOMER_NAME` varchar(100) DEFAULT NULL,
+   `ADULTS`        int          DEFAULT NULL,
+   `CHILDS`        int          DEFAULT NULL,
+   `CONCESSION`    varchar(100) DEFAULT NULL,
+   `SCREEN_DATE`   varchar(50)  DEFAULT NULL,
+   `SCREEN_ID`     int          DEFAULT NULL,
+   PRIMARY KEY (`FORM_ID`),
+   FOREIGN KEY (`SCREEN_ID`) REFERENCES `qacinemas`.`screentime` (`SCREENTIME_ID`) ON DELETE CASCADE
+);
+
+CREATE TABLE `discussionboard` (
+   `POST_ID`       int NOT NULL AUTO_INCREMENT,
+   `CONTENT`       varchar(1000) DEFAULT NULL,
+   `POST_DATETIME` datetime      DEFAULT CURRENT_TIMESTAMP,
+   `MOVIE_ID`      int           DEFAULT NULL,
+   `MOVIE_RATING`  int           DEFAULT NULL,
+   `POST_CHECKER` tinyint(1) DEFAULT '0',
+   PRIMARY KEY (`POST_ID`),
+   FOREIGN KEY (`MOVIE_ID`) REFERENCES `movie` (`MOVIE_ID`) ON DELETE CASCADE
+);
   
 /* insert data */
 INSERT INTO `qacinemas`.`movie` (`MOVIE_ID`, `MOVIE_NAME`, `YEAR`, `GENRE`, `AGE_RATING`, `ACTORS`, `DIRECTOR`, `IMAGE_URL`, `DESC`)
@@ -35,16 +62,36 @@ VALUES
 
 INSERT INTO `qacinemas`.`screentime` (`SCREENTIME_ID`, `SCREENTIME_MOVIE`, `SCREENTIME_DAY`, `SCREENTIME_TIME`, `SCREEN_TYPE`)
 VALUES
-    (1, 1, "Monday", "19:30", "Standard"),
-    (2, 1, "Monday", "21:00", "Standard"),
-    (3, 1, "Tuesday", "20:15", "Deluxe"),
-    (4, 1, "Wednesday", "18:00", "Standard"),
-    (5, 1, "Wednesday", "20:20", "Deluxe"),
-    (6, 1, "Thursday", "21:00", "Standard"),
-    (7, 1, "Friday", "18:00", "Standard"),
-    (8, 1, "Friday", "20:00", "Standard"),
-    (9, 1, "Friday", "21:45", "Deluxe"),
-    (10, 1, "Saturday", "19:30", "Deluxe"),
-    (11, 1, "Sunday", "18:15", "Standard"),
-    (12, 1, "Sunday", "20:30", "Standard");
+(1, 1, "Monday", "19:30", "Standard"),
+(2, 1, "Monday", "21:00", "Standard"),
+(3, 1, "Tuesday", "20:15", "Deluxe"),
+(4, 1, "Wednesday", "18:00", "Standard"),
+(5, 1, "Wednesday", "20:20", "Deluxe"),
+(6, 1, "Thursday", "21:00", "Standard"),
+(7, 1, "Friday", "18:00", "Standard"),
+(8, 1, "Friday", "20:00", "Standard"),
+(9, 1, "Friday", "21:45", "Deluxe"),
+(10, 1, "Saturday", "19:30", "Deluxe"),
+(11, 1, "Sunday", "18:15", "Standard"),
+(12, 1, "Sunday", "20:30", "Standard");
 
+INSERT INTO `qacinemas`.`booking` (`FORM_ID`, `CUSTOMER_NAME`, `ADULTS`, `CHILDS`, `CONCESSION`, `SCREEN_DATE`, `SCREEN_ID`)
+VALUES
+(1, "Piers", 1, 1, "Popcorn, HotDog", "30/2/2021", 1);
+
+INSERT INTO `qacinemas`.`discussionboard` (`POST_ID`, `CONTENT`, `MOVIE_ID`, `MOVIE_RATING`)
+VALUES
+(1, "Oh dear oh dear oh dear... Talks of Leonardo getting an oscar for this are poor.
+Why don't we not just just leave this were we found it... At the bottom of the ocean!",
+ 1, 9);
+
+CREATE TABLE `qacinemas`.`payment` (
+   `PAYMENT_ID` INT NOT NULL AUTO_INCREMENT,
+   `CARD_HOLDER_NAME` VARCHAR(255),
+   `CARD_NO` INT NOT NULL,
+   `EXPIRY_DATE` VARCHAR(255),
+   `SECURITY_CODE` INT NOT NULL,
+   `BOOKING_ID` INT NOT NULL,
+   PRIMARY KEY (`PAYMENT_ID`),
+   FOREIGN KEY (`BOOKING_ID`) REFERENCES `qacinemas`.`booking`(`FORM_ID`)
+);

@@ -21,3 +21,5 @@ GET   /screens                   controllers.HomeController.screens
 
 GET   /gettingthere             controllers.HomeController.gettingThere
 
+GET     /payment                    controllers.HomeController.createPayment
+

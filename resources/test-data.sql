@@ -1,8 +1,8 @@
 /* drop tables (do higher order tables first)*/
 DROP TABLE IF EXISTS `qacinemas`.`payment`;
 DROP TABLE IF EXISTS `qacinemas`.`booking`;
-DROP TABLE IF EXISTS `qacinemas`.`screentime`;
 DROP TABLE IF EXISTS `qacinemas`.`discussionboard`;
+DROP TABLE IF EXISTS `qacinemas`.`screentime`;
 DROP TABLE IF EXISTS `qacinemas`.`movie`;
 /*create new tables*/
 CREATE TABLE `qacinemas`.`movie` (
@@ -27,7 +27,7 @@ CREATE TABLE `qacinemas`.`screentime` (
   FOREIGN KEY (`SCREENTIME_MOVIE`) REFERENCES `qacinemas`.`movie`(`MOVIE_ID`) ON DELETE CASCADE
 );
 
-CREATE TABLE `booking` (
+CREATE TABLE `qacinemas`.`booking` (
    `FORM_ID`       int NOT NULL AUTO_INCREMENT,
    `CUSTOMER_NAME` varchar(100) DEFAULT NULL,
    `ADULTS`        int          DEFAULT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `booking` (
    FOREIGN KEY (`SCREEN_ID`) REFERENCES `qacinemas`.`screentime` (`SCREENTIME_ID`) ON DELETE CASCADE
 );
 
-CREATE TABLE `discussionboard` (
+CREATE TABLE `qacinemas`.`discussionboard` (
    `POST_ID`       int NOT NULL AUTO_INCREMENT,
    `CONTENT`       varchar(1000) DEFAULT NULL,
    `POST_DATETIME` varchar(100) DEFAULT NULL,
@@ -69,6 +69,7 @@ VALUES
 (2, "Nemo", 432, "Scary", 5, "Fish", "Steve Erwin", "Nemo.png", "Fish looking for fish"),
 (3, "Toy Story", 2000, "Happy", 6, "Toys", "Guy Fieri", "ToyStory.png", "Toys running away from their owner and doing other stuff"),
 (4, "Transformers", 2002, "Epic", 7, "Robots", "Human", "Transformers.png", "Robots fighting other robots and humans are present");
+
 INSERT INTO `qacinemas`.`screentime` (`SCREENTIME_ID`, `SCREENTIME_MOVIE`, `SCREENTIME_DAY`, `SCREENTIME_TIME`, `SCREEN_TYPE`)
 VALUES
 (1, 1, "Monday", "19:30", "Standard"),
@@ -83,7 +84,6 @@ VALUES
 (10, 1, "Saturday", "19:30", "Deluxe"),
 (11, 1, "Sunday", "18:15", "Standard"),
 (12, 1, "Sunday", "20:30", "Standard");
-
 
 INSERT INTO `qacinemas`.`booking` (`FORM_ID`, `CUSTOMER_NAME`, `ADULTS`, `CHILDS`, `CONCESSION`, `SCREEN_DATE`, `SCREEN_ID`)
 VALUES

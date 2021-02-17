@@ -19,3 +19,5 @@ GET   /gettingthere             controllers.HomeController.gettingThere
 
 GET   /contactus                 controllers.HomeController.contactUs
 
+GET   /simontest                    controllers.HomeController.simontest
+

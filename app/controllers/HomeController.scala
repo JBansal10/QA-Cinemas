@@ -53,13 +53,17 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   )
 
-  def createDiscBoard() = Action {implicit request =>
-    boardForm.submitForm.bindFromRequest.fold({ formsWithError =>
-        BadRequest(views.html.discboard(formsWithError))
-    }, {
-      creator => createFunc(creator)
-        Redirect("/discboard")
-    })
+//  def discBoardRead() = Action {implicit request => DiscussionBoardDAO.readAll() map (working => Ok(views.html))}
+
+  def createDiscBoard() = Action.async {implicit request =>
+    DiscussionBoardDAO.readAll() map { discussions =>
+      boardForm.submitForm.bindFromRequest.fold({ formsWithError =>
+          BadRequest(views.html.discboard(formsWithError, discussions))
+      }, {
+        creator => createFunc(creator)
+          Redirect("/discboard")
+      }
+    )}
   }
 
   def createFunc(discBoard: DiscussionBoard): Unit = {

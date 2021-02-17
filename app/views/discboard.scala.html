@@ -1,8 +1,9 @@
 @import views.html.helper.form
 @import Persistence.Domain.DiscussionBoardOBJ.DiscussionBoard
-@(form: Form[DiscussionBoard])(implicit messages: Messages)
+@(form: Form[DiscussionBoard], discussions: Seq[DiscussionBoard])(implicit messages: Messages)
 
 @main("Discussion Board") {
+    <div class="container text-light">
     <h1>Welcome to your Discussion Board</h1>
     @helper.form(routes.HomeController.createDiscBoard()) {
         <div class="form-floating">
@@ -11,5 +12,14 @@
             @helper.inputText(form("mRating"), Symbol("label") -> "mRating", Symbol("showConstraints") -> false)
             <button class="btn btn-primary" type="submit">Submit!</button>
         </div>
+
+        <div>
+            <ul>
+            @for(dboard <- discussions.filter(_.postChecker == true)) {
+                <li>@dboard.content</li>
+            }
+            </ul>
+        </div>
+    </div>
     }
 }

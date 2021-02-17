@@ -42,7 +42,7 @@ CREATE TABLE `booking` (
 CREATE TABLE `discussionboard` (
    `POST_ID`       int NOT NULL AUTO_INCREMENT,
    `CONTENT`       varchar(1000) DEFAULT NULL,
-   `POST_DATETIME` datetime      DEFAULT CURRENT_TIMESTAMP,
+   `POST_DATETIME` varchar(100) DEFAULT NULL,
    `MOVIE_ID`      int           DEFAULT NULL,
    `MOVIE_RATING`  int           DEFAULT NULL,
    `POST_CHECKER` tinyint(1) DEFAULT '0',

@@ -50,10 +50,8 @@ CREATE TABLE `qacinemas`.`discussionboard` (
    `MOVIE_ID`      int           DEFAULT NULL,
    `MOVIE_RATING`  int           DEFAULT NULL,
    `POST_CHECKER` tinyint(1) DEFAULT '0',
-   PRIMARY KEY (`POST_ID`),
-   FOREIGN KEY (`MOVIE_ID`) REFERENCES `movie` (`MOVIE_ID`) ON DELETE CASCADE
-    );
-
+   PRIMARY KEY (`POST_ID`)
+   FOREIGN KEY (`MOVIE_ID`) REFERENCES `qacinemas`.`movie`(`MOVIE_ID`) ON DELETE CASCADE
 
 CREATE TABLE `qacinemas`.`payment` (
     `PAYMENT_ID` INT NOT NULL AUTO_INCREMENT,
@@ -98,7 +96,10 @@ VALUES
     (5, "Simon", 1, 1, "M&Ms", "30/2/2021", 1),
     (6, "Iqra", 1, 1, "Minstrels", "30/2/2021", 1);
 
-INSERT INTO `qacinemas`.`discussionboard` (`POST_ID`, `CONTENT`, `MOVIE_ID`, `MOVIE_RATING`)
+INSERT INTO `qacinemas`.`discussionboard` (`POST_ID`, `CONTENT`, `POST_DATETIME`, `MOVIE_ID`, `MOVIE_RATING`)
 VALUES
-    (1, "Oh dear oh dear oh dear... Talks of Leonardo getting an oscar for this are poor. Why don't we not just just leave this were we found it... At the bottom of the ocean!", 1, 9),
-    (2, "Welp, this was interesting, certainly expected us to feel for the toys but wow... they're awful!", 3, 9);
+(1, "Oh dear oh dear oh dear... Talks of Leonardo getting an oscar for this are poor.
+Why don't we not just just leave this were we found it... At the bottom of the ocean!",
+ "17/02/2021 12:34", 1, 9),
+(2, "Welp, this was interesting, certainly expected us to feel for the toys but wow... they're awful!",
+ "17/02/2021 12:48", 3, 9);

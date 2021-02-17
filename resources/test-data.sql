@@ -4,7 +4,6 @@ DROP TABLE IF EXISTS `qacinemas`.`booking`;
 DROP TABLE IF EXISTS `qacinemas`.`screentime`;
 DROP TABLE IF EXISTS `qacinemas`.`discussionboard`;
 DROP TABLE IF EXISTS `qacinemas`.`movie`;
-
 /*create new tables*/
 CREATE TABLE `qacinemas`.`movie` (
  `MOVIE_ID` INT NOT NULL AUTO_INCREMENT,
@@ -18,7 +17,6 @@ CREATE TABLE `qacinemas`.`movie` (
  `DESC` VARCHAR(1000) NULL,
  PRIMARY KEY (`MOVIE_ID`)
 );
-
 CREATE TABLE `qacinemas`.`screentime` (
   `SCREENTIME_ID` INT NOT NULL AUTO_INCREMENT,
   `SCREENTIME_MOVIE` INT NOT NULL,
@@ -51,15 +49,26 @@ CREATE TABLE `discussionboard` (
    PRIMARY KEY (`POST_ID`),
    FOREIGN KEY (`MOVIE_ID`) REFERENCES `movie` (`MOVIE_ID`) ON DELETE CASCADE
 );
-  
+
+
+CREATE TABLE `qacinemas`.`payment` (
+   `PAYMENT_ID` INT NOT NULL AUTO_INCREMENT,
+   `CARD_HOLDER_NAME` VARCHAR(255),
+   `CARD_NO` INT NOT NULL,
+   `EXPIRY_DATE` VARCHAR(255),
+   `SECURITY_CODE` INT NOT NULL,
+   `BOOKING_ID` INT NOT NULL,
+   PRIMARY KEY (`PAYMENT_ID`),
+   FOREIGN KEY (`BOOKING_ID`) REFERENCES `qacinemas`.`booking`(`FORM_ID`)
+);
+
 /* insert data */
 INSERT INTO `qacinemas`.`movie` (`MOVIE_ID`, `MOVIE_NAME`, `YEAR`, `GENRE`, `AGE_RATING`, `ACTORS`, `DIRECTOR`, `IMAGE_URL`, `DESC`)
-VALUES 
-    (1, "Titanic", 123, "Sad", 3, "Fish probably", "Jeff Bezos", "titanic.png", "Boat drowning"),
-    (2, "Nemo", 432, "Scary", 5, "Fish", "Steve Erwin", "Nemo.png", "Fish looking for fish"),
-    (3, "Toy Story", 2000, "Happy", 6, "Toys", "Guy Fieri", "ToyStory.png", "Toys running away from their owner and doing other stuff"),
-    (4, "Transformers", 2002, "Epic", 7, "Robots", "Human", "Transformers.png", "Robots fighting other robots and humans are present");
-
+VALUES
+(1, "Titanic", 123, "Sad", 3, "Fish probably", "Jeff Bezos", "titanic.png", "Boat drowning"),
+(2, "Nemo", 432, "Scary", 5, "Fish", "Steve Erwin", "Nemo.png", "Fish looking for fish"),
+(3, "Toy Story", 2000, "Happy", 6, "Toys", "Guy Fieri", "ToyStory.png", "Toys running away from their owner and doing other stuff"),
+(4, "Transformers", 2002, "Epic", 7, "Robots", "Human", "Transformers.png", "Robots fighting other robots and humans are present");
 INSERT INTO `qacinemas`.`screentime` (`SCREENTIME_ID`, `SCREENTIME_MOVIE`, `SCREENTIME_DAY`, `SCREENTIME_TIME`, `SCREEN_TYPE`)
 VALUES
 (1, 1, "Monday", "19:30", "Standard"),
@@ -75,23 +84,20 @@ VALUES
 (11, 1, "Sunday", "18:15", "Standard"),
 (12, 1, "Sunday", "20:30", "Standard");
 
+
 INSERT INTO `qacinemas`.`booking` (`FORM_ID`, `CUSTOMER_NAME`, `ADULTS`, `CHILDS`, `CONCESSION`, `SCREEN_DATE`, `SCREEN_ID`)
 VALUES
-(1, "Piers", 1, 1, "Popcorn, HotDog", "30/2/2021", 1);
+(1, "Piers", 1, 1, "Popcorn, HotDog", "30/2/2021", 1),
+(2, "Ayub", 1, 1, "None", "30/2/2021", 1),
+(3, "Jake", 1, 1, "Large Coke, medium popcorn", "30/2/2021", 1),
+(4, "Jas", 1, 1, "Tango Ice Blast", "30/2/2021", 1),
+(5, "Simon", 1, 1, "M&Ms", "30/2/2021", 1),
+(6, "Iqra", 1, 1, "Minstrels", "30/2/2021", 1);
 
 INSERT INTO `qacinemas`.`discussionboard` (`POST_ID`, `CONTENT`, `MOVIE_ID`, `MOVIE_RATING`)
 VALUES
 (1, "Oh dear oh dear oh dear... Talks of Leonardo getting an oscar for this are poor.
 Why don't we not just just leave this were we found it... At the bottom of the ocean!",
- 1, 9);
-
-CREATE TABLE `qacinemas`.`payment` (
-   `PAYMENT_ID` INT NOT NULL AUTO_INCREMENT,
-   `CARD_HOLDER_NAME` VARCHAR(255),
-   `CARD_NO` INT NOT NULL,
-   `EXPIRY_DATE` VARCHAR(255),
-   `SECURITY_CODE` INT NOT NULL,
-   `BOOKING_ID` INT NOT NULL,
-   PRIMARY KEY (`PAYMENT_ID`),
-   FOREIGN KEY (`BOOKING_ID`) REFERENCES `qacinemas`.`booking`(`FORM_ID`)
-);
+ 1, 9),
+(2, "Welp, this was interesting, certainly expected us to feel for the toys but wow... they're awful!",
+ 3, 9);

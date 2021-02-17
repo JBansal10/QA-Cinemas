@@ -35,12 +35,12 @@ object boardForm {
   val submitForm =
     Form(
       mapping(
-        "id" -> number,
+        "id" -> default(number, 0),
         "content" -> nonEmptyText,
-        "datetime" -> localDateTime,
+        "datetime" -> default(localDateTime, LocalDateTime.now()),
         "movieID" -> number,
         "mRating" -> number,
-        "postChecker" -> boolean
+        "postChecker" -> default(boolean, false)
       )(DiscussionBoard.apply)(DiscussionBoard.unapply)
     )
 }

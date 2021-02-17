@@ -68,7 +68,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.gettingThere())
   }
 
- 
+  def openingTimes = Action {
+    Ok(views.html.openingTimes())
+  }
+
   def tempToDo = TODO
 }
 

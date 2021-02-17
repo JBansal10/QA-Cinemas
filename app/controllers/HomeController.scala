@@ -3,7 +3,8 @@ package controllers
 import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.mvc.Results.{BadRequest, Redirect}
-import Persistence.DAO.MovieDAO
+import Persistence.DAO.{DiscussionBoardDAO, MovieDAO}
+import Persistence.Domain.DiscussionBoardOBJ.{DiscussionBoard, boardForm}
 import Persistence.Domain.Movie
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -19,7 +20,7 @@ import scala.util.{Failure, Success}
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) with I18nSupport {
 
   /**
    * Create an Action to render an HTML page with a welcome message.
@@ -44,6 +45,23 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       )
   )
 
+  def createDiscBoard() = Action {implicit request =>
+    boardForm.submitForm.bindFromRequest.fold({ formsWithError =>
+        BadRequest(views.html.discboard(formsWithError))
+    }, {
+      creator => createFunc(creator)
+        Redirect("/discboard")
+    })
+  }
+
+  def createFunc(discBoard: DiscussionBoard): Unit = {
+    DiscussionBoardDAO.create(discBoard).onComplete {
+      case Success(value) =>
+        print(value)
+      case Failure(exception) =>
+        exception.printStackTrace()
+    }
+  }
   def homepage = Action {
     Ok(views.html.homepage("Welcome to QA Cinemas!"))
   }
@@ -64,7 +82,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def gettingThere = Action {
     Ok(views.html.gettingThere())
   }
- 
+
     def tempToDo = TODO
 }
 

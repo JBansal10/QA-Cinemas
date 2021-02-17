@@ -1,0 +1,39 @@
+@import Persistence.Domain.Movie
+@(movies: Seq[Seq[Movie]])
+
+
+@main("Welcome to Play") {
+    <!-- cards are not centered in their columns for some reason -->
+    <div class="container">
+        <div class="card-deck m-2 mb-20">
+            <div class="row">
+                @for(row <- movies) {
+                    <div class="row">
+                    @for(movie <- row) {
+                        <div class="col">
+                            <div class="card text-center m-2" style="width: 22rem;">
+                                <a href="/movie/@movie.id">
+                                    <img class="card-image-top" src='@routes.Assets.versioned("images/" + movie.imageURL)' alt="movie poster">
+                                </a>
+                                <div class="card-body">
+                                    <div class="Rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <h5 class="card-title">@movie.mName</h5>
+                                    <p class="card-text">@movie.desc</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+}

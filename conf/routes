@@ -13,8 +13,11 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 GET     /temp                       controllers.HomeController.tempToDo
 
+GET     /listgallery                controllers.HomeController.listingsGallery
 
-GET    /                    controllers.HomeController.homepage
+GET     /movie/$id<[0-9]+>          controllers.HomeController.readID(id: Int)
+
+GET     /                           controllers.HomeController.homepage
 
 GET    /aboutUs                    controllers.HomeController.aboutUs
 

@@ -1,0 +1,26 @@
+@import Persistence.Domain.Movie
+@(movie: Movie)
+
+
+@main(movie.mName) {
+
+
+        <div class="row text-light">
+            <div class="col-4 text-center">
+                <img src='@routes.Assets.versioned("images/" + movie.imageURL)'>
+            </div>
+            <div class="col-8">
+                <div class="jumbotron">
+                    <div class="container">
+
+                        <h1 class="display-4">@movie.mName</h1>
+                        <p class="lead">Directed by @movie.director and featuring @movie.actors .</p>
+                        <hr class="my-4">
+                        <p>@movie.desc</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+}

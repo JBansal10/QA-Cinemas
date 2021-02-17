@@ -1,5 +1,3 @@
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.chrome.ChromeDriver
 import org.scalatest._
 import org.scalatestplus.selenium._
 import org.scalatest.matchers._

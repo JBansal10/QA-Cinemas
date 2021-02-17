@@ -3,7 +3,11 @@ package controllers
 import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.mvc.Results.{BadRequest, Redirect}
+import Persistence.DAO.{MovieDAO, PaymentDAO}
+import Persistence.Domain.paymentObj.{Payment, PaymentForm}
 import Persistence.DAO.{MovieDAO, ScreenTimeDAO}
+import Persistence.DAO.{DiscussionBoardDAO, MovieDAO}
+import Persistence.Domain.DiscussionBoardOBJ.{DiscussionBoard, boardForm}
 import Persistence.Domain.Movie
 import Persistence.Domain.ScreenTimesOBJ.ScreenTime
 
@@ -20,7 +24,7 @@ import scala.util.{Failure, Success}
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) with I18nSupport {
 
   /**
    * Create an Action to render an HTML page with a welcome message.
@@ -33,7 +37,9 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def listingsGallery = Action.async { implicit request =>
+
     MovieDAO.readAll() map(movies => Ok(views.html.listingsgallery(movies)))
+
   }
 
   def readID(id: Int) = Action.async(implicit request =>
@@ -47,6 +53,27 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   )
 
+//  def discBoardRead() = Action {implicit request => DiscussionBoardDAO.readAll() map (working => Ok(views.html))}
+
+  def createDiscBoard() = Action.async {implicit request =>
+    DiscussionBoardDAO.readAll() map { discussions =>
+      boardForm.submitForm.bindFromRequest.fold({ formsWithError =>
+          BadRequest(views.html.discboard(formsWithError, discussions))
+      }, {
+        creator => createFunc(creator)
+          Redirect("/discboard")
+      }
+    )}
+  }
+
+  def createFunc(discBoard: DiscussionBoard): Unit = {
+    DiscussionBoardDAO.create(discBoard).onComplete {
+      case Success(value) =>
+        print(value)
+      case Failure(exception) =>
+        exception.printStackTrace()
+    }
+  }
   def homepage = Action {
     Ok(views.html.homepage("Welcome to QA Cinemas!"))
   }
@@ -68,8 +95,27 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.gettingThere())
   }
 
+
   def openingTimes = Action {
     Ok(views.html.openingTimes())
+  }
+  
+  def createPayment() = Action { implicit request =>
+    PaymentForm.submitForm.bindFromRequest.fold({ formWithErrors =>
+      BadRequest(views.html.payment(formWithErrors))
+    }, { widget =>
+      createP(widget)
+      Redirect("/payment")
+    })
+  }
+
+  def createP(pay: Payment): Unit = {
+    PaymentDAO.create(pay).onComplete {
+      case Success(value) =>
+        println(value)
+      case Failure(exception) =>
+        exception.printStackTrace()
+    }
   }
 
   def tempToDo = TODO

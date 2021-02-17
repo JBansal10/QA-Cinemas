@@ -22,3 +22,8 @@ GET   /screens                   controllers.HomeController.screens
 GET   /gettingthere             controllers.HomeController.gettingThere
 
 GET   /openingtimes             controllers.HomeController.openingTimes
+
+GET     /payment                    controllers.HomeController.createPayment
+
+GET   /discboard                    controllers.HomeController.createDiscBoard()
+

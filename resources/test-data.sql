@@ -1,7 +1,6 @@
 /* drop tables (do higher order tables first)*/
 DROP TABLE IF EXISTS `qacinemas`.`screentime`;
 DROP TABLE IF EXISTS `qacinemas`.`movie`;
-
 /*create new tables*/
 CREATE TABLE `qacinemas`.`movie` (
     `MOVIE_ID` INT NOT NULL AUTO_INCREMENT,
@@ -29,7 +28,7 @@ CREATE TABLE `qacinemas`.`screentime` (
 /* insert data */
 INSERT INTO `qacinemas`.`movie` (`MOVIE_ID`, `MOVIE_NAME`, `YEAR`, `GENRE`, `AGE_RATING`, `ACTORS`, `DIRECTOR`, `IMAGE_URL`, `DESC`)
 VALUES 
-	(1, "Titanic", 123, "Sad", 3, "Fish probably", "Jeff Bezos", "titanic.png", "Boat drowning"),
+    (1, "Titanic", 123, "Sad", 3, "Fish probably", "Jeff Bezos", "titanic.png", "Boat drowning"),
     (2, "Nemo", 432, "Scary", 5, "Fish", "Steve Erwin", "Nemo.png", "Fish looking for fish"),
     (3, "Toy Story", 2000, "Happy", 6, "Toys", "Guy Fieri", "ToyStory.png", "Toys running away from their owner and doing other stuff"),
     (4, "Transformers", 2002, "Epic", 7, "Robots", "Human", "Transformers.png", "Robots fighting other robots and humans are present");
@@ -48,3 +47,4 @@ VALUES
     (10, 1, "Saturday", "19:30", "Deluxe"),
     (11, 1, "Sunday", "18:15", "Standard"),
     (12, 1, "Sunday", "20:30", "Standard");
+

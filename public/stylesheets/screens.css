@@ -1,0 +1,27 @@
+.panel-primary
+{
+    color: black;
+    background: rgb(240, 240, 240);
+    padding: 5px 10px 5px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: rgb(29, 29, 29);
+    margin-bottom: 50px;
+}
+
+img
+{
+    height: 300px;
+    width: 500px;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: rgb(29, 29, 29);
+    padding: 5px 10px 5px;
+}
+
+/*Adding Quantity of Seats*/
+
+
+
+.numberofseats
+{
+    align-items: center;
+}

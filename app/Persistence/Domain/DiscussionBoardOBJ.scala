@@ -14,14 +14,14 @@ import java.time.LocalDateTime
 
 object DiscussionBoardOBJ{
 
-case class DiscussionBoard(id: Int, content: String, datetime: LocalDateTime, movieID: Int, mRating: Int, postChecker: Boolean)
+case class DiscussionBoard(id: Int, content: String, datetime: String, movieID: Int, mRating: Int, postChecker: Boolean)
 
 val movies = TableQuery[Movies]
 
 case class DiscussionBoards(tag: Tag) extends Table[DiscussionBoard] (tag, "discussionboard") {
   def id = column[Int]("POST_ID", O.AutoInc, O.PrimaryKey)
   def content = column[String]("CONTENT")
-  def datetime = column[LocalDateTime]("POST_DATETIME")
+  def datetime = column[String]("POST_DATETIME")
   def movieID = column[Int]("MOVIE_ID")
   def mRating = column[Int]("MOVIE_RATING")
   def postChecker = column[Boolean]("POST_CHECKER")
@@ -35,12 +35,12 @@ object boardForm {
   val submitForm =
     Form(
       mapping(
-        "id" -> number,
+        "id" -> default(number, 0),
         "content" -> nonEmptyText,
-        "datetime" -> localDateTime,
+        "datetime" -> default(nonEmptyText, LocalDateTime.now().toString),
         "movieID" -> number,
         "mRating" -> number,
-        "postChecker" -> boolean
+        "postChecker" -> default(boolean, false)
       )(DiscussionBoard.apply)(DiscussionBoard.unapply)
     )
 }

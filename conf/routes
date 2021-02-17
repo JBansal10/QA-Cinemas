@@ -23,3 +23,5 @@ GET   /gettingthere             controllers.HomeController.gettingThere
 
 GET     /payment                    controllers.HomeController.createPayment
 
+
+GET   /discboard                    controllers.HomeController.createDiscBoard()

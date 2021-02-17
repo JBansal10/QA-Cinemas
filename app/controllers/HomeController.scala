@@ -3,8 +3,9 @@ package controllers
 import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.mvc.Results.{BadRequest, Redirect}
-import Persistence.DAO.MovieDAO
+import Persistence.DAO.{MovieDAO, ScreenTimeDAO}
 import Persistence.Domain.Movie
+import Persistence.Domain.ScreenTimesOBJ.ScreenTime
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import javax.inject._
@@ -32,16 +33,18 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def listingsGallery = Action.async { implicit request =>
-
     MovieDAO.readAll() map(movies => Ok(views.html.listingsgallery(movies)))
-
   }
 
   def readID(id: Int) = Action.async(implicit request =>
-    MovieDAO.readById(id) map (movie =>
-      if (movie.isDefined) Ok(views.html.movie(movie.get))
-      else Ok(views.html.index("ERROR")) // TODO needs to send to an error page for movie not found
-      )
+    // Used nested? futures instead of using a join
+    ScreenTimeDAO.readByMID(id).flatMap { times =>
+      MovieDAO.readById(id).map {
+        case Some(movie) =>
+          Ok(views.html.movie(movie, times))
+        case None => Ok(views.html.error("Error 404", "Could not find the movie."))
+      }
+    }
   )
 
   def homepage = Action {
@@ -64,7 +67,8 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def gettingThere = Action {
     Ok(views.html.gettingThere())
   }
+
  
-    def tempToDo = TODO
+  def tempToDo = TODO
 }
 

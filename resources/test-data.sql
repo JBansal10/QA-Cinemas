@@ -43,15 +43,17 @@ CREATE TABLE `qacinemas`.`booking` (
    FOREIGN KEY (`SCREEN_ID`) REFERENCES `qacinemas`.`screentime` (`SCREENTIME_ID`) ON DELETE CASCADE
     );
 
-CREATE TABLE `qacinemas`.`discussionboard` (
-   `POST_ID`       int NOT NULL AUTO_INCREMENT,
-   `CONTENT`       varchar(1000) DEFAULT NULL,
-   `POST_DATETIME` varchar(100) DEFAULT NULL,
-   `MOVIE_ID`      int           DEFAULT NULL,
-   `MOVIE_RATING`  int           DEFAULT NULL,
-   `POST_CHECKER` tinyint(1) DEFAULT '0',
-   PRIMARY KEY (`POST_ID`)
-   FOREIGN KEY (`MOVIE_ID`) REFERENCES `qacinemas`.`movie`(`MOVIE_ID`) ON DELETE CASCADE
+CREATE TABLE `qacinemas`.`discussionboard`
+(
+    `POST_ID`       int NOT NULL AUTO_INCREMENT,
+    `CONTENT`       varchar(1000) DEFAULT NULL,
+    `POST_DATETIME` varchar(100)  DEFAULT NULL,
+    `MOVIE_ID`      int           DEFAULT NULL,
+    `MOVIE_RATING`  int           DEFAULT NULL,
+    `POST_CHECKER`  tinyint(1) DEFAULT '0',
+    PRIMARY KEY (`POST_ID`),
+    FOREIGN KEY (`MOVIE_ID`) REFERENCES `qacinemas`.`movie`(`MOVIE_ID`) ON DELETE CASCADE
+    );
 
 CREATE TABLE `qacinemas`.`payment` (
     `PAYMENT_ID` INT NOT NULL AUTO_INCREMENT,
@@ -61,7 +63,7 @@ CREATE TABLE `qacinemas`.`payment` (
     `SECURITY_CODE` INT NOT NULL,
     `BOOKING_ID` INT NOT NULL,
     PRIMARY KEY (`PAYMENT_ID`),
-    FOREIGN KEY (`BOOKING_ID`) REFERENCES `qacinemas`.`booking`(`FORM_ID`)
+    FOREIGN KEY (`BOOKING_ID`) REFERENCES `qacinemas`.`booking`(`FORM_ID`) ON DELETE CASCADE
     );
 
 /* insert data */

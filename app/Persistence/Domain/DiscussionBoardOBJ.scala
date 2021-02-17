@@ -11,6 +11,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import slick.jdbc.MySQLProfile.api._
 
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 object DiscussionBoardOBJ{
 
@@ -32,12 +33,13 @@ case class DiscussionBoards(tag: Tag) extends Table[DiscussionBoard] (tag, "disc
 
 
 object boardForm {
+  val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
   val submitForm =
     Form(
       mapping(
         "id" -> default(number, 0),
         "content" -> nonEmptyText,
-        "datetime" -> default(nonEmptyText, LocalDateTime.now().toString),
+        "datetime" -> default(nonEmptyText, LocalDateTime.now().format(formatter)),
         "movieID" -> number,
         "mRating" -> number,
         "postChecker" -> default(boolean, false)

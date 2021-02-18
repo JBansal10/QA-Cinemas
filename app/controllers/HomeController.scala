@@ -42,7 +42,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       MovieDAO.readById(id).map {
         case Some(movie) =>
           Ok(views.html.movie(movie, times))
-        case None => Ok(views.html.error("Error 404", "Could not find the movie."))
+        case None => NotFound(views.html.error("Error 404", "Could not find the movie."))
       }
     }
   )

@@ -32,7 +32,7 @@ object BookingFormOBJ {
   object bookingForm {
     val bookForm = Form (
       mapping (
-        "id" -> number,
+        "id" -> default(number, 0),
         "screenDate" -> nonEmptyText,
         "cName" -> nonEmptyText,
         "adults" -> number,

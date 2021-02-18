@@ -8,7 +8,7 @@ import Persistence.Domain.paymentObj.{Payment, PaymentForm}
 import Persistence.DAO.{MovieDAO, ScreenTimeDAO}
 import Persistence.DAO.{DiscussionBoardDAO, MovieDAO}
 import Persistence.Domain.DiscussionBoardOBJ.{DiscussionBoard, boardForm}
-import Persistence.Domain.Movie
+import Persistence.Domain.{Movie, SearchOBJ}
 import Persistence.Domain.ScreenTimesOBJ.ScreenTime
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -116,6 +116,15 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       case Failure(exception) =>
         exception.printStackTrace()
     }
+  }
+
+  def search = Action.async { implicit request =>
+    SearchOBJ.searchForm.bindFromRequest.fold(
+      formWithErrors => Future { Ok(views.html.searchresults(Seq[Movie]())) },
+      search => MovieDAO.search(search.term) map { results =>
+        Ok(views.html.searchresults(results))
+      }
+    )
   }
 
   def tempToDo = TODO

@@ -3,6 +3,17 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
+a:link, a:visited {
+    color: #999999;
+    text-decoration: none;
+    transition: color .5s;
+}
+
+a:hover, a:active {
+    color: #666666;
+    text-decoration: none;
+}
+
 #navtxt {
     background-color: #212529;
     font-family: 'Roboto', sans-serif;

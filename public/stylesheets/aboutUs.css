@@ -36,3 +36,17 @@
     background: #125688;
     color: white;
 }
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: contain;
+}
+
+#card5{
+    align-content: center;
+}
+
+#cutxt{
+    font-size: 13px;
+}

@@ -96,8 +96,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def openingTimes = Action {
-    val result = Await.result(BookingDAO.getLastIndex(), Duration.Inf)
-    println(result)
     Ok(views.html.openingTimes())
   }
   
@@ -120,13 +118,13 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
 
-  def createBooking() = Action { implicit request =>
+  def createBooking() = Action.async { implicit request =>
     bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
-      BadRequest(views.html.booking(bookingFormWithErrors))
+      Future {BadRequest(views.html.booking(bookingFormWithErrors))}
     }, { widget =>
-    createB(widget)
-    Redirect("/payment")
-  })
+      createB(widget)
+      BookingDAO.getLastIndex() map { id => Redirect("/payment/" + id) }
+    })
   }
 
   def createB(book: Booking): Unit = {
@@ -140,10 +138,11 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   def bookingComplete(id: Int) = Action.async { implicit request =>
     BookingDAO.readById(id).map {
-      case Some(thing) =>
-        Ok(views.html.bookingcomplete(thing))
-      case None => Ok(views.html.error("Error 404", "Could not find the booking."))
+      case Some(thing) => Ok(views.html.bookingcomplete(thing))
+      case None => NotFound(views.html.error("Error 404", "Could not find the booking."))
     }
+  }
+
 
   def search = Action.async { implicit request =>
     SearchOBJ.searchForm.bindFromRequest.fold(

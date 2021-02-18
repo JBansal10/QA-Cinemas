@@ -53,7 +53,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   )
 
-//  def discBoardRead() = Action {implicit request => DiscussionBoardDAO.readAll() map (working => Ok(views.html))}
+  def discBoardRead() = Action.async {implicit request => DiscussionBoardDAO.readAll() map (working => Ok(views.html.AdminDiscBoard(working)))}
 
   def createDiscBoard() = Action.async {implicit request =>
     DiscussionBoardDAO.readAll() map { discussions =>

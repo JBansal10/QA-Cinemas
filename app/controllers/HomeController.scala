@@ -142,6 +142,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
         Ok(views.html.bookingcomplete(thing))
       case None => Ok(views.html.error("Error 404", "Could not find the booking."))
     }
+  }
 
   def search = Action.async { implicit request =>
     SearchOBJ.searchForm.bindFromRequest.fold(

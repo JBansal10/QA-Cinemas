@@ -15,10 +15,9 @@ GET     /                           controllers.HomeController.homepage
 
 GET    /aboutus                    controllers.HomeController.aboutUs
 
-GET   /contactus                 controllers.HomeController.contactUs
+GET   /contactus                 controllers.EmailController.sendEmail
 
 GET   /screens                   controllers.HomeController.screens
 
 GET   /gettingthere             controllers.HomeController.gettingThere
 
-GET   /contactform               controllers.EmailFormController.EmailForm

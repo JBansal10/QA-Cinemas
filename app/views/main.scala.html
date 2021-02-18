@@ -45,20 +45,15 @@
                                 About
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="aboutusDropdown">
-
-
                                 <li><a class="dropdown-item" href="/aboutus">About QA Cinemas</a></li>
-
-                                <li><a class="dropdown-item" href="/aboutus" id="aboutus">About QA Cinemas</a></li>
-
                                 <li><a class="dropdown-item" href="/contactus" id="contactUsHeader">Contact Us</a></li>
-                                <li><a class="dropdown-item" href="/temp">Opening Times</a></li>
+                                <li><a class="dropdown-item" href="/openingtimes">Opening Times</a></li>
                                 <li><a class="dropdown-item" href="/screens" id="screens">Screens</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Movies!
+                                Movies
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/listgallery">Listings Gallery</a></li>
@@ -74,6 +69,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/discboard" id="discboardID">Discussion Board</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/openingtimes" id="openHead">Opening Times</a>
+                        </li>
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -88,20 +86,20 @@
          * the page content. *@
         <div style="text-align: center">@content</div>
 
-
-
         <footer>
-            <ul class="nav justify-content-center fixed-bottom navbar-dark bg-dark">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Homepage</a>
-                </li>
-                <li class="nav-item">
-                    <a id="aboutUsFooter"  class="nav-link" href="/aboutus">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contactus" id="contactUsFooter">Contact Us</a>
-                </li>
-            </ul>
+            <div class="navbar justify-content-center navbar-expand-lg fixed-bottom navbar-dark bg-dark" id="footertext">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class= "nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class = "nav-link" href="/aboutus" id="aboutUsFooter">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contactus" id="contactUsFooter">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

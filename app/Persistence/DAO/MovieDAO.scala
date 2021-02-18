@@ -27,5 +27,4 @@ object MovieDAO {
 
     db.run(query.result)
   }
-
 }

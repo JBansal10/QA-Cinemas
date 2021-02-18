@@ -15,16 +15,16 @@ object MovieDAO {
 
   lazy val db = Database.forConfig("mysqlDB")
   lazy val movieTable: TableQuery[Movies] = TableQuery[Movies]
-  lazy val screenTimeTable = TableQuery[ScreenTimes]
 
   def readAll(): Future[Seq[Movie]] = db.run(movieTable.result)
 
   def readById(id: Int): Future[Option[Movie]] = db.run(movieTable.filter(_.id === id).result.headOption)
 
-  def resetAll = {
-    val statement = Source.fromFile("resources/test-data.sql").mkString
-    db.run(sqlu"#$statement")
-    println(statement)
-  }
+  def search(term: String): Future[Seq[Movie]] = { // TODO need to test this
+    val formedTerm = "%" + term + "%"
+    // cant reduce the below statement
+    val query = movieTable.filter(m => (m.mName like formedTerm) || (m.director like formedTerm) || (m.actors like formedTerm))
 
+    db.run(query.result)
+  }
 }

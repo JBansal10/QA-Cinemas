@@ -1,0 +1,11 @@
+@import Persistence.Domain.DiscussionBoardOBJ.DiscussionBoard
+@(readDBoard: Seq[DiscussionBoard])
+
+@main("Admin Discussion Board") {
+    <div class="container text-light">
+    <h1>Discussion Board Moderation</h1>
+        @for(dboard <- readDBoard){
+            <li>@dboard </li>
+        }
+    </div>
+}

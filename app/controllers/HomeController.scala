@@ -7,7 +7,7 @@ import Persistence.DAO.{BookingDAO, DiscussionBoardDAO, MovieDAO, PaymentDAO, Sc
 import Persistence.Domain.paymentObj.{Payment, PaymentForm}
 import Persistence.Domain.BookingFormOBJ.{Booking, bookingForm}
 import Persistence.Domain.DiscussionBoardOBJ.{DiscussionBoard, boardForm}
-import Persistence.Domain.Movie
+import Persistence.Domain.{Movie, SearchOBJ}
 import Persistence.Domain.ScreenTimesOBJ.ScreenTime
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -53,7 +53,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   )
 
-//  def discBoardRead() = Action {implicit request => DiscussionBoardDAO.readAll() map (working => Ok(views.html))}
+  def discBoardRead() = Action.async {implicit request => DiscussionBoardDAO.readAll() map (working => Ok(views.html.AdminDiscBoard(working)))}
 
   def createDiscBoard() = Action.async {implicit request =>
     DiscussionBoardDAO.readAll() map { discussions =>
@@ -119,6 +119,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   }
 
+
   def createBooking() = Action { implicit request =>
     bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
       BadRequest(views.html.booking(bookingFormWithErrors))
@@ -143,6 +144,15 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
         Ok(views.html.bookingcomplete(thing))
       case None => Ok(views.html.error("Error 404", "Could not find the booking."))
     }
+
+  def search = Action.async { implicit request =>
+    SearchOBJ.searchForm.bindFromRequest.fold(
+      formWithErrors => Future { Ok(views.html.searchresults(Seq[Movie]())) },
+      search => MovieDAO.search(search.term) map { results =>
+        Ok(views.html.searchresults(results))
+      }
+    )
+
   }
 
   def tempToDo = TODO

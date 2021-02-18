@@ -14,7 +14,7 @@
                 <div class="jumbotron">
                     <div class="container">
                         <h1 class="display-4">@movie.mName</h1>
-                        <p class="lead">Directed by @movie.director and featuring @movie.actors .</p>
+                        <p class="lead">Directed by @movie.director and featuring @(movie.actors+ ".")</p>
                         <hr class="my-4">
                         <p>@movie.desc</p>
                         <table class="table text-light">

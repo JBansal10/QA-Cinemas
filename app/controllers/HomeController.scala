@@ -4,7 +4,7 @@ import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.mvc.Results.{BadRequest, Redirect}
 import Persistence.DAO.{MovieDAO, ScreenTimeDAO}
-import Persistence.Domain.Movie
+import Persistence.Domain.{Email, Movie}
 import Persistence.Domain.ScreenTimesOBJ.ScreenTime
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -68,6 +68,12 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.gettingThere())
   }
 
+
+
+  def emailform = Action{
+    Email.emailing
+    Ok(views.html.contactUs())
+  }
  
   def tempToDo = TODO
 }

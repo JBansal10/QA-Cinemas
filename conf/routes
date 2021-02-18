@@ -21,3 +21,4 @@ GET   /screens                   controllers.HomeController.screens
 
 GET   /gettingthere             controllers.HomeController.gettingThere
 
+GET   /contactform               controllers.EmailFormController.EmailForm

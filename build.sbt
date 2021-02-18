@@ -16,6 +16,8 @@ unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/
 
 libraryDependencies += "org.scalatestplus" %% "selenium-3-141" % "3.2.2.0" % "test"
 
+
+
 libraryDependencies += "org.scalatest" %% "scalatest-flatspec" % "3.2.2" % "test"
 libraryDependencies += "org.scalatest" %% "scalatest-shouldmatchers" % "3.2.2" % "test"
 
@@ -24,3 +26,10 @@ libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick-hikaricp" % "3.3.3",
   "mysql" % "mysql-connector-java" % "8.0.11"
 )
+
+libraryDependencies += "javax.mail" % "mail" % "1.4.7"
+
+libraryDependencies += "com.github.daddykotex" %% "courier" % "3.0.0-M2a"
+
+
+libraryDependencies += "javax.mail" % "javax.mail-api" % "1.6.0"

@@ -1,32 +1,64 @@
+
 @main("Welcome to Play") {
 
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+</head>
+<body>
 <div class="container" >
-    <h1>Contact us</h1>
-    <div class="row">
-        <div class="col">
-            <br><br>
-            <h4>Phone Number:</h4>
-            <h5>0345 074 7857</h5>
-            <p></p>
 
-            <h4>Address:</h4>
-            <h5>8th Floor, St James Buildings<br>
-                79 Oxford Street<br>
-                Manchester<br>
-                M1 6FQ<br>
-            </h5>
-            <p></p>
-            <h4>Email:</h4>
-            <h5>QACINEMA&#64;QA.COM</h5>
-        </div>
-            <div class="col">
-                <p></p><p></p>
-                <h6>Where to find us:</h6>
-                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1PlZOY3Swroapc8RN8-mXy3o3lOrOZi0B" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-            </div>
+    <h1>Contact us</h1>
+    <h6>Where to find us:</h6>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2374.599266612334!2d-2.2436285483986036!3d53.47562157990819!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487bb1ea57eb2a39%3A0x6b93de303a6a2776!2s8th%20Floor%2C%20St%20James&#39;s%20Bldg%2C%2079%20Oxford%20St%2C%20Manchester%20M1%206PP!5e0!3m2!1sen!2suk!4v1613407966479!5m2!1sen!2suk" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+    <h4>Phone Number:</h4>
+    <h5>0161 393 2271</h5>
+    <p></p>
+
+    <h4>Address:</h4>
+    <h5>Anchorage 1 Anchorage Quay Salford,<br>
+        The Quays, Manchester M50 3YJ
+    </h5>
+    <p></p>
+
+    <h4>Email:</h4>
+    <div class="fcf-body">
+
+        <div id="fcf-form">
+            <h3 class="fcf-h3">Contact us</h3>
+
+            <form id="fcf-form-id" class="fcf-form-class" method="post" action="contact-form-process.php">
+
+                <div class="fcf-form-group">
+                    <label for="Name" class="fcf-label">Your name</label>
+                    <div class="fcf-input-group">
+                        <input type="text" id="FullName" name="Name" class="fcf-form-control" required>
+                    </div>
+                </div>
+
+                <div class="fcf-form-group">
+                    <label for="Email" class="fcf-label">Your email address</label>
+                    <div class="fcf-input-group">
+                        <input type="email" id="Email" name="Email" class="fcf-form-control" required>
+                    </div>
+                </div>
+
+                <div class="fcf-form-group">
+                    <label for="Message" class="fcf-label">Your message</label>
+                    <div class="fcf-input-group">
+
+@*                        <textarea id="Message" name="Message" class="fcf-form-control" rows="6" maxlength="3000" required></textarea>*@
+                    </div>
+                </div>
+
+                <div class="fcf-form-group">
+                    <button type="submit" href="/contactform" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Send Message</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
+</body>
 
 }

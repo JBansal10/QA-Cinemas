@@ -2,9 +2,8 @@
 @import Persistence.Domain.paymentObj.Payment
 @(form: Form[Payment])(implicit messages: Messages)
 
-
 @main("payment page") {
-    <p>Payment page</p>
+    <h1>Payment page</h1>
     @helper.form(routes.HomeController.createPayment()){
         <div class="form-floating">
             @helper.inputText(form("cardHolderName"), Symbol("label") -> "cardHolderName", Symbol("showConstraints") -> false)

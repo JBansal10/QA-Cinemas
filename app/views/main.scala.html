@@ -24,17 +24,19 @@
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/homepage.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/screens.css")">
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/contactUs.css")">
-        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/gettingthere.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/gettingThere.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/openingTimes.css")">
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/aboutUs.css")">
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@@300&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!-- Adding  Stars-->
 
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
-
-        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
+        <nav class="navbar navbar-expand-lg navbar navbar-dark" id="navtxt">
+            <div class="container" id="maincont">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -76,9 +78,15 @@
                             <a class="nav-link" href="/openingtimes" id="openHead">Opening Times</a>
                         </li>
                     </ul>
+
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+
                     <form action="/search" class="d-flex" method="GET">
                         <input id="searchText" name="term" class="form-control me-2" type="text" placeholder="Search Term" aria-label="Search">
                         <button id="searchButton" type="submit" class="btn btn-outline-success">Search</button>
+
                     </form>
                 </div>
             </div>
@@ -87,23 +95,51 @@
 
         @* And here's where we render the `Html` object containing
          * the page content. *@
-        <div style="text-align: center">@content</div>
+        <div style="text-align: center">@content</div><hr/>
 
-        <footer>
-            <div class="navbar justify-content-center navbar-expand-lg fixed-bottom navbar-dark bg-dark" id="footertext">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class= "nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class = "nav-link" href="/aboutus" id="aboutUsFooter">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contactus" id="contactUsFooter">Contact Us</a>
-                    </li>
-                </ul>
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <h6>About</h6>
+                        <p class="text-justify">
+                            QA Cinema provides a high quality service lorem ipsum.....
+                        </p>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <h6>Categories</h6>
+                        <ul class="footer-links">
+                            <li><a href="/listgallery">Listings Gallery</a></li>
+                            <li><a href="/screens">Screens</a></li>
+                            <li><a href="/openingtimes">Opening Times</a></li>
+                            <li><a href="/gettingthere">Getting There</a></li>
+                            <li><a href="/discboard">Discussion Board</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <h6>Quick Links</h6>
+                        <ul class="footer-links">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/aboutus">About Us</a></li>
+                            <li><a href="/contactus">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-sm-6 col-xs-12">
+                        <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
+                            <a href="/aboutus">Team Fire</a>.
+                        </p>
+                    </div>
+                </div>
             </div>
         </footer>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     </body>

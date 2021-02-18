@@ -96,8 +96,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def openingTimes = Action {
-    val result = Await.result(BookingDAO.getLastIndex(), Duration.Inf)
-    println(result)
     Ok(views.html.openingTimes())
   }
   

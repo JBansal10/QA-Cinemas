@@ -21,4 +21,6 @@ object BookingDAO {
   }
   def readById (id: Int): Future[Option[Booking]] = db.run(bookingTable.filter(_.id === id).result.headOption)
 
+  def getLastIndex(): Future[Int] = db.run(bookingTable.size.result)
+
 }

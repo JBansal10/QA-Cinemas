@@ -1,0 +1,17 @@
+@import Persistence.Domain.BookingFormOBJ.Booking
+@(booking: Booking)
+
+@main("Booking Complete") {
+
+<div class="container">
+    <h1>Booking Complete!</h1>
+    <p>id: @booking.id</p>
+    <p>screenDate: @booking.screenDate</p>
+    <p>cName: @booking.cName</p>
+    <p>adults: @booking.adults</p>
+    <p>childs: @booking.childs</p>
+    <p>concession: @booking.concession</p>
+    <p>screenID: @booking.screenID</p>
+
+</div>
+}

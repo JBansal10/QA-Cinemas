@@ -3,10 +3,9 @@ package controllers
 import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.mvc.Results.{BadRequest, Redirect}
-import Persistence.DAO.{MovieDAO, PaymentDAO}
+import Persistence.DAO.{BookingDAO, DiscussionBoardDAO, MovieDAO, PaymentDAO, ScreenTimeDAO}
 import Persistence.Domain.paymentObj.{Payment, PaymentForm}
-import Persistence.DAO.{MovieDAO, ScreenTimeDAO}
-import Persistence.DAO.{DiscussionBoardDAO, MovieDAO}
+import Persistence.Domain.BookingFormOBJ.{Booking, bookingForm}
 import Persistence.Domain.DiscussionBoardOBJ.{DiscussionBoard, boardForm}
 import Persistence.Domain.Movie
 import Persistence.Domain.ScreenTimesOBJ.ScreenTime
@@ -17,7 +16,8 @@ import play.api.mvc._
 import play.mvc.Action
 
 import scala.collection.mutable.ArrayBuffer
-import scala.concurrent.{Future, TimeoutException}
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future, TimeoutException}
 import scala.util.{Failure, Success}
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -57,7 +57,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   def createDiscBoard() = Action.async {implicit request =>
     DiscussionBoardDAO.readAll() map { discussions =>
-      boardForm.submitForm.bindFromRequest.fold({ formsWithError =>
+      boardForm.submitForm.bindFromRequest().fold({ formsWithError =>
           BadRequest(views.html.discboard(formsWithError, discussions))
       }, {
         creator => createFunc(creator)
@@ -95,17 +95,18 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.gettingThere())
   }
 
-
   def openingTimes = Action {
+    val result = Await.result(BookingDAO.getLastIndex(), Duration.Inf)
+    println(result)
     Ok(views.html.openingTimes())
   }
   
   def createPayment() = Action { implicit request =>
-    PaymentForm.submitForm.bindFromRequest.fold({ formWithErrors =>
+    PaymentForm.submitForm.bindFromRequest().fold({ formWithErrors =>
       BadRequest(views.html.payment(formWithErrors))
     }, { widget =>
       createP(widget)
-      Redirect("/payment")
+      Redirect("/bookingcomplete")
     })
   }
 
@@ -115,6 +116,32 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
         println(value)
       case Failure(exception) =>
         exception.printStackTrace()
+    }
+  }
+
+  def createBooking() = Action { implicit request =>
+    bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
+      BadRequest(views.html.booking(bookingFormWithErrors))
+    }, { widget =>
+    createB(widget)
+    Redirect("/payment")
+  })
+  }
+
+  def createB(book: Booking): Unit = {
+    BookingDAO.create(book).onComplete {
+      case Success(value) =>
+        println(value)
+      case Failure(exception) =>
+        exception.printStackTrace()
+    }
+  }
+
+  def bookingComplete(id: Int) = Action.async { implicit request =>
+    BookingDAO.readById(id).map {
+      case Some(thing) =>
+        Ok(views.html.bookingcomplete(thing))
+      case None => Ok(views.html.error("Error 404", "Could not find the booking."))
     }
   }
 

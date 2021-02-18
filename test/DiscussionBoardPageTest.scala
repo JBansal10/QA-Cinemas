@@ -39,7 +39,10 @@ class DiscussionBoardPageTest extends flatspec.AnyFlatSpec with WebBrowser with 
     textField(xpath("/html/body/div/div/form/div[1]/dl[1]/dd[1]/input")).value = "This is test content"
     textField(xpath("/html/body/div/div/form/div[1]/dl[2]/dd[1]/input")).value = "2"
     textField(xpath("/html/body/div/div/form/div[1]/dl[3]/dd[1]/input")).value = "8"
-//    assert("this is test content".exists(i =>
+    click on xpath("/html/body/div/div/form/div[1]/button")
+
+    go to host + "adminboard"
+    assert(find(xpath("/html/body/div/div/li[3]")).get.text.contains("This is test content"))
   }
 
 }

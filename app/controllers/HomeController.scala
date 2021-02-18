@@ -91,6 +91,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.screens())
   }
 
+  def placesToGo = Action {
+    Ok(views.html.placestogo())
+  }
+
   def gettingThere = Action {
     Ok(views.html.gettingThere())
   }

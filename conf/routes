@@ -34,3 +34,5 @@ GET     /search                    controllers.HomeController.search
 GET     /discboard                    controllers.HomeController.createDiscBoard()
 
 GET     /adminboard                 controllers.HomeController.discBoardRead()
+
+GET     /placestogo                 controllers.HomeController.placesToGo()

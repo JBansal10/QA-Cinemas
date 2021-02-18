@@ -41,7 +41,7 @@ CREATE TABLE `qacinemas`.`booking` (
    `SCREEN_ID`     int          DEFAULT NULL,
    PRIMARY KEY (`FORM_ID`),
    FOREIGN KEY (`SCREEN_ID`) REFERENCES `qacinemas`.`screentime` (`SCREENTIME_ID`) ON DELETE CASCADE
-    );
+);
 
 CREATE TABLE `qacinemas`.`discussionboard`
 (

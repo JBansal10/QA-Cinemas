@@ -27,4 +27,8 @@ GET     /payment                    controllers.HomeController.createPayment
 
 GET   /discboard                    controllers.HomeController.createDiscBoard()
 
-GET   /search                  controllers.HomeController.search
+GET   /search                    controllers.HomeController.search
+
+GET   /discboard                    controllers.HomeController.createDiscBoard()
+
+GET     /adminboard                 controllers.HomeController.discBoardRead()

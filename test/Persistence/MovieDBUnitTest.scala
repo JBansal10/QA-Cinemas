@@ -42,4 +42,8 @@ class MovieDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with Matchers {
       } else assert(false)
     }
   }
+
+  it should "return a few movies when searching for a" in {
+    MovieDAO.search("a") map { movies => movies.length should be > 1 }
+  }
 }

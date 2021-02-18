@@ -1,14 +1,14 @@
 .panel-primary
 {
     color: black;
-    background: rgb(240, 240, 240);
-    padding: 5px 10px 5px;
+    background: rgb(100, 100, 100);
+    padding: 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
     box-shadow: rgb(29, 29, 29);
     margin-bottom: 50px;
 }
 
-img
+#picture
 {
     height: 300px;
     width: 500px;

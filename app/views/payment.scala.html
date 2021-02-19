@@ -3,6 +3,7 @@
 @(form: Form[Payment])(implicit messages: Messages)
 
 @main("payment page") {
+    <div class="container text-light">
     <h1>Payment page</h1>
     @helper.form(routes.HomeController.createPayment()){
         <div class="form-floating">
@@ -13,6 +14,7 @@
             @helper.inputText(form("bookingID"), Symbol("label") -> "bookingID", Symbol("showConstraints") -> false)
             <button class="btn btn-primary" type="submit">Submit!</button>
         </div>
+    </div>
     }
 
 

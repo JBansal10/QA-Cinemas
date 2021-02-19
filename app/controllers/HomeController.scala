@@ -154,6 +154,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   }
 
+  def Classification = Action{
+    Ok(views.html.Classifications())
+  }
+
   def tempToDo = TODO
 }
 

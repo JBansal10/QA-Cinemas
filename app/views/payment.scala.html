@@ -1,9 +1,10 @@
 @import views.html.helper.form
 @import Persistence.Domain.paymentObj.Payment
-@(form: Form[Payment])(implicit messages: Messages)
+@(form: Form[Payment], price: BigDecimal)(implicit messages: Messages)
 
 @main("payment page") {
     <h1>Payment page</h1>
+    <h3>Total price: £@price</h3>
     @helper.form(routes.HomeController.createPayment()){
         <div class="form-floating">
             @helper.inputText(form("cardHolderName"), Symbol("label") -> "cardHolderName", Symbol("showConstraints") -> false)

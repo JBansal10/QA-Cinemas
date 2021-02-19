@@ -3,6 +3,7 @@
 @(form: Form[Booking])(implicit messages: Messages)
 
 @main("booking page") {
+    <div class="container text-light">
     <h1>Booking page</h1>
     @helper.form(routes.HomeController.createBooking()){
         <div class="form-floating">
@@ -14,5 +15,6 @@
             @helper.inputText(form("screenId"), Symbol("label") -> "screenId", Symbol("showConstraints") -> false)
             <button class="btn btn-primary" type="submit">Submit!</button>
         </div>
+    </div>
     }
 }

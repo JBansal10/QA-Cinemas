@@ -25,8 +25,6 @@ libraryDependencies ++= Seq(
   "mysql" % "mysql-connector-java" % "8.0.11"
 )
 
+libraryDependencies += "javax.mail" % "mail" % "1.4.7"
 libraryDependencies += "com.github.daddykotex" %% "courier" % "3.0.0-M2a"
 libraryDependencies += "javax.mail" % "javax.mail-api" % "1.6.0"
-
-// https://mvnrepository.com/artifact/net.liftweb/lift-sbt
-libraryDependencies += "net.liftweb" % "lift-sbt" % "2.4-M2"

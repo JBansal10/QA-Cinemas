@@ -8,6 +8,8 @@ import Persistence.Domain.paymentObj.{Payment, PaymentForm}
 import Persistence.Domain.BookingFormOBJ.{Booking, bookingForm}
 import Persistence.Domain.DiscussionBoardOBJ.{DiscussionBoard, boardForm}
 import Persistence.Domain.{Movie, SearchOBJ}
+import Persistence.DAO.{MovieDAO, ScreenTimeDAO}
+import Persistence.Domain.{EmailOBJ, Movie}
 import Persistence.Domain.ScreenTimesOBJ.ScreenTime
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -37,18 +39,15 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def listingsGallery = Action.async { implicit request =>
-
     MovieDAO.readAll() map(movies => Ok(views.html.listingsgallery(movies)))
-
   }
 
   def readID(id: Int) = Action.async(implicit request =>
     // Used nested? futures instead of using a join
     ScreenTimeDAO.readByMID(id).flatMap { times =>
       MovieDAO.readById(id).map {
-        case Some(movie) =>
-          Ok(views.html.movie(movie, times))
-        case None => NotFound(views.html.error("Error 404", "Could not find the movie."))
+        case Some(movie) => Ok(views.html.movie(movie, times))
+        case None => Ok(views.html.error("Error 404", "Could not find the movie."))
       }
     }
   )
@@ -83,9 +82,16 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
 
-   def contactUs = Action {
-   Ok(views.html.contactUs())
-   }
+  def contactUs = Action { implicit request =>
+    EmailOBJ.emailContactForm.submitForm.bindFromRequest().fold({ formWithErrors =>
+      println("not sneding")
+      BadRequest(views.html.contactUs(formWithErrors))
+    }, { widget =>
+      println("sending email")
+      EmailOBJ.emailing(widget)
+      Ok(views.html.contactUs(EmailOBJ.emailContactForm.submitForm))
+    })
+  }
 
   def screens = Action {
     Ok(views.html.screens())
@@ -144,7 +150,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
 
   def search = Action.async { implicit request =>
-    SearchOBJ.searchForm.bindFromRequest().fold(
+    SearchOBJ.searchForm.bindFromRequest.fold(
       formWithErrors => Future { Ok(views.html.searchresults(Seq[Movie]())) },
       search => MovieDAO.search(search.term) map { results =>
         Ok(views.html.searchresults(results))

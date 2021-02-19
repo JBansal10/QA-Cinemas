@@ -1,32 +1,27 @@
-@main("Welcome to Play") {
-
-<div class="container" >
-    <h1>Contact us</h1>
-    <div class="row">
-        <div class="col">
-            <br><br>
-            <h4>Phone Number:</h4>
-            <h5>0345 074 7857</h5>
-            <p></p>
-
-            <h4>Address:</h4>
-            <h5>8th Floor, St James Buildings<br>
-                79 Oxford Street<br>
-                Manchester<br>
-                M1 6FQ<br>
-            </h5>
-            <p></p>
-            <h4>Email:</h4>
-            <h5>QACINEMA&#64;QA.COM</h5>
-        </div>
-            <div class="col">
-                <p></p><p></p>
-                <h6>Where to find us:</h6>
-                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1PlZOY3Swroapc8RN8-mXy3o3lOrOZi0B" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+@main("Contact Us") {
+    <div class="container">
+        <br><h1 id="ctxt">Contact Us</h1><hr/>
+        <h4 id="find">Where to find us</h4>
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1PlZOY3Swroapc8RN8-mXy3o3lOrOZi0B" width="900" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe><hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card" id="ccard">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-geo-alt-fill"></i> Address</h5><hr/>
+                        <p class="card-text">8th Floor, St James Buildings<br> 79 Oxford Street<br> Manchester<br> M1 6FQ<br></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6" id="ccard">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-info-circle-fill"></i> Contact information</h5><hr/>
+                        <p class="card-text"><i class="bi bi-telephone-fill"></i> 0345 074 7857<br>
+                            <i class="bi bi-envelope-fill"></i></i> qacinema@@qa.com</p>
+                        <a href="https://www.twitter.com/" target="_blank"><i class="bi bi-twitter"></i></a>  <a href="https://www.instagram.com/" target="_blank"><i class="bi bi-instagram"></i></a>  <a href="http://www.youtube.com/" target="_blank"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-
 }

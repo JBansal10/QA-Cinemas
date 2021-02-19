@@ -9,8 +9,6 @@ import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import slick.jdbc.MySQLProfile.api._
 
-import scala.util.{Failure, Success}
-
 object BookingDAO {
 
   lazy val db = Database.forConfig("mysqlDB")

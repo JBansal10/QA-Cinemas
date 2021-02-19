@@ -36,3 +36,5 @@ GET     /discboard                  controllers.HomeController.createDiscBoard()
 GET     /adminboard                 controllers.HomeController.discBoardRead()
 
 GET     /MovieClassification        controllers.HomeController.Classification()
+
+GET     /SorroundingVenues          controllers.HomeController.Venues()

@@ -1,0 +1,28 @@
+.panel-primary
+{
+    background: rgb(240, 240, 240);
+    padding: 5px 10px 5px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: rgb(29, 29, 29);
+    margin-bottom: 50px;
+}
+
+.img-responsive:hover
+{
+    opacity: 0.3;
+    transform: translateY(-10px);
+}
+
+img
+{
+    height: 500px;
+    width: 300px;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: rgb(29, 29, 29);
+    padding: 5px 10px 5px;
+}
+
+#Description
+{
+    color: azure;
+}

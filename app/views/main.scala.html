@@ -4,6 +4,9 @@
  * two arguments, a `String` for the title of the page and an `Html`
  * object to insert into the body of the page.
  *@
+@import Persistence.Domain.SearchOBJ._
+@import Persistence.Domain.SearchOBJ
+@import helper._
 @(title: String)(content: Html)
 
 <!DOCTYPE html>
@@ -14,10 +17,129 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
         <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/listinggallery.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/homepage.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/screens.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/contactUs.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/gettingThere.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/openingTimes.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/aboutUs.css")">
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@@300&family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@@1.3.0/font/bootstrap-icons.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Adding  Stars-->
+
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg navbar navbar-dark" id="navtxt">
+            <div class="container" id="maincont">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="aboutusDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                About
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="aboutusDropdown">
+                                <li><a class="dropdown-item" href="/aboutus">About</a></li>
+                                <li><a class="dropdown-item" href="/contactus" id="contactUsHeader">Contact Us</a></li>
+                                <li><a class="dropdown-item" href="/openingtimes">Opening Times</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Movies
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/listgallery">Listings Gallery</a></li>
+                                <li><a class="dropdown-item" href="/temp">New Releases Gallery</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/screens" id="screens">Screens</a></li>
+                                <li><a class="dropdown-item" href="/MovieClassification" id="Classification">Classification</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/booking" id="bookingheader">Booking</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/gettingthere" id="gettingthereHeader">Getting There</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/discboard" id="discboardID">Discussion Board</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/SorroundingVenues " id="Surrounding Venues">Surrounding Venues</a>
+                        </li>
+                    </ul>
+                    <form action="/search" class="d-flex" method="GET">
+                        <input id="searchText" name="term" class="form-control me-2" type="text" placeholder="Search Term" aria-label="Search">
+                        <button id="searchButton" type="submit" class="btn btn-outline-success">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+
         @* And here's where we render the `Html` object containing
          * the page content. *@
-        @content
+        <div style="text-align: center">@content</div><hr/>
+
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <h6>About</h6>
+                        <p class="text-justify">
+                            QA Cinema provides a high quality service lorem ipsum.....
+                        </p>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <h6>Categories</h6>
+                        <ul class="footer-links">
+                            <li><a href="/listgallery">Listings Gallery</a></li>
+                            <li><a href="/screens">Screens</a></li>
+                            <li><a href="/openingtimes">Opening Times</a></li>
+                            <li><a href="/gettingthere">Getting There</a></li>
+                            <li><a href="/discboard">Discussion Board</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <h6>Quick Links</h6>
+                        <ul class="footer-links">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/aboutus">About Us</a></li>
+                            <li><a href="/contactus">Contact Us</a></li>
+                            <a href="https://www.twitter.com/" target="_blank"><i class="bi bi-twitter"></i></a>  <a href="https://www.instagram.com/" target="_blank"><i class="bi bi-instagram"></i></a>  <a href="http://www.youtube.com/" target="_blank"><i class="bi bi-youtube"></i></a>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-sm-6 col-xs-12">
+                        <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
+                            <a href="/aboutus">Team Fire</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     </body>
 </html>

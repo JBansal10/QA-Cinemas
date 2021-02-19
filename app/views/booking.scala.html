@@ -1,0 +1,21 @@
+@import views.html.helper.form
+@import Persistence.Domain.BookingFormOBJ.Booking
+@(form: Form[Booking])(implicit messages: Messages)
+
+@main("booking page") {
+    <div class="container text-light">
+    <h1>Booking page</h1>
+    @helper.form(routes.HomeController.createBooking()){
+        <div class="form-floating">
+            @helper.inputText(form("screenDate"), Symbol("label") -> "screenDate", Symbol("showConstraints") -> false)
+            @helper.inputText(form("cName"), Symbol("label") -> "cName", Symbol("showConstraints") -> false)
+            @helper.inputText(form("adults"), Symbol("label") -> "adults", Symbol("showConstraints") -> false)
+            @helper.inputText(form("childs"), Symbol("label") -> "childs", Symbol("showConstraints") -> false)
+            @helper.inputText(form("concession"), Symbol("label") -> "concession", Symbol("showConstraints") -> false)
+            @helper.inputText(form("screenId"), Symbol("label") -> "screenId", Symbol("showConstraints") -> false)
+            @helper.inputText(form("movieId"), Symbol("label") -> "screenId", Symbol("showConstraints") -> false)
+            <button class="btn btn-primary" type="submit">Submit!</button>
+        </div>
+    </div>
+    }
+}

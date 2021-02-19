@@ -1,0 +1,65 @@
+#hphead {
+    font-family: 'Oswald', sans-serif;
+    text-shadow: 3px 3px 5px #969696;
+    text-transform: uppercase;
+    font-size: 60px;
+    letter-spacing: 8px;
+}
+
+#maintxt{
+    font-family: 'Roboto', sans-serif;
+    font-size: 25px;
+}
+
+#subtxt {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+
+/* Slideshow container */
+#slide {
+    align-self: center;
+    max-width: 400px;
+    position: relative;
+    margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+    align-content: center;
+    display: none;
+    height: 500px;
+    width: auto;
+}
+
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+#Slideshow
+{
+    width:100%;
+    height: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 13px;
+
+}
+
+::-webkit-scrollbar-thumb {
+    border: 5px solid #212529;
+    background: #F0FFFF;
+}
+
+::-webkit-scrollbar-track {
+    border: 5px solid #212529;
+    background: #212529;
+}
+
+#banner{
+    width: 1300px;
+    height: 360px;
+}

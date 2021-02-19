@@ -1,0 +1,28 @@
+@import views.html.helper.form
+@import Persistence.Domain.paymentObj.Payment
+@(form: Form[Payment], price: BigDecimal)(implicit messages: Messages)
+
+@main("payment page") {
+    <div class="container text-light">
+    <h1>Payment page</h1>
+    <h3>Total price: £@price</h3>
+    @helper.form(routes.HomeController.createPayment()){
+        <div class="form-floating">
+            <h3>Booking ID: @form("bookingID").value</h3>
+            <div style="display: none">
+                @helper.inputText(form("bookingID"), Symbol("label") -> "securityCode", Symbol("showConstraints") -> false, Symbol("readonly") -> "readonly")
+            </div>
+            @helper.inputText(form("cardHolderName"), Symbol("label") -> "cardHolderName", Symbol("showConstraints") -> false)
+            @helper.inputText(form("cardNo"), Symbol("label") -> "cardNo", Symbol("showConstraints") -> false)
+            @helper.inputText(form("expiryDate"), Symbol("label") -> "expiryDate", Symbol("showConstraints") -> false)
+            @helper.inputText(form("securityCode"), Symbol("label") -> "securityCode", Symbol("showConstraints") -> false)
+
+
+            <button class="btn btn-primary" type="submit">Submit!</button>
+        </div>
+    </div>
+    }
+
+
+
+}

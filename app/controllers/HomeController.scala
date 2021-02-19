@@ -8,6 +8,8 @@ import Persistence.Domain.paymentObj.{Payment, PaymentForm}
 import Persistence.Domain.BookingFormOBJ.{Booking, bookingForm}
 import Persistence.Domain.DiscussionBoardOBJ.{DiscussionBoard, boardForm}
 import Persistence.Domain.{Movie, SearchOBJ}
+import Persistence.DAO.{MovieDAO, ScreenTimeDAO}
+import Persistence.Domain.{EmailOBJ, Movie}
 import Persistence.Domain.ScreenTimesOBJ.ScreenTime
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -37,18 +39,15 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def listingsGallery = Action.async { implicit request =>
-
     MovieDAO.readAll() map(movies => Ok(views.html.listingsgallery(movies)))
-
   }
 
   def readID(id: Int) = Action.async(implicit request =>
     // Used nested? futures instead of using a join
     ScreenTimeDAO.readByMID(id).flatMap { times =>
       MovieDAO.readById(id).map {
-        case Some(movie) =>
-          Ok(views.html.movie(movie, times))
-        case None => NotFound(views.html.error("Error 404", "Could not find the movie."))
+        case Some(movie) => Ok(views.html.movie(movie, times))
+        case None => Ok(views.html.error("Error 404", "Could not find the movie."))
       }
     }
   )
@@ -83,9 +82,16 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
 
-   def contactUs = Action {
-   Ok(views.html.contactUs())
-   }
+  def contactUs = Action { implicit request =>
+    EmailOBJ.emailContactForm.submitForm.bindFromRequest().fold({ formWithErrors =>
+      println("not sneding")
+      BadRequest(views.html.contactUs(formWithErrors))
+    }, { widget =>
+      println("sending email")
+      EmailOBJ.emailing(widget)
+      Ok(views.html.contactUs(EmailOBJ.emailContactForm.submitForm))
+    })
+  }
 
   def screens = Action {
     Ok(views.html.screens())
@@ -99,12 +105,12 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.openingTimes())
   }
   
-  def createPayment() = Action { implicit request =>
+  def createPayment() = Action.async { implicit request =>
     PaymentForm.submitForm.bindFromRequest().fold({ formWithErrors =>
-      BadRequest(views.html.payment(formWithErrors))
+      Future{BadRequest(views.html.payment(formWithErrors))}
     }, { widget =>
       createP(widget)
-      Redirect("/bookingcomplete")
+      BookingDAO.getLastIndex() map { id => Redirect("/bookingcomplete/" + id)}
     })
   }
 
@@ -117,13 +123,12 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   }
 
-
-  def createBooking() = Action.async { implicit request =>
+  def createBooking() = Action { implicit request =>
     bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
-      Future {BadRequest(views.html.booking(bookingFormWithErrors))}
+      BadRequest(views.html.booking(bookingFormWithErrors))
     }, { widget =>
       createB(widget)
-      BookingDAO.getLastIndex() map { id => Redirect("/payment/" + id) }
+      Redirect("/payment")
     })
   }
 
@@ -152,6 +157,14 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       }
     )
 
+  }
+
+  def Classification = Action{
+    Ok(views.html.Classifications())
+  }
+
+  def Venues= Action{
+    Ok(views.html.placestogo())
   }
 
   def tempToDo = TODO

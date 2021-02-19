@@ -1,5 +1,6 @@
 @import Persistence.Domain.EmailOBJ.Email
-@(contactEmail: Form[Email])
+@import Persistence.Domain.EmailOBJ
+@(contactEmail: Form[Email])(implicit messages: Messages)
 
 
 @main("Contact us") {
@@ -30,33 +31,38 @@
 
         <div id="fcf-form">
             <h3 class="fcf-h3">Contact us</h3>
-            <form id="fcf-form-id" class="fcf-form-class">
+                @helper.form(routes.HomeController.contactUs()) {
                 <div class="fcf-form-group">
                     <label for="Name" class="fcf-label">Your name</label>
                     <div class="fcf-input-group">
-                        <input type="text" id="FullName" name="Name" class="fcf-form-control" required>
+                        @helper.input(contactEmail("name")) { (id, name,  value, args) =>
+                        <input type="text" id="@id" name="@name" class="fcf-form-control" @toHtmlArgs(args)>
+                        }
                     </div>
                 </div>
 
                 <div class="fcf-form-group">
                     <label for="Email" class="fcf-label">Your email address</label>
                     <div class="fcf-input-group">
-                        <input type="email" id="Email" name="Email" class="fcf-form-control" required>
+                        @helper.input(contactEmail("from")) { (id, name, value, args) =>
+                        <input type="email" id="@id" name="@name" class="fcf-form-control" required @toHtmlArgs(args)>
+                        }
                     </div>
                 </div>
 
                 <div class="fcf-form-group">
                     <label for="Message" class="fcf-label">Your message</label>
                     <div class="fcf-input-group">
-
-                        <textarea id="Message" name="Message" class="fcf-form-control" rows="6" maxlength="3000" required></textarea>
+                        @helper.input(contactEmail("content")) { (id, name, value, args) =>
+                            <textarea id="@id" name="@name" class="fcf-form-control" rows="6" maxlength="3000" @toHtmlArgs(args)></textarea>
+                        }
                     </div>
                 </div>
 
                 <div class="fcf-form-group">
-                    <button type="submit" href="" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Send Message</button>
+                    <button type="submit" id="fcf-button" class="fcf-btn fcf-btn-primary fcf-btn-lg fcf-btn-block">Send Message</button>
                 </div>
-            </form>
+                }
         </div>
     </div>
 </div>

@@ -33,7 +33,7 @@ object EmailOBJ {
   object emailContactForm {
     val submitForm = Form(
       mapping(
-        "to" -> email,
+        "from" -> email,
         "name" -> nonEmptyText,
         "content" -> nonEmptyText
       )(Email.apply)(Email.unapply)

@@ -91,10 +91,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.screens())
   }
 
-  def placesToGo = Action {
-    Ok(views.html.placestogo())
-  }
-
   def gettingThere = Action {
     Ok(views.html.gettingThere())
   }
@@ -103,12 +99,12 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.openingTimes())
   }
   
-  def createPayment() = Action { implicit request =>
+  def createPayment() = Action.async { implicit request =>
     PaymentForm.submitForm.bindFromRequest().fold({ formWithErrors =>
-      BadRequest(views.html.payment(formWithErrors))
+      Future{BadRequest(views.html.payment(formWithErrors))}
     }, { widget =>
       createP(widget)
-      Redirect("/bookingcomplete")
+      BookingDAO.getLastIndex() map { id => Redirect("/bookingcomplete/" + id)}
     })
   }
 
@@ -121,13 +117,12 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   }
 
-
-  def createBooking() = Action.async { implicit request =>
+  def createBooking() = Action { implicit request =>
     bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
-      Future {BadRequest(views.html.booking(bookingFormWithErrors))}
+      BadRequest(views.html.booking(bookingFormWithErrors))
     }, { widget =>
       createB(widget)
-      BookingDAO.getLastIndex() map { id => Redirect("/payment/" + id) }
+      Redirect("/payment")
     })
   }
 
@@ -149,7 +144,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
 
   def search = Action.async { implicit request =>
-    SearchOBJ.searchForm.bindFromRequest.fold(
+    SearchOBJ.searchForm.bindFromRequest().fold(
       formWithErrors => Future { Ok(views.html.searchresults(Seq[Movie]())) },
       search => MovieDAO.search(search.term) map { results =>
         Ok(views.html.searchresults(results))

@@ -9,7 +9,7 @@ GET     /temp                       controllers.HomeController.tempToDo
 
 GET     /listgallery                controllers.HomeController.listingsGallery
 
-GET     /movie/$id<[0-9]+>          controllers.HomeController.readID(id: Int)
+GET     /movie/$id<[0-20]+>          controllers.HomeController.readID(id: Int)
 
 GET     /                           controllers.HomeController.homepage
 
@@ -27,7 +27,7 @@ GET     /payment                    controllers.HomeController.createPayment()
 
 GET     /booking                    controllers.HomeController.createBooking()
 
-GET     /bookingcomplete/$id<[0-9]+>             controllers.HomeController.bookingComplete(id: Int)
+GET     /bookingcomplete/$id<[0-20]+>           controllers.HomeController.bookingComplete(id: Int)
 
 GET     /search                    controllers.HomeController.search
 

@@ -108,11 +108,8 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def createPayment() = Action.async { implicit request =>
     BookingDAO.getLastIndex() flatMap { booking =>
       if (booking.isDefined) {
-        println("booking is defined")
         MovieDAO.totalPrice(booking.get) map { price =>
-          println("price is defined")
           PaymentForm.submitForm.bindFromRequest().fold({ formWithErrors =>
-            println("form not complete")
             BadRequest(views.html.payment(PaymentForm.submitForm.fill(Payment(0,"", 0, "", 0, booking.get.movieID)), price))
           }, { widget =>
             println("form complete")

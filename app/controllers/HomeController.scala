@@ -4,7 +4,7 @@ import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.mvc.Results.{BadRequest, Redirect}
 import Persistence.DAO.{MovieDAO, ScreenTimeDAO}
-import Persistence.Domain.{Email, Movie}
+import Persistence.Domain.{EmailOBJ, Movie}
 import Persistence.Domain.ScreenTimesOBJ.ScreenTime
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -40,8 +40,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     // Used nested? futures instead of using a join
     ScreenTimeDAO.readByMID(id).flatMap { times =>
       MovieDAO.readById(id).map {
-        case Some(movie) =>
-          Ok(views.html.movie(movie, times))
+        case Some(movie) => Ok(views.html.movie(movie, times))
         case None => Ok(views.html.error("Error 404", "Could not find the movie."))
       }
     }
@@ -56,9 +55,16 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
 
-   def contactUs = Action {
-   Ok(views.html.contactUs())
-   }
+  def contactUs = Action { implicit request =>
+    EmailOBJ.emailContactForm.submitForm.bindFromRequest().fold({ contactFormWithErrors =>
+      BadRequest(views.html.contactUs(contactFormWithErrors))
+    }, { widget =>
+      EmailOBJ.emailing(widget)
+      Ok(views.html.contactUs(null))
+    })
+
+
+  }
 
   def screens = Action {
     Ok(views.html.screens())
@@ -66,13 +72,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   def gettingThere = Action {
     Ok(views.html.gettingThere())
-  }
-
-
-
-  def emailform = Action{
-    Email.emailing
-    Ok(views.html.contactUs())
   }
  
   def tempToDo = TODO

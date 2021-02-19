@@ -18,6 +18,8 @@ CREATE TABLE `qacinemas`.`movie` (
      `DIRECTOR` VARCHAR(45) NULL,
      `IMAGE_URL` VARCHAR(255) NULL,
      `DESC` VARCHAR(1000) NULL,
+     `ADULT_PRICE` decimal(10,2) DEFAULT NULL,
+     `CHILD_PRICE` decimal(10,2) DEFAULT NULL,
      PRIMARY KEY (`MOVIE_ID`)
     );
 
@@ -67,12 +69,12 @@ CREATE TABLE `qacinemas`.`payment` (
     );
 
 /* insert data */
-INSERT INTO `qacinemas`.`movie` (`MOVIE_ID`, `MOVIE_NAME`, `YEAR`, `GENRE`, `AGE_RATING`, `ACTORS`, `DIRECTOR`, `IMAGE_URL`, `DESC`)
+INSERT INTO `qacinemas`.`movie` (`MOVIE_ID`, `MOVIE_NAME`, `YEAR`, `GENRE`, `AGE_RATING`, `ACTORS`, `DIRECTOR`, `IMAGE_URL`, `DESC`, `ADULT_PRICE`, `CHILD_PRICE`)
 VALUES
-    (1, "Titanic", 123, "Sad", 3, "Fish probably", "Jeff Bezos", "titanic.png", "Boat drowning"),
-    (2, "Nemo", 432, "Scary", 5, "Fish", "Steve Erwin", "Nemo.png", "Fish looking for fish"),
-    (3, "Toy Story", 2000, "Happy", 6, "Toys", "Guy Fieri", "ToyStory.png", "Toys running away from their owner and doing other stuff"),
-    (4, "Transformers", 2002, "Epic", 7, "Robots", "Human", "Transformers.png", "Robots fighting other robots and humans are present");
+    (1, "Titanic", 123, "Sad", 3, "Fish probably", "Jeff Bezos", "titanic.png", "Boat drowning", 4.95, 10.95),
+    (2, "Nemo", 432, "Scary", 5, "Fish", "Steve Erwin", "Nemo.png", "Fish looking for fish", 8.95, 6.95),
+    (3, "Toy Story", 2000, "Happy", 6, "Toys", "Guy Fieri", "ToyStory.png", "Toys running away from their owner and doing other stuff", 9.95, 7.95),
+    (4, "Transformers", 2002, "Epic", 7, "Robots", "Human", "Transformers.png", "Robots fighting other robots and humans are present", 8.95, 7.95);
 
 INSERT INTO `qacinemas`.`screentime` (`SCREENTIME_ID`, `SCREENTIME_MOVIE`, `SCREENTIME_DAY`, `SCREENTIME_TIME`, `SCREEN_TYPE`)
 VALUES

@@ -104,13 +104,13 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def openingTimes = Action {
     Ok(views.html.openingTimes())
   }
-
-  def createPayment() = Action { implicit request =>
+  
+  def createPayment() = Action.async { implicit request =>
     PaymentForm.submitForm.bindFromRequest().fold({ formWithErrors =>
-      BadRequest(views.html.payment(formWithErrors))
+      Future{BadRequest(views.html.payment(formWithErrors))}
     }, { widget =>
       createP(widget)
-      Redirect("/bookingcomplete")
+      BookingDAO.getLastIndex() map { id => Redirect("/bookingcomplete/" + id)}
     })
   }
 
@@ -123,13 +123,12 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   }
 
-
-  def createBooking() = Action.async { implicit request =>
+  def createBooking() = Action { implicit request =>
     bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
-      Future {BadRequest(views.html.booking(bookingFormWithErrors))}
+      BadRequest(views.html.booking(bookingFormWithErrors))
     }, { widget =>
       createB(widget)
-      BookingDAO.getLastIndex() map { id => Redirect("/payment/" + id) }
+      Redirect("/payment")
     })
   }
 
@@ -158,6 +157,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       }
     )
 
+  }
+
+  def Classification = Action{
+    Ok(views.html.Classifications())
   }
 
   def tempToDo = TODO

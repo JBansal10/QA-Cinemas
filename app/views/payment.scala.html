@@ -3,6 +3,7 @@
 @(form: Form[Payment], price: BigDecimal)(implicit messages: Messages)
 
 @main("payment page") {
+    <div class="container text-light">
     <h1>Payment page</h1>
     <h3>Total price: £@price</h3>
     @helper.form(routes.HomeController.createPayment()){
@@ -19,6 +20,7 @@
 
             <button class="btn btn-primary" type="submit">Submit!</button>
         </div>
+    </div>
     }
 
 

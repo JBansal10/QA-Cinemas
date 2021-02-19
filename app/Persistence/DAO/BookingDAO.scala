@@ -1,7 +1,6 @@
 package Persistence.DAO
 
 import Persistence.Domain.BookingFormOBJ.{Booking, Bookings}
-import Persistence.Domain.{Movie, Movies}
 import slick.jdbc.MySQLProfile.backend.Database
 import slick.lifted.TableQuery
 

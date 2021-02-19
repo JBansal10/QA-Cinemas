@@ -163,6 +163,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.Classifications())
   }
 
+  def Venues= Action{
+    Ok(views.html.placestogo())
+  }
+
   def tempToDo = TODO
 }
 

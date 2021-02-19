@@ -8,9 +8,10 @@ import slick.jdbc.MySQLProfile.api._
 
 object BookingFormOBJ {
 
-  case class Booking(id: Int, screenDate: String, cName: String, adults: Int, childs: Int, concession: String, screenID: Int)
+  case class Booking(id: Int, screenDate: String, cName: String, adults: Int, childs: Int, concession: String, screenID: Int, movieID: Int)
 
   val screentime = TableQuery[ScreenTimes]
+  val movie = TableQuery[Movies]
 
   case class Bookings(tag: Tag) extends Table[Booking] (tag, "booking") {
     def id = column[Int]("FORM_ID", O.AutoInc, O.PrimaryKey)
@@ -22,10 +23,12 @@ object BookingFormOBJ {
     def childs = column[Int]("CHILDS")
     def concession = column[String]("CONCESSION")
     def screenID = column[Int]("SCREEN_ID")
+    def movieID = column[Int]("MOVIE_ID")
 
     def screentimes = foreignKey("fk_screentime_id", screenID, screentime)(_.id, onDelete = ForeignKeyAction.Cascade)
+    def movies = foreignKey("fk_movie_id", movieID, movie)(_.id, onDelete = ForeignKeyAction.Cascade)
 
-    def * = (id, screenDate, cName, adults, childs, concession, screenID) <> (Booking.tupled, Booking.unapply)
+    def * = (id, screenDate, cName, adults, childs, concession, screenID, movieID) <> (Booking.tupled, Booking.unapply)
 
   }
 
@@ -38,7 +41,8 @@ object BookingFormOBJ {
         "adults" -> number,
         "childs" -> number,
         "concession" -> nonEmptyText,
-        "screenId" -> number
+        "screenId" -> number,
+        "movieID" -> number
       )(Booking.apply)(Booking.unapply)
     )
   }

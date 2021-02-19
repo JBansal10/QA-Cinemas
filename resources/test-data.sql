@@ -41,8 +41,10 @@ CREATE TABLE `qacinemas`.`booking` (
    `CONCESSION`    varchar(100) DEFAULT NULL,
    `SCREEN_DATE`   varchar(50)  DEFAULT NULL,
    `SCREEN_ID`     int          DEFAULT NULL,
+   `MOVIE_ID`      int          DEFAULT NULL,
    PRIMARY KEY (`FORM_ID`),
-   FOREIGN KEY (`SCREEN_ID`) REFERENCES `qacinemas`.`screentime` (`SCREENTIME_ID`) ON DELETE CASCADE
+   FOREIGN KEY (`SCREEN_ID`) REFERENCES `qacinemas`.`screentime` (`SCREENTIME_ID`) ON DELETE CASCADE,
+   FOREIGN KEY (`MOVIE_ID`) REFERENCES `qacinemas`.`movie` (`MOVIE_ID`) ON DELETE CASCADE
 );
 
 CREATE TABLE `qacinemas`.`discussionboard`
@@ -91,14 +93,14 @@ VALUES
     (11, 1, "Sunday", "18:15", "Standard"),
     (12, 1, "Sunday", "20:30", "Standard");
 
-INSERT INTO `qacinemas`.`booking` (`FORM_ID`, `CUSTOMER_NAME`, `ADULTS`, `CHILDS`, `CONCESSION`, `SCREEN_DATE`, `SCREEN_ID`)
+INSERT INTO `qacinemas`.`booking` (`FORM_ID`, `CUSTOMER_NAME`, `ADULTS`, `CHILDS`, `CONCESSION`, `SCREEN_DATE`, `SCREEN_ID`, `MOVIE_ID`)
 VALUES
-    (1, "Piers", 1, 1, "Popcorn, HotDog", "30/2/2021", 1),
-    (2, "Ayub", 1, 1, "None", "30/2/2021", 1),
-    (3, "Jake", 1, 1, "Large Coke, medium popcorn", "30/2/2021", 1),
-    (4, "Jas", 1, 1, "Tango Ice Blast", "30/2/2021", 1),
-    (5, "Simon", 1, 1, "M&Ms", "30/2/2021", 1),
-    (6, "Iqra", 1, 1, "Minstrels", "30/2/2021", 1);
+    (1, "Piers", 1, 1, "Popcorn, HotDog", "30/2/2021", 1, 1),
+    (2, "Ayub", 1, 1, "None", "30/2/2021", 1, 2),
+    (3, "Jake", 1, 1, "Large Coke, medium popcorn", "30/2/2021", 1, 3),
+    (4, "Jas", 1, 1, "Tango Ice Blast", "30/2/2021", 1, 4),
+    (5, "Simon", 1, 1, "M&Ms", "30/2/2021", 1, 2),
+    (6, "Iqra", 1, 1, "Minstrels", "30/2/2021", 1, 3);
 
 INSERT INTO `qacinemas`.`discussionboard` (`POST_ID`, `CONTENT`, `POST_DATETIME`, `MOVIE_ID`, `MOVIE_RATING`)
 VALUES

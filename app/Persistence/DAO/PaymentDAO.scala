@@ -19,4 +19,7 @@ object PaymentDAO {
         ex.getCause.getMessage
     }
   }
+
+  def getLastIndex(): Future[Int] = db.run(paymentTable.size.result)
+
 }

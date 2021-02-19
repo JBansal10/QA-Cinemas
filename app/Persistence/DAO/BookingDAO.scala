@@ -1,7 +1,6 @@
 package Persistence.DAO
 
 import Persistence.Domain.BookingFormOBJ.{Booking, Bookings}
-import Persistence.Domain.Movies
 import slick.jdbc.MySQLProfile.backend.Database
 import slick.lifted.TableQuery
 
@@ -13,7 +12,6 @@ object BookingDAO {
 
   lazy val db = Database.forConfig("mysqlDB")
   lazy val bookingTable = TableQuery[Bookings]
-  lazy val movieTable = TableQuery[Movies]
 
   def create (bookForm: Booking): Future[String] ={
     db.run(bookingTable += bookForm).map(res => "Booking succesfully added").recover {
@@ -23,6 +21,6 @@ object BookingDAO {
   }
   def readById (id: Int): Future[Option[Booking]] = db.run(bookingTable.filter(_.id === id).result.headOption)
 
-  def getLastIndex(): Future[Int] = db.run(bookingTable.size.result)
+  def getLastIndex(): Future[Option[Booking]] = db.run(bookingTable.sortBy(_.id.desc).result.headOption)
 
 }

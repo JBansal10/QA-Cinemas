@@ -9,8 +9,6 @@ import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import slick.jdbc.MySQLProfile.api._
 
-import scala.util.{Failure, Success}
-
 object BookingDAO {
 
   lazy val db = Database.forConfig("mysqlDB")
@@ -28,8 +26,13 @@ object BookingDAO {
   def getLastIndex(): Future[Int] = db.run(bookingTable.size.result)
 
   def totalPrice(id: Int, adults: Int, childs: Int): Future[BigDecimal] = {
-    val bidDec: BigDecimal = 9.82
-    db.run(movieTable.filter(_.id === id).result.headOption).
+    val bidDec: BigDecimal = 999.99
+    db.run(movieTable.filter(_.id === id).result.headOption).map{ movie =>
+      movie.get.aPrice * adults + movie.get.cPrice * childs
+    }recover {
+      case exception: Exception => exception.printStackTrace();
+        bidDec
+    }
   }
 
 }

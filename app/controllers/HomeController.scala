@@ -3,6 +3,11 @@ package controllers
 import play.api.data.Form
 import play.api.i18n.I18nSupport
 import play.api.mvc.Results.{BadRequest, Redirect}
+import Persistence.DAO.{BookingDAO, DiscussionBoardDAO, MovieDAO, PaymentDAO, ScreenTimeDAO}
+import Persistence.Domain.paymentObj.{Payment, PaymentForm}
+import Persistence.Domain.BookingFormOBJ.{Booking, bookingForm}
+import Persistence.Domain.DiscussionBoardOBJ.{DiscussionBoard, boardForm}
+import Persistence.Domain.{Movie, SearchOBJ}
 import Persistence.DAO.{MovieDAO, ScreenTimeDAO}
 import Persistence.Domain.{EmailOBJ, Movie}
 import Persistence.Domain.ScreenTimesOBJ.ScreenTime
@@ -13,7 +18,8 @@ import play.api.mvc._
 import play.mvc.Action
 
 import scala.collection.mutable.ArrayBuffer
-import scala.concurrent.{Future, TimeoutException}
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future, TimeoutException}
 import scala.util.{Failure, Success}
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -46,6 +52,27 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   )
 
+  def discBoardRead() = Action.async {implicit request => DiscussionBoardDAO.readAll() map (working => Ok(views.html.AdminDiscBoard(working)))}
+
+  def createDiscBoard() = Action.async {implicit request =>
+    DiscussionBoardDAO.readAll() map { discussions =>
+      boardForm.submitForm.bindFromRequest().fold({ formsWithError =>
+          BadRequest(views.html.discboard(formsWithError, discussions))
+      }, {
+        creator => createFunc(creator)
+          Redirect("/discboard")
+      }
+    )}
+  }
+
+  def createFunc(discBoard: DiscussionBoard): Unit = {
+    DiscussionBoardDAO.create(discBoard).onComplete {
+      case Success(value) =>
+        print(value)
+      case Failure(exception) =>
+        exception.printStackTrace()
+    }
+  }
   def homepage = Action {
     Ok(views.html.homepage("Welcome to QA Cinemas!"))
   }
@@ -73,7 +100,66 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def gettingThere = Action {
     Ok(views.html.gettingThere())
   }
- 
+
+  def openingTimes = Action {
+    Ok(views.html.openingTimes())
+  }
+
+  def createPayment() = Action { implicit request =>
+    PaymentForm.submitForm.bindFromRequest().fold({ formWithErrors =>
+      BadRequest(views.html.payment(formWithErrors))
+    }, { widget =>
+      createP(widget)
+      Redirect("/bookingcomplete")
+    })
+  }
+
+  def createP(pay: Payment): Unit = {
+    PaymentDAO.create(pay).onComplete {
+      case Success(value) =>
+        println(value)
+      case Failure(exception) =>
+        exception.printStackTrace()
+    }
+  }
+
+
+  def createBooking() = Action.async { implicit request =>
+    bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
+      Future {BadRequest(views.html.booking(bookingFormWithErrors))}
+    }, { widget =>
+      createB(widget)
+      BookingDAO.getLastIndex() map { id => Redirect("/payment/" + id) }
+    })
+  }
+
+  def createB(book: Booking): Unit = {
+    BookingDAO.create(book).onComplete {
+      case Success(value) =>
+        println(value)
+      case Failure(exception) =>
+        exception.printStackTrace()
+    }
+  }
+
+  def bookingComplete(id: Int) = Action.async { implicit request =>
+    BookingDAO.readById(id).map {
+      case Some(thing) => Ok(views.html.bookingcomplete(thing))
+      case None => NotFound(views.html.error("Error 404", "Could not find the booking."))
+    }
+  }
+
+
+  def search = Action.async { implicit request =>
+    SearchOBJ.searchForm.bindFromRequest.fold(
+      formWithErrors => Future { Ok(views.html.searchresults(Seq[Movie]())) },
+      search => MovieDAO.search(search.term) map { results =>
+        Ok(views.html.searchresults(results))
+      }
+    )
+
+  }
+
   def tempToDo = TODO
 }
 

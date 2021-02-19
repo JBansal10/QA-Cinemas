@@ -1,31 +1,25 @@
-
-
-
 @(message: String)
 
+@main("QA Cinema") {
 
-@main("Welcome to Play") {
 
-
-<div class= "container" id="Description" style=" text-align: center"><h5>At QA Cinemas you can pay less to see the films that everyone’s raving about.<br>
+<div class= "container">
+    <h1 id="hphead">Welcome to QA Cinema</h1>
+    <h4 id="maintxt">The future of Movies with our premium screens</h4><hr/>
+    <h6 id="subtxt">At QA Cinemas you can pay less to see the films that everyone’s raving about.<br>
     That means you’ll have more to spend on other things. Popcorn, anyone?.<br>
-    Navigate to our Ticket Bookings page to book a ticket now! </h5>
-</div>
-
+    Navigate to our Ticket Bookings page to book a ticket now!</h6>
 <!-- Slideshow container -->
-<div class="slideshow-container">
-
-    <div class="slideshow-container" style="max-width:500px">
-        <img class="mySlides" src="@routes.Assets.versioned("images/ToyStory.png")" style="width:100%">
-        <img class="mySlides" src="@routes.Assets.versioned("images/Transformers.png")" style="width:100%">
-        <img class="mySlides" src="@routes.Assets.versioned("images/Nemo.png")" style="width:100%">
-
+    <div class="slideshow-container">
+        <div class="slideshow-container" id="slide">
+            <img class="mySlides" src="@routes.Assets.versioned("images/ToyStory.png")">
+            <img class="mySlides" src="@routes.Assets.versioned("images/Transformers.png")">
+            <img class="mySlides" src="@routes.Assets.versioned("images/Nemo.png")">
+        </div>
     </div>
-
-    <div style="color: #f2f2f2">
-        <img class="mySlides" src="@routes.Assets.versioned("images/inside.png")" style="width:100%">
-        <p><h3>Welcome to the future of Movies with our premium screens.</h3></p>
-    </div>
+    <hr/>
+    <img src="@routes.Assets.versioned("images/banner.png")" alt="banner" id="banner">
+</div>
 
     <script>
         var myIndex = 0;
@@ -43,5 +37,4 @@
             setTimeout(carousel, 3000); // Change image every 2 seconds
         }
     </script>
-
 }

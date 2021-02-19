@@ -1,0 +1,20 @@
+@import views.html.helper.form
+@import Persistence.Domain.paymentObj.Payment
+@(form: Form[Payment])(implicit messages: Messages)
+
+@main("payment page") {
+    <h1>Payment page</h1>
+    @helper.form(routes.HomeController.createPayment()){
+        <div class="form-floating">
+            @helper.inputText(form("cardHolderName"), Symbol("label") -> "cardHolderName", Symbol("showConstraints") -> false)
+            @helper.inputText(form("cardNo"), Symbol("label") -> "cardNo", Symbol("showConstraints") -> false)
+            @helper.inputText(form("expiryDate"), Symbol("label") -> "expiryDate", Symbol("showConstraints") -> false)
+            @helper.inputText(form("securityCode"), Symbol("label") -> "securityCode", Symbol("showConstraints") -> false)
+            @helper.inputText(form("bookingID"), Symbol("label") -> "bookingID", Symbol("showConstraints") -> false)
+            <button class="btn btn-primary" type="submit">Submit!</button>
+        </div>
+    }
+
+
+
+}

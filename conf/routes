@@ -19,4 +19,18 @@ GET   /contactus                 controllers.HomeController.contactUs
 
 GET   /screens                   controllers.HomeController.screens
 
-GET   /gettingthere             controllers.HomeController.gettingThere
+GET     /gettingthere               controllers.HomeController.gettingThere
+
+GET     /openingtimes               controllers.HomeController.openingTimes
+
+GET     /payment                    controllers.HomeController.createPayment()
+
+GET     /booking                    controllers.HomeController.createBooking()
+
+GET     /bookingcomplete/$id<[0-9]+>             controllers.HomeController.bookingComplete(id: Int)
+
+GET     /search                    controllers.HomeController.search
+
+GET     /discboard                    controllers.HomeController.createDiscBoard()
+
+GET     /adminboard                 controllers.HomeController.discBoardRead()

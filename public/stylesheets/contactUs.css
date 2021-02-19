@@ -1,3 +1,15 @@
+#ctxt {
+    font-family: 'Oswald', sans-serif;
+    text-shadow: 3px 3px 5px #969696;
+    text-transform: uppercase;
+    font-size: 60px;
+    letter-spacing: 8px;
+}
+
+#find {
+    font-family: 'Oswald', sans-serif;
+}
+
 #Mapped
 {
     align-content: center;
@@ -5,10 +17,8 @@
 
 .container
 {
-    color: azure;
-}
 
-#fcf-form {
+  #fcf-form {
     display:block;
 }
 

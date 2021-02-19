@@ -1,23 +1,45 @@
 @main("Getting There") {
 
-    <body>
-        <div class="container">
-            <h1>Getting there</h1>
-            <div class="row">
-                <div class="col-md">
-                    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1PlZOY3Swroapc8RN8-mXy3o3lOrOZi0B" width="400" height="300" frameborder="0" style="border: 0;" allowfullscreen="" aria-hidden="false" tabindex="0" id="mget"></iframe>
-                    <p></p><h6>8th Floor, St James Buildings<br>
-                    79 Oxford Street<br>
-                    Manchester<br>
-                    M1 6FQ</h6><p></p>
+    <script>
+            <script src="https://kit.fontawesome.com/" crossorigin="anonymous"></script>
+    </script>
+    <div class="container">
+        <br><h1 id="get">Getting there</h1><hr/>
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1PlZOY3Swroapc8RN8-mXy3o3lOrOZi0B" width="900" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe><hr>
+
+        <div class="row" id="abcol">
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-geo-alt-fill"></i></h5><hr/>
+                        <p class="card-text">8th Floor, St James Buildings<br> 79 Oxford Street<br> Manchester<br> M1 6FQ<br></p>
+                    </div>
                 </div>
-                <div class="col-md"><p></p><p></p>
-                    <h5>Public transport</h5><h6>Train:Oxford Road Train Station or Manchester Piccadilly Station (3 minute walk)</h6><p></p>
-                    <h6>Tram: Blue Line or Purple Line from Manchester Piccadilly Station</h6><p></p>
-                    <h5>Parking</h5><h6>Nearest parking at The Palace (Whitworth St, Manchester, M1 6NE)</h6><p></p>
-                    <img src="@routes.Assets.versioned("/images/cinema.png")" id="cinema">
+            </div>
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="material-icons">directions_transit</i></h5><hr/>
+                        <p class="card-text">Oxford Road Train Station or Manchester Piccadilly Station (3 minute walk)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="material-icons">local_parking</i></h5><hr/>
+                        <p class="card-text">Nearest parking at The Palace (Whitworth St, Manchester, M1 6NE)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="material-icons">accessible</i></h5><hr/>
+                        <p class="card-text">There are lifts that go to all floors and accessible for wheelchair users, there are also disabled toilets.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
 }

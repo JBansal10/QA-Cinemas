@@ -8,7 +8,7 @@ import slick.jdbc.MySQLProfile.api._
 
 object paymentObj {
 
-  case class Payment(id: Int, cardHolderName: String, cardNo: Int, expiryDate: String, securityCode: Int, bookingID: Int)
+  case class Payment(id: Int = 0, cardHolderName: String, cardNo: Int, expiryDate: String, securityCode: Int, var bookingID: Int)
 
   val bookings = TableQuery[Bookings]
 

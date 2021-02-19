@@ -1,12 +1,9 @@
-import Persistence.DAO.DiscussionBoardDAO
-import Persistence.Domain.DiscussionBoardOBJ.DiscussionBoard
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
 import org.scalatest.{BeforeAndAfter, flatspec}
-import org.scalatest.flatspec.AnyFlatSpec
-import org.scalatest.matchers._
+
 import org.scalatest.matchers.should.Matchers
-import org.scalatestplus.selenium.{HtmlUnit, WebBrowser}
+import org.scalatestplus.selenium.WebBrowser
 import slick.jdbc.H2Profile.api._
 import slick.jdbc.MySQLProfile.backend.Database
 

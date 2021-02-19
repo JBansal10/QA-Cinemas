@@ -29,8 +29,8 @@ GET     /booking                    controllers.HomeController.createBooking()
 
 GET     /bookingcomplete/$id<[0-9]+>             controllers.HomeController.bookingComplete(id: Int)
 
-GET     /search                    controllers.HomeController.search
+GET     /search                     controllers.HomeController.search
 
-GET     /discboard                    controllers.HomeController.createDiscBoard()
+GET     /discboard                  controllers.HomeController.createDiscBoard()
 
 GET     /adminboard                 controllers.HomeController.discBoardRead()

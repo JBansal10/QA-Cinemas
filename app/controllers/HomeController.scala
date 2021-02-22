@@ -91,7 +91,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       BadRequest(views.html.contactUs(formWithErrors))
     }, { widget =>
       EmailOBJ.emailing(widget)
-      Ok(views.html.contactUs(EmailOBJ.emailContactForm.submitForm))
+      Ok(views.html.emailconfirmation())
     })
   }
 

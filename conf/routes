@@ -40,3 +40,5 @@ GET     /adminboard                 controllers.HomeController.discBoardRead()
 GET     /MovieClassification        controllers.HomeController.Classification()
 
 GET     /surroundingvenues         controllers.HomeController.Venues()
+
+GET     /bookings                   controllers.HomeController.bookings()

@@ -78,26 +78,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   }
 
-  def createBooking(id:Int) = Action.async { implicit request =>
-    ScreenTimeDAO.readByMID(id) map { screentimes =>
-      bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
-        BadRequest(views.html.booking(bookingFormWithErrors, id, screentimes))
-      }, { widget =>
-        createB(widget)
-        Redirect("/payment")
-      })
-    }
-  }
-
-  def createB(book: Booking): Unit = {
-    BookingDAO.create(book).onComplete {
-      case Success(value) =>
-        println(value)
-      case Failure(exception) =>
-        exception.printStackTrace()
-    }
-  }
-
   def homepage = Action {
     Ok(views.html.homepage("Welcome to QA Cinemas!"))
   }
@@ -150,6 +130,26 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   }
 
+  def createBooking(id:Int) = Action.async { implicit request =>
+    ScreenTimeDAO.readByMID(id) map { screentimes =>
+      bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
+        BadRequest(views.html.booking(bookingFormWithErrors, id, screentimes))
+      }, { widget =>
+        createB(widget)
+        Redirect("/payment")
+      })
+    }
+  }
+
+  def createB(book: Booking): Unit = {
+    BookingDAO.create(book).onComplete {
+      case Success(value) =>
+        println(value)
+      case Failure(exception) =>
+        exception.printStackTrace()
+    }
+  }
+
   def bookingComplete(id: Int) = Action.async { implicit request =>
     BookingDAO.readById(id).map {
       case Some(thing) => Ok(views.html.bookingcomplete(thing))
@@ -177,5 +177,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def tempToDo = TODO
+
+  def bookings() = Action.async{ implicit request =>
+    MovieDAO.readAll() map(movies => Ok(views.html.bookings(movies.filter(_.released == true))))
+  }
+
 }
 

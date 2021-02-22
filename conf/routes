@@ -13,11 +13,11 @@ GET     /movie/$id<[0-9]+>          controllers.HomeController.readID(id: Int)
 
 GET     /                           controllers.HomeController.homepage
 
-GET    /aboutus                    controllers.HomeController.aboutUs
+GET    /aboutus                     controllers.HomeController.aboutUs
 
-GET   /contactus                 controllers.HomeController.contactUs
+GET   /contactus                    controllers.HomeController.contactUs
 
-GET   /screens                   controllers.HomeController.screens
+GET   /screens                      controllers.HomeController.screens
 
 GET     /gettingthere               controllers.HomeController.gettingThere
 
@@ -27,13 +27,15 @@ GET     /payment                    controllers.HomeController.createPayment()
 
 GET     /booking                    controllers.HomeController.createBooking()
 
-GET     /bookingcomplete/$id<[0-9]+>           controllers.HomeController.bookingComplete(id: Int)
+GET     /bookingcomplete/$id<[0-9]+> controllers.HomeController.bookingComplete(id: Int)
 
 GET     /search                     controllers.HomeController.search
 
 GET     /discboard                  controllers.HomeController.createDiscBoard()
 
 GET     /adminboard                 controllers.HomeController.discBoardRead()
+
+GET     /deletedboard/$id<[0-9]+>   controllers.HomeController.deleteDiscBoard(id: Int)
 
 GET     /MovieClassification        controllers.HomeController.Classification()
 

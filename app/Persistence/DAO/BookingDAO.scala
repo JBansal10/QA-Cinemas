@@ -27,9 +27,4 @@ object BookingDAO {
 
   def getLastIndex(): Future[Int] = db.run(bookingTable.size.result)
 
-  def totalPrice(id: Int, adults: Int, childs: Int): Future[BigDecimal] = {
-    val bidDec: BigDecimal = 9.82
-    db.run(movieTable.filter(_.id === id).result.headOption).
-  }
-
 }

@@ -1,5 +1,6 @@
 package Persistence.DAO
 
+import Persistence.DAO.BookingDAO.bookingTable
 import Persistence.Domain.BookingFormOBJ.Booking
 import Persistence.Domain._
 import slick.jdbc.MySQLProfile.backend.Database
@@ -35,4 +36,6 @@ object MovieDAO {
         bidDec
     }
   }
+
+  def getLastIndex(): Future[Option[Booking]] = db.run(bookingTable.sortBy(_.id.desc).result.headOption)
 }

@@ -73,6 +73,27 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
         exception.printStackTrace()
     }
   }
+
+  def createBooking(id:Int) = Action.async { implicit request =>
+    ScreenTimeDAO.readByMID(id) map { screentimes =>
+      bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
+        BadRequest(views.html.booking(bookingFormWithErrors, id, screentimes))
+      }, { widget =>
+        createB(widget)
+        Redirect("/payment")
+      })
+    }
+  }
+
+  def createB(book: Booking): Unit = {
+    BookingDAO.create(book).onComplete {
+      case Success(value) =>
+        println(value)
+      case Failure(exception) =>
+        exception.printStackTrace()
+    }
+  }
+
   def homepage = Action {
     Ok(views.html.homepage("Welcome to QA Cinemas!"))
   }
@@ -80,7 +101,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def aboutUs = Action {
     Ok(views.html.aboutUs())
   }
-
 
   def contactUs = Action { implicit request =>
     EmailOBJ.emailContactForm.submitForm.bindFromRequest().fold({ formWithErrors =>
@@ -128,31 +148,12 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   }
 
-  def createBooking() = Action { implicit request =>
-    bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
-      BadRequest(views.html.booking(bookingFormWithErrors))
-    }, { widget =>
-      createB(widget)
-      Redirect("/payment")
-    })
-  }
-
-  def createB(book: Booking): Unit = {
-    BookingDAO.create(book).onComplete {
-      case Success(value) =>
-        println(value)
-      case Failure(exception) =>
-        exception.printStackTrace()
-    }
-  }
-
   def bookingComplete(id: Int) = Action.async { implicit request =>
     BookingDAO.readById(id).map {
       case Some(thing) => Ok(views.html.bookingcomplete(thing))
       case None => NotFound(views.html.error("Error 404", "Could not find the booking."))
     }
   }
-
 
   def search = Action.async { implicit request =>
     SearchOBJ.searchForm.bindFromRequest.fold(

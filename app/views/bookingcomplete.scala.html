@@ -5,12 +5,29 @@
 
 <div class="container text-light">
     <br><h1 id="othead">Your Booking is Complete!</h1><br/><hr/><br/>
-    <p>id: @booking.id</p>
-    <p>screenDate: @booking.screenDate</p>
-    <p>cName: @booking.cName</p>
-    <p>adults: @booking.adults</p>
-    <p>childs: @booking.childs</p>
-    <p>concession: @booking.concession</p>
-
+    <table class="table" id="times">
+        <tbody>
+            <tr>
+                <th scope="row">Booking ID:</th>
+                <td>@booking.id</td>
+            </tr>
+            <tr>
+                <th scope="row">Full Name:</th>
+                <td>@booking.cName</td>
+            </tr>
+            <tr>
+                <th scope="row">Adults:</th>
+                <td>@booking.adults</td>
+            </tr>
+            <tr>
+                <th scope="row">Children:</th>
+                <td>@booking.childs</td>
+            </tr>
+            <tr>
+                <th scope="row">Concession:</th>
+                <td>@booking.concession</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 }

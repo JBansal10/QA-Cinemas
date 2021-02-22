@@ -39,3 +39,4 @@ object MovieDAO {
 
   def getLastIndex(): Future[Option[Booking]] = db.run(bookingTable.sortBy(_.id.desc).result.headOption)
 }
+

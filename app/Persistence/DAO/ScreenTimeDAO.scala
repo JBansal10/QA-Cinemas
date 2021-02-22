@@ -14,4 +14,7 @@ object ScreenTimeDAO {
   lazy val screenTable: TableQuery[ScreenTimes] = TableQuery[ScreenTimes]
 
   def readByMID(mId: Int): Future[Seq[ScreenTime]] = db.run(screenTable.filter(_.mID === mId).result)
+
+
+
 }

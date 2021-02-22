@@ -112,7 +112,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       if (booking.isDefined) {
         MovieDAO.totalPrice(booking.get) map { price =>
           PaymentForm.submitForm.bindFromRequest().fold({ formWithErrors =>
-            BadRequest(views.html.payment(PaymentForm.submitForm.fill(Payment(0,"", 0, "", 0, booking.get.movieID)), price))
+            BadRequest(views.html.payment(PaymentForm.submitForm.fill(Payment(0,"", 0, "", 0, booking.get.id)), price))
           }, { widget =>
             println("form complete")
             createP(widget)

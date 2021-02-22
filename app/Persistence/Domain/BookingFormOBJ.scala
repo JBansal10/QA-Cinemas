@@ -42,7 +42,7 @@ object BookingFormOBJ {
         "childs" -> number,
         "concession" -> nonEmptyText,
         "screenId" -> number,
-        "movieID" -> number
+        "movieId" -> number
       )(Booking.apply)(Booking.unapply)
     )
   }

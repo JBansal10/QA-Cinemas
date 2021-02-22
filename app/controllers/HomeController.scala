@@ -106,20 +106,25 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
   
   def createPayment() = Action.async { implicit request =>
-    PaymentForm.submitForm.bindFromRequest().fold({ formWithErrors =>
-      Future{BadRequest(views.html.payment(formWithErrors))}
-    }, { widget =>
-      createP(widget)
-      BookingDAO.getLastIndex() map { id => Redirect("/bookingcomplete/" + id)}
-    })
+    BookingDAO.getLastIndex() flatMap { booking =>
+      if (booking.isDefined) {
+        MovieDAO.totalPrice(booking.get) map { price =>
+          PaymentForm.submitForm.bindFromRequest().fold({ formWithErrors =>
+            BadRequest(views.html.payment(PaymentForm.submitForm.fill(Payment(0,"", 0, "", 0, booking.get.movieID)), price))
+          }, { widget =>
+            println("form complete")
+            createP(widget)
+            Redirect("/bookingcomplete/" + booking.get.id)
+          })
+        }
+      } else Future {NotFound(views.html.error("Error 404", "Booking not found."))}
+    }
   }
 
   def createP(pay: Payment): Unit = {
     PaymentDAO.create(pay).onComplete {
-      case Success(value) =>
-        println(value)
-      case Failure(exception) =>
-        exception.printStackTrace()
+      case Success(value) => println(value)
+      case Failure(exception) => exception.printStackTrace()
     }
   }
 
@@ -158,6 +163,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     )
 
   }
+
 
   def Classification = Action{
     Ok(views.html.Classifications())

@@ -15,12 +15,13 @@ import java.time.format.DateTimeFormatter
 
 object DiscussionBoardOBJ{
 
-case class DiscussionBoard(id: Int, content: String, datetime: String, movieID: Int, mRating: Int, postChecker: Boolean)
+case class DiscussionBoard(id: Int, username: String, content: String, datetime: String, movieID: Int, mRating: Int, postChecker: Boolean)
 
 val movies = TableQuery[Movies]
 
 case class DiscussionBoards(tag: Tag) extends Table[DiscussionBoard] (tag, "discussionboard") {
   def id = column[Int]("POST_ID", O.AutoInc, O.PrimaryKey)
+  def username = column[String]("USERNAME")
   def content = column[String]("CONTENT")
   def datetime = column[String]("POST_DATETIME")
   def movieID = column[Int]("MOVIE_ID")
@@ -28,7 +29,7 @@ case class DiscussionBoards(tag: Tag) extends Table[DiscussionBoard] (tag, "disc
   def postChecker = column[Boolean]("POST_CHECKER")
 
   def movie = foreignKey("fk_movie_id", movieID, movies)(_.id, onDelete = ForeignKeyAction.Cascade)
-  def * = (id, content, datetime, movieID, mRating, postChecker) <> (DiscussionBoard.tupled, DiscussionBoard.unapply)
+  def * = (id, username, content, datetime, movieID, mRating, postChecker) <> (DiscussionBoard.tupled, DiscussionBoard.unapply)
 }
 
 
@@ -38,6 +39,7 @@ object boardForm {
     Form(
       mapping(
         "id" -> default(number, 0),
+        "username" -> nonEmptyText,
         "content" -> nonEmptyText,
         "datetime" -> default(nonEmptyText, LocalDateTime.now().format(formatter)),
         "movieID" -> number,

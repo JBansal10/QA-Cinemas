@@ -9,6 +9,8 @@ GET     /temp                       controllers.HomeController.tempToDo
 
 GET     /listgallery                controllers.HomeController.listingsGallery
 
+GET     /newreleases                controllers.HomeController.newReleases
+
 GET     /movie/$id<[0-9]+>          controllers.HomeController.readID(id: Int)
 
 GET     /                           controllers.HomeController.homepage
@@ -29,7 +31,7 @@ GET     /booking/$id<[0-9]+>                 controllers.HomeController.createBo
 
 GET     /bookingcomplete/$id<[0-9]+>           controllers.HomeController.bookingComplete(id: Int)
 
-GET     /search                     controllers.HomeController.search
+GET     /search                    controllers.HomeController.search
 
 GET     /discboard                  controllers.HomeController.createDiscBoard()
 
@@ -37,4 +39,4 @@ GET     /adminboard                 controllers.HomeController.discBoardRead()
 
 GET     /MovieClassification        controllers.HomeController.Classification()
 
-GET     /SorroundingVenues          controllers.HomeController.Venues()
+GET     /surroundingvenues         controllers.HomeController.Venues()

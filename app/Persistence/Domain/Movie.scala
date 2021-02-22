@@ -5,7 +5,7 @@ import slick.jdbc.MySQLProfile.api._
 
 import scala.collection.mutable.ArrayBuffer
 
-case class Movie(id: Int, mName: String, year: Int, genre: String, aRating: String, actors: String, director: String, imageURL: String, desc: String, aPrice: BigDecimal, cPrice: BigDecimal)
+case class Movie(id: Int, mName: String, year: Int, genre: String, aRating: String, actors: String, director: String, imageURL: String, desc: String, aPrice: BigDecimal, cPrice: BigDecimal, released: Boolean)
 
 case class Movies(tag: Tag) extends Table[Movie] (tag, "movie") {
   def id = column[Int]("MOVIE_ID", O.PrimaryKey, O.AutoInc)
@@ -19,6 +19,7 @@ case class Movies(tag: Tag) extends Table[Movie] (tag, "movie") {
   def desc = column[String]("DESC")
   def aPrice = column[BigDecimal]("ADULT_PRICE")
   def cPrice = column[BigDecimal]("CHILD_PRICE")
+  def released = column[Boolean]("RELEASED")
 
-  def * = (id, mName, year, genre, aRating, actors, director, imageURL, desc, aPrice, cPrice) <> (Movie.tupled, Movie.unapply)
+  def * = (id, mName, year, genre, aRating, actors, director, imageURL, desc, aPrice, cPrice, released) <> (Movie.tupled, Movie.unapply)
 }

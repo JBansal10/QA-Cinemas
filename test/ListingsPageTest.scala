@@ -31,7 +31,7 @@ class ListingsPageTest extends flatspec.AnyFlatSpec with WebBrowser with BeforeA
     go to host
     click on xpath("//*[@id=\"navbarDropdown\"]")
     click on xpath("//*[@id=\"navbarSupportedContent\"]/ul/li[3]/ul/li[1]/a")
-    pageTitle should be ("Listings")
+    pageTitle should be ("Listings gallery")
   }
 
   it should "show the default movies in cards" in {

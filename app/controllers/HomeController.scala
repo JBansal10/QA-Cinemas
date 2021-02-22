@@ -88,8 +88,9 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   def contactUs = Action { implicit request =>
     EmailOBJ.emailContactForm.submitForm.bindFromRequest().fold({ formWithErrors =>
-      BadRequest(views.html.contactUs(formWithErrors))
+       BadRequest(views.html.contactUs(formWithErrors))
     }, { widget =>
+      // could send to an error page on failure to send
       EmailOBJ.emailing(widget)
       Ok(views.html.emailconfirmation())
     })

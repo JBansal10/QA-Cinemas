@@ -39,7 +39,11 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def listingsGallery = Action.async { implicit request =>
-    MovieDAO.readAll() map(movies => Ok(views.html.listingsgallery(movies)))
+    MovieDAO.readAll() map(movies => Ok(views.html.listingsgallery("Listings gallery", movies.filter(_.released == true))))
+  }
+
+  def newReleases = Action.async { implicit request =>
+    MovieDAO.readAll() map(movies => Ok(views.html.listingsgallery("Upcoming releases", movies.filter(_.released == false))))
   }
 
   def readID(id: Int) = Action.async(implicit request =>
@@ -84,10 +88,8 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   def contactUs = Action { implicit request =>
     EmailOBJ.emailContactForm.submitForm.bindFromRequest().fold({ formWithErrors =>
-      println("not sneding")
       BadRequest(views.html.contactUs(formWithErrors))
     }, { widget =>
-      println("sending email")
       EmailOBJ.emailing(widget)
       Ok(views.html.contactUs(EmailOBJ.emailContactForm.submitForm))
     })

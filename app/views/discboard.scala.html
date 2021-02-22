@@ -1,4 +1,3 @@
-@import views.html.helper.form
 @import Persistence.Domain.DiscussionBoardOBJ.DiscussionBoard
 @(form: Form[DiscussionBoard], discussions: Seq[DiscussionBoard])(implicit messages: Messages)
 
@@ -7,6 +6,7 @@
     <h1>Welcome to your Discussion Board</h1>
     @helper.form(routes.HomeController.createDiscBoard()) {
         <div class="form-floating">
+            @helper.inputText(form("username"), Symbol("label") -> "username:", Symbol("showConstraints") -> false)
             @helper.inputText(form("content"), Symbol("label") -> "content", Symbol("showConstraints") -> false)
             @helper.inputText(form("movieID"), Symbol("label") -> "movieID", Symbol("showConstraints") -> false)
             @helper.inputText(form("mRating"), Symbol("label") -> "mRating", Symbol("showConstraints") -> false)
@@ -16,7 +16,9 @@
         <div>
             <ul>
             @for(dboard <- discussions.filter(_.postChecker == true)) {
+                <li>@dboard.username</li>
                 <li>@dboard.content</li>
+                <li>@dboard.datetime</li>
             }
             </ul>
         </div>

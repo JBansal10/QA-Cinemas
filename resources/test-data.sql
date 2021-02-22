@@ -50,6 +50,7 @@ CREATE TABLE `qacinemas`.`booking` (
 CREATE TABLE `qacinemas`.`discussionboard`
 (
     `POST_ID`       int NOT NULL AUTO_INCREMENT,
+    `USERNAME`      varchar(100)  DEFAULT NULL,
     `CONTENT`       varchar(1000) DEFAULT NULL,
     `POST_DATETIME` varchar(100)  DEFAULT NULL,
     `MOVIE_ID`      int           DEFAULT NULL,
@@ -102,10 +103,10 @@ VALUES
     (5, "Simon", 1, 1, "M&Ms", "30/2/2021", 1, 2),
     (6, "Iqra", 1, 1, "Minstrels", "30/2/2021", 1, 3);
 
-INSERT INTO `qacinemas`.`discussionboard` (`POST_ID`, `CONTENT`, `POST_DATETIME`, `MOVIE_ID`, `MOVIE_RATING`)
+INSERT INTO `qacinemas`.`discussionboard` (`POST_ID`, `USERNAME`, `CONTENT`, `POST_DATETIME`, `MOVIE_ID`, `MOVIE_RATING`)
 VALUES
-(1, "Oh dear oh dear oh dear... Talks of Leonardo getting an oscar for this are poor.
+(1, "PCMBARBER", "Oh dear oh dear oh dear... Talks of Leonardo getting an oscar for this are poor.
 Why don't we not just just leave this were we found it... At the bottom of the ocean!",
  "17/02/2021 12:34", 1, 9),
-(2, "Welp, this was interesting, certainly expected us to feel for the toys but wow... they're awful!",
+(2, "JDBRAC","Welp, this was interesting, certainly expected us to feel for the toys but wow... they're awful!",
  "17/02/2021 12:48", 3, 9);

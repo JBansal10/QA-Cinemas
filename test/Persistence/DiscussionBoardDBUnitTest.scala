@@ -29,7 +29,7 @@ class DiscussionBoardDBUnitTest extends AnyFlatSpec with BeforeAndAfter with Mat
 //  }
 
   "DAO" should "return Right" in {
-    val dBoard: DiscussionBoard = new DiscussionBoard(3, "This is test data", "15/02/2021 14:28", 3, 8, false)
+    val dBoard: DiscussionBoard = new DiscussionBoard(3,"TestUser", "This is test data", "15/02/2021 14:28", 3, 8, false)
     val result = Await.result(DiscussionBoardDAO.create(dBoard), Duration.Inf)
     assert(result === "Discussion successfully added")
   }

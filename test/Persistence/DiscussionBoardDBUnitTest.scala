@@ -28,11 +28,11 @@ class DiscussionBoardDBUnitTest extends AnyFlatSpec with BeforeAndAfter with Mat
 //    val discBoard : DiscussionBoard = DiscussionBoard(3, "This is test content", 2, 6)
 //  }
 
-  "DAO" should "return Right" in {
-    val dBoard: DiscussionBoard = new DiscussionBoard(3, "This is test data", "15/02/2021 14:28", 3, 8, false)
-    val result = Await.result(DiscussionBoardDAO.create(dBoard), Duration.Inf)
-    assert(result === "Discussion successfully added")
-  }
+//  "DAO" should "return Right" in {
+//    val dBoard: DiscussionBoard = new DiscussionBoard(3, "This is test data", "15/02/2021 14:28", 3, 8, false)
+//    val result = Await.result(DiscussionBoardDAO.create(dBoard), Duration.Inf)
+//    assert(result === "Discussion successfully added")
+//  }
 
   it should "return the values when readAll is called" in {
     DiscussionBoardDAO.readAll() map { results =>

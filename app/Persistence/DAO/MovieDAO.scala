@@ -1,5 +1,6 @@
 package Persistence.DAO
 
+
 import Persistence.Domain.BookingFormOBJ.Booking
 import Persistence.Domain._
 import slick.jdbc.MySQLProfile.backend.Database
@@ -9,7 +10,7 @@ import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import slick.jdbc.MySQLProfile.api._
 
-object MovieDAO {
+object MovieDAO extends MovieDAOT[Movie] {
 
   lazy val db = Database.forConfig("mysqlDB")
   lazy val movieTable: TableQuery[Movies] = TableQuery[Movies]

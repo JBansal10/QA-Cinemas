@@ -4,7 +4,8 @@
 
 @main("booking page") {
     <div class="container text-light">
-    <h1>Booking page</h1>
+        <br><h1 id="get">Booking Page</h1><hr/>
+
     @helper.form(routes.HomeController.createBooking()){
         <div class="form-floating">
             @helper.inputText(form("screenDate"), Symbol("label") -> "screenDate", Symbol("showConstraints") -> false)

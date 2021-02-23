@@ -26,5 +26,4 @@ class BookingDBUnitTest extends AnyFlatSpec with BeforeAndAfter{
       assert(false)
     }
   }
-
 }

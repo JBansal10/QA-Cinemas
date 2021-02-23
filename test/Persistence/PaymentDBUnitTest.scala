@@ -20,12 +20,6 @@ class PaymentDBUnitTest extends AnyFlatSpec with BeforeAndAfter with Matchers{
 
   behavior of "Payment table"
 
-  before {
-    val statement = Source.fromFile("resources/test-data.sql").mkString
-    db.run(sqlu"#$statement")
-
-  }
-
   it should "create a payment when when create is called" in {
     val pay: Payment = new Payment(1,"john",1243131, "12/20", 123, 1)
     val result = Await.result(PaymentDAO.create(pay), Duration.Inf)

@@ -16,7 +16,7 @@ class MovieDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with Matchers {
   behavior of "Movie table"
 
   before { // runs before each test
-    // should set up test data
+
   }
 
   it should "return a few values when readAll is called" in {
@@ -36,7 +36,7 @@ class MovieDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with Matchers {
   }
 
   // vvv Search tests vvv
-  
+
   it should "return titanic when searching for titanic" in {
     MovieDAO.search("titanic") map { movies =>
       if (movies.length > 0) {

@@ -12,9 +12,14 @@ class AboutUsPageTest extends flatspec.AnyFlatSpec with BeforeAndAfter with shou
   implicit val webDriver: WebDriver = new HtmlUnitDriver()
   webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
 
+  org.slf4j.LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME)
+    .asInstanceOf[ch.qos.logback.classic.Logger]
+    .setLevel(ch.qos.logback.classic.Level.ERROR)
+
+
   "clicking on About Us in footer" should "take you to About Us page" in {
     go to host
-    click on id("aboutUsFooter")
+    click on xpath("/html/body/footer/div[1]/div/div[3]/ul/li[2]/a")
     pageTitle should be ("About Us")
   }
 

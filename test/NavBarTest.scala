@@ -2,7 +2,6 @@ import org.scalatest._
 import org.scalatestplus.selenium._
 import org.scalatest.matchers._
 
-
 class NavBarTest extends flatspec.AnyFlatSpec with BeforeAndAfter with should.Matchers with HtmlUnit {
 
   val host = "http://localhost:9000/"

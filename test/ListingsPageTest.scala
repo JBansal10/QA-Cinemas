@@ -20,12 +20,11 @@ class ListingsPageTest extends flatspec.AnyFlatSpec with WebBrowser with BeforeA
   implicit val webDriver: WebDriver = new HtmlUnitDriver()
   webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
 
-  behavior of "Listings page"
+  org.slf4j.LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME)
+    .asInstanceOf[ch.qos.logback.classic.Logger]
+    .setLevel(ch.qos.logback.classic.Level.ERROR)
 
-  before {
-    val statement = Source.fromFile("resources/test-data.sql").mkString
-    db.run(sqlu"#$statement")
-  }
+  behavior of "Listings page"
 
   it should "be accessed from the home page" in {
     go to host

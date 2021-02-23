@@ -18,6 +18,10 @@ class BookingPageTest extends flatspec.AnyFlatSpec with WebBrowser with BeforeAn
   implicit val webDriver: WebDriver = new HtmlUnitDriver()
   webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
 
+  org.slf4j.LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME)
+    .asInstanceOf[ch.qos.logback.classic.Logger]
+    .setLevel(ch.qos.logback.classic.Level.ERROR)
+
   behavior of "Disccusion board page"
 
   it should "create a booking" in {

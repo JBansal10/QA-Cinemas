@@ -10,7 +10,7 @@ import slick.jdbc.MySQLProfile.backend.Database
 import scala.concurrent.ExecutionContext
 import scala.io.Source
 
-class MovieDBIntegrationTest extends AsyncFlatSpec with BeforeAndAfter with Matchers {
+class MovieDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with Matchers {
 
 
   behavior of "Movie table"

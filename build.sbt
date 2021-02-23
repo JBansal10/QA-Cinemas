@@ -20,8 +20,6 @@ libraryDependencies += "org.scalatestplus" %% "mockito-3-4" % "3.2.5.0" % "test"
 libraryDependencies += "org.scalatest" %% "scalatest-flatspec" % "3.2.2" % "test"
 libraryDependencies += "org.scalatest" %% "scalatest-shouldmatchers" % "3.2.2" % "test"
 
-
-
 libraryDependencies ++= Seq(
   "com.typesafe.slick" %% "slick" % "3.3.3",
   "com.typesafe.slick" %% "slick-hikaricp" % "3.3.3",

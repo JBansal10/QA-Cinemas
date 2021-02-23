@@ -16,6 +16,4 @@ object ScreenTimeDAO {
 
   def readByMID(mId: Int): Future[Seq[ScreenTime]] = db.run(screenTable.filter(_.mID === mId).result)
 
-//  def getMIDFromScreenTimes(id:Int): Future[Int] = db.run(screenTable.filter(_.id===id).result)
-
 }

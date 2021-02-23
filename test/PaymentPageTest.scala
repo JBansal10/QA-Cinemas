@@ -21,16 +21,23 @@ class PaymentPageTest extends flatspec.AnyFlatSpec with BeforeAndAfter with shou
     pageTitle should be ("payment page")
   }
 
-  it should "redirect to booking successful page" in {
-    go to host + "payment" // TODO form doesn't fill in right
-    textField(xpath("//*[@id=\"cardHolderName\"]")).value = "John Smith"
-    println(textField(xpath("//*[@id=\"cardHolderName\"]")).value)
-    textField(xpath("//*[@id=\"cardNo\"]")).value = "1234 5678 1234"
-    textField(xpath("//*[@id=\"expiryDate\"]")).value = "12/21"
-    textField(xpath("//*[@id=\"securityCode\"]")).value = "789"
-    click on id("submit")
+  it should "direct to payment form" in {
+    go to host + "booking/1"
+    textField(xpath("/html/body/div/div/form/div/dl[1]/dd/input")).value = "1/1/2021"
+    textField(xpath("/html/body/div/div/form/div/dl[2]/dd/input")).value = "John Doe"
+    textField(xpath("/html/body/div/div/form/div/dl[5]/dd/input")).value = "Burger"
+    click on xpath("/html/body/div/div/form/div/button")
+    assert(find(xpath("/html/body/div/div/h1")).get.text.contains("Payment Page"))
+
+    textField(xpath("/html/body/div/div/form/div/dl[1]/dd/input")).value = "John Doe"
+    textField(xpath("/html/body/div/div/form/div/dl[2]/dd/input")).value = "1234"
+    textField(xpath("/html/body/div/div/form/div/dl[3]/dd/input")).value = "12/21"
+    textField(xpath("/html/body/div/div/form/div/dl[4]/dd/input")).value = "789"
+    click on xpath("/html/body/div/div/form/div/button")
+
     pageTitle should be ("Booking Complete")
   }
+
 
 
 

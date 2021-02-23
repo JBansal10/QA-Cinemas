@@ -56,6 +56,18 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   )
 
+  def deleteDiscBoard(id: Int) = Action { implicit request =>
+    DiscussionBoardDAO.delete(id).onComplete{
+      case Success(1) =>
+        println("Discussion board entry has been deleted!")
+      case Success(0) =>
+        println("Something went wrong and the entry was not deleted")
+      case Failure(error) =>
+        error.printStackTrace()
+    }
+    Redirect("/adminboard")
+  }
+
   def discBoardRead() = Action.async {implicit request => DiscussionBoardDAO.readAll() map (working => Ok(views.html.AdminDiscBoard(working)))}
 
   def createDiscBoard() = Action.async {implicit request =>
@@ -88,10 +100,11 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
 
   def contactUs = Action { implicit request =>
     EmailOBJ.emailContactForm.submitForm.bindFromRequest().fold({ formWithErrors =>
-      BadRequest(views.html.contactUs(formWithErrors))
+       BadRequest(views.html.contactUs(formWithErrors))
     }, { widget =>
+      // could send to an error page on failure to send
       EmailOBJ.emailing(widget)
-      Ok(views.html.contactUs(EmailOBJ.emailContactForm.submitForm))
+      Ok(views.html.emailconfirmation())
     })
   }
 

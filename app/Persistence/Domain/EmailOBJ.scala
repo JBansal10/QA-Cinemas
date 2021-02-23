@@ -18,14 +18,14 @@ object EmailOBJ {
       .startTls(true)()
 
 
-  def emailing(email: Email) = {
+  def emailing(email: Email): Unit = {
     val text = new StringBuilder()
     text.append("From: ").append(email.name).append(" <").append(email.from).append(">\n").append(email.content)
     mailer(Envelope.from("teamfireqa" `@` "gmail.com")
       .to("teamfireqa" `@` "gmail.com") // can change destination
       .subject("QACinemas website from " + email.name)
       .content(Text(text.mkString))).onComplete {
-      case Success(value) => println("message delivered")
+      case Success(value) => println("Sent email")
       case Failure(exception) => exception.printStackTrace()
     }
   }

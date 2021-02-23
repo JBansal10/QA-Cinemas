@@ -35,6 +35,8 @@ class MovieDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with Matchers {
     }
   }
 
+  // vvv Search tests vvv
+  
   it should "return titanic when searching for titanic" in {
     MovieDAO.search("titanic") map { movies =>
       if (movies.length > 0) {

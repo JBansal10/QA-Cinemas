@@ -19,7 +19,7 @@ object MovieDAO extends MovieDAOT[Movie] {
 
   def readById(id: Int): Future[Option[Movie]] = db.run(movieTable.filter(_.id === id).result.headOption)
 
-  def search(term: String): Future[Seq[Movie]] = { // TODO need to test this
+  def search(term: String): Future[Seq[Movie]] = {
     val formedTerm = "%" + term + "%"
     // cant reduce the below statement
     val query = movieTable.filter(m => (m.mName like formedTerm) || (m.director like formedTerm) || (m.actors like formedTerm))

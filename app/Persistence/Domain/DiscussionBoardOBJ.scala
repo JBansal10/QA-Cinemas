@@ -28,7 +28,7 @@ case class DiscussionBoards(tag: Tag) extends Table[DiscussionBoard] (tag, "disc
   def mRating = column[Int]("MOVIE_RATING")
   def postChecker = column[Boolean]("POST_CHECKER")
 
-  def movie = foreignKey("fk_movie_id", movieID, movies)(_.id, onDelete = ForeignKeyAction.Cascade)
+  def movie = foreignKey("fk_movie_id_dboard", movieID, movies)(_.id, onDelete = ForeignKeyAction.Cascade)
   def * = (id, username, content, datetime, movieID, mRating, postChecker) <> (DiscussionBoard.tupled, DiscussionBoard.unapply)
 }
 

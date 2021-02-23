@@ -22,4 +22,6 @@ object PaymentDAO {
 
   def getLastIndex(): Future[Int] = db.run(paymentTable.size.result)
 
+
+
 }

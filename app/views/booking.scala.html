@@ -5,12 +5,12 @@
 @import play.shaded.ahc.org.asynchttpclient.Dsl.options
 @import slick.ast.UnassignedType.select
 @import scala.collection.JavaConverters._
-@(form: Form[Booking], mId: Int, screentimes: Seq[ScreenTime])(implicit messages: Messages)
+@(form: Form[Booking], mId: Int, movie: Movie, screentimes: Seq[ScreenTime])(implicit messages: Messages)
 
 @main("booking page") {
     <div class="container text-light">
     <br><h1 id="get">Booking Page</h1><hr/>
-    <h2>Movie name here (not yet implemented)</h2>
+    <h2>@movie.mName</h2>
 
     @helper.form(routes.HomeController.createBooking(mId)){
         <div class="form-floating">
@@ -18,12 +18,14 @@
                 form("screenDate"),
                 Symbol("label") -> "screenDate",
                 Symbol("_showConstraints") -> false,
-                Symbol("_showErrors") -> false)
+                Symbol("_showErrors") -> false
+            )
             @helper.inputText(
                 form("cName"),
                 Symbol("label") -> "cName",
                 Symbol("_showConstraints") -> false,
-                Symbol("_showErrors") -> false)
+                Symbol("_showErrors") -> false
+            )
             @helper.select(
                 field = form("adults"),
                 options = Seq("1" -> "1","2" -> "2","3" -> "3", "4" -> "4"),
@@ -39,19 +41,23 @@
             @helper.inputText(form("concession"),
                 Symbol("label") -> "concession",
                 Symbol("_showConstraints") -> false,
-                Symbol("_showErrors") -> false)
+                Symbol("_showErrors") -> false
+            )
             @helper.select(
                 field = form("screenId"),
                 options = screentimes.map(screen => screen.id.toString -> (screen.id.toString + " | " + screen.showDay + " | " + screen.showTime + " | " + screen.screenType)),
                 Symbol("_showConstraints") -> false,
                 Symbol("_showErrors") -> false
             )
-            @helper.inputText(
-                form("movieId"),
-                Symbol("label") -> "screenId",
-                Symbol("_showConstraints") -> false,
-                Symbol("_showErrors") -> false
-            )
+            <div style="display: none">
+                @helper.inputText(
+                    form("movieId"),
+                    Symbol("label") -> "screenId",
+                    Symbol("_showConstraints") -> false,
+                    Symbol("_showErrors") -> false,
+                    Symbol("readonly") -> "readonly"
+                )
+            </div>
             <button class="btn btn-primary" type="submit">Submit!</button>
         </div>
     </div>

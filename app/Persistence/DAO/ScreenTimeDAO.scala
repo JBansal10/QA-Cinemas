@@ -1,5 +1,6 @@
 package Persistence.DAO
 
+import Persistence.DAO.PaymentDAO.db
 import Persistence.Domain.ScreenTimesOBJ.{ScreenTime, ScreenTimes}
 import slick.jdbc.MySQLProfile.backend.Database
 import slick.lifted.TableQuery
@@ -15,6 +16,6 @@ object ScreenTimeDAO {
 
   def readByMID(mId: Int): Future[Seq[ScreenTime]] = db.run(screenTable.filter(_.mID === mId).result)
 
-
+//  def getMIDFromScreenTimes(id:Int): Future[Int] = db.run(screenTable.filter(_.id===id).result)
 
 }

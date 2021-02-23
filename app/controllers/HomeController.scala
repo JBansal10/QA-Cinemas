@@ -131,13 +131,17 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def createBooking(id:Int) = Action.async { implicit request =>
-    ScreenTimeDAO.readByMID(id) map { screentimes =>
-      bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
-        BadRequest(views.html.booking(bookingFormWithErrors, id, screentimes))
-      }, { widget =>
-        createB(widget)
-        Redirect("/payment")
-      })
+    MovieDAO.readById(id).flatMap { movie =>
+      if(movie.isDefined) {
+        ScreenTimeDAO.readByMID(id) map { screentimes =>
+          bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
+            BadRequest(views.html.booking(bookingForm.bookForm.fill(Booking(0, "", "", 1, 0, "", 1, movie.get.id)), id, movie.get, screentimes))
+          }, { widget =>
+            createB(widget)
+            Redirect("/payment")
+          })
+        }
+      }else Future {NotFound(views.html.error("Error 404", "Booking not found."))}
     }
   }
 

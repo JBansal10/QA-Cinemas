@@ -18,13 +18,11 @@ class DiscussionBoardPageTest extends flatspec.AnyFlatSpec with WebBrowser with 
   implicit val webDriver: WebDriver = new HtmlUnitDriver()
   webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
 
+  org.slf4j.LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME)
+    .asInstanceOf[ch.qos.logback.classic.Logger]
+    .setLevel(ch.qos.logback.classic.Level.ERROR)
+
   behavior of "Discussions page"
-
-  before {
-    val statement = Source.fromFile("resources/test-data.sql").mkString
-    db.run(sqlu"#$statement")
-
-  }
 
   it should "be accessed from the homepage" in {
     go to host
@@ -41,7 +39,7 @@ class DiscussionBoardPageTest extends flatspec.AnyFlatSpec with WebBrowser with 
     click on xpath("/html/body/div/div/div/div[1]/form/div/button")
 
     go to host + "adminboard"
-    assert(find(xpath("/html/body/div/div/li[3]")).get.text.contains("This is test content"))
+    assert(find(xpath("/html/body/div/div/ul[3]/li[1]")).get.text.contains("This is test content"))
   }
 
 }

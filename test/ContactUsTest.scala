@@ -9,8 +9,12 @@ import java.util.concurrent.TimeUnit
 class ContactUsTest extends flatspec.AnyFlatSpec with BeforeAndAfter with should.Matchers with WebBrowser {
 
   val host = "http://localhost:9000/"
-  implicit val webDriver: WebDriver = new HtmlUnitDriver(true)
+  implicit val webDriver: WebDriver = new HtmlUnitDriver()
   webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
+
+  org.slf4j.LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME)
+    .asInstanceOf[ch.qos.logback.classic.Logger]
+    .setLevel(ch.qos.logback.classic.Level.ERROR)
 
   "clicking on Contact Us in footer" should "take you to Contact Us page" in {
     go to host
@@ -25,13 +29,5 @@ class ContactUsTest extends flatspec.AnyFlatSpec with BeforeAndAfter with should
     pageTitle should be ("Contact Us")
   }
 
-  "Typing on Contact Us form and Submitting" should "Send email to specified email address" in{
-    go to host + "contactus"
-    textField(id("name")).value = "Test Person"
-    emailField(id("from")).value = "test@email.com"
-    textArea(id("content")).value = "Words, words words words test words."
-    submit()
-    pageTitle should be ("Email sent")
-  }
 
 }

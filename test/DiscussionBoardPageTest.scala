@@ -1,4 +1,4 @@
-import Persistence.Domain.DiscussionBoardOBJ.DiscussionBoard
+import Schema.Schemas.{createDrop, insertData}
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
 import org.scalatest.{BeforeAndAfter, flatspec}
@@ -6,9 +6,10 @@ import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.selenium.WebBrowser
 import slick.jdbc.H2Profile.api._
 
-
 import java.util.concurrent.TimeUnit
-import scala.io.Source
+import scala.concurrent.{Await, Future}
+import scala.concurrent.duration.Duration
+
 
 class DiscussionBoardPageTest extends flatspec.AnyFlatSpec with WebBrowser with BeforeAndAfter with Matchers {
 
@@ -21,9 +22,14 @@ class DiscussionBoardPageTest extends flatspec.AnyFlatSpec with WebBrowser with 
   behavior of "Discussions page"
 
   before {
-    val statement = Source.fromFile("resources/test-data.sql").mkString
-    db.run(sqlu"#$statement")
-
+    val futureFuncs: Future[_] = {
+      val funcs: DBIO[Unit] = DBIO.seq(
+        createDrop,
+        insertData
+      )
+      db.run(funcs)
+    }
+    Await.result(futureFuncs, Duration.Inf)
   }
 
   it should "be accessed from the homepage" in {
@@ -41,7 +47,7 @@ class DiscussionBoardPageTest extends flatspec.AnyFlatSpec with WebBrowser with 
     click on xpath("/html/body/div/div/div/div[1]/form/div/button")
 
     go to host + "adminboard"
-    assert(find(xpath("/html/body/div/div/li[3]")).get.text.contains("This is test content"))
+    assert(find(xpath("/html/body/div/div/ul[3]/li[1]")).get.text.contains("This is test content"))
   }
 
 }

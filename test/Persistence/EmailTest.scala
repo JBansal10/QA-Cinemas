@@ -4,6 +4,8 @@ import Persistence.Domain.EmailOBJ._
 import org.scalatest.flatspec.AsyncFlatSpec
 import org.scalatest.matchers.should.Matchers
 
+import scala.concurrent.Await
+
 class EmailTest extends AsyncFlatSpec with Matchers{
 
   behavior of "Email backend"

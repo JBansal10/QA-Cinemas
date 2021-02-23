@@ -22,12 +22,13 @@ class PaymentPageTest extends flatspec.AnyFlatSpec with BeforeAndAfter with shou
   }
 
   it should "redirect to booking successful page" in {
-    go to host + "payment" // TODO doesn't work
+    go to host + "payment" // TODO form doesn't fill in right
     textField(xpath("//*[@id=\"cardHolderName\"]")).value = "John Smith"
+    println(textField(xpath("//*[@id=\"cardHolderName\"]")).value)
     textField(xpath("//*[@id=\"cardNo\"]")).value = "1234 5678 1234"
     textField(xpath("//*[@id=\"expiryDate\"]")).value = "12/21"
     textField(xpath("//*[@id=\"securityCode\"]")).value = "789"
-    submit()
+    click on id("submit")
     pageTitle should be ("Booking Complete")
   }
 

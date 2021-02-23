@@ -17,10 +17,11 @@ class EmailPageTest extends AnyFlatSpec with Matchers with WebBrowser {
 
   "Typing on Contact Us form and submitting" should "Send email to specified email address" in {
     go to host + "contactus"
-    textField(id("name")).value = "Test Person"
+    textField(id("name")).value = "Front End"
+    println(textField(id("name")).value)
     emailField(id("from")).value = "test@email.com"
     textArea(id("content")).value = "Words, words words words test words."
-    submit()
+    click on id("fcf-button")
     pageTitle should be ("Email sent")
   }
 }

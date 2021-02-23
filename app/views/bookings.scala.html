@@ -1,0 +1,29 @@
+@import Persistence.Domain.Movie
+@(movies: Seq[Movie])
+
+@main("Booking page") {
+    <body>
+        <div class="container text-light">
+            <br><h1 id="othead">Booking Page</h1><br/><hr/><br/>
+            <table class="table" id="times">
+                <tbody>
+                    <tr>
+                        <th scope="row">Movie</th>
+                        <td>Age Rating:</td>
+                        <td>Adult Price:</td>
+                        <td>Child Price:</td>
+                    </tr>
+                    @for(mov <- movies){
+                        <tr>
+                            <th scope="row">@mov.mName</th>
+                            <td>@mov.aRating</td>
+                            <td>@mov.aPrice</td>
+                            <td>@mov.cPrice</td>
+                            <td><a href="http://localhost:9000/booking/@mov.id">book</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </body>
+}

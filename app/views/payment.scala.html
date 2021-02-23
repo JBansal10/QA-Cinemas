@@ -8,14 +8,39 @@
     <h3>Total price: £@price</h3>
     @helper.form(routes.HomeController.createPayment()){
         <div class="form-floating">
-            <h3>Booking ID: @form("bookingID").value</h3>
+            <h4>Booking ID: @form("bookingID").value</h4>
             <div style="display: none">
-                @helper.inputText(form("bookingID"), Symbol("label") -> "securityCode", Symbol("showConstraints") -> false, Symbol("readonly") -> "readonly")
+                @helper.inputText(
+                    form("bookingID"),
+                    Symbol("label") -> "securityCode",
+                    Symbol("showConstraints") -> false,
+                    Symbol("readonly") -> "readonly"
+                )
             </div>
-            @helper.inputText(form("cardHolderName"), Symbol("label") -> "cardHolderName", Symbol("showConstraints") -> false)
-            @helper.inputText(form("cardNo"), Symbol("label") -> "cardNo", Symbol("showConstraints") -> false)
-            @helper.inputText(form("expiryDate"), Symbol("label") -> "expiryDate", Symbol("showConstraints") -> false)
-            @helper.inputText(form("securityCode"), Symbol("label") -> "securityCode", Symbol("showConstraints") -> false)
+            @helper.inputText(
+                form("cardHolderName"),
+                Symbol("label") -> "cardHolderName",
+                Symbol("_showConstraints") -> false,
+                Symbol("_showErrors") -> false
+            )
+            @helper.inputText(
+                form("cardNo"),
+                Symbol("label") -> "cardNo",
+                Symbol("_showConstraints") -> false,
+                Symbol("_showErrors") -> false
+            )
+            @helper.inputText(
+                form("expiryDate"),
+                Symbol("label") -> "expiryDate",
+                Symbol("_showConstraints") -> false,
+                Symbol("_showErrors") -> false
+            )
+            @helper.inputText(
+                form("securityCode"),
+                Symbol("label") -> "securityCode",
+                Symbol("_showConstraints") -> false,
+                Symbol("_showErrors") -> false
+            )
 
 
             <button class="btn btn-primary" type="submit" id="submit">Submit!</button>

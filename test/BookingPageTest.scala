@@ -22,7 +22,6 @@ class BookingPageTest extends flatspec.AnyFlatSpec with WebBrowser with BeforeAn
     .asInstanceOf[ch.qos.logback.classic.Logger]
     .setLevel(ch.qos.logback.classic.Level.ERROR)
 
-  behavior of "Disccusion board page"
   behavior of "Booking page"
 
   it should "show booking form" in {
@@ -39,7 +38,7 @@ class BookingPageTest extends flatspec.AnyFlatSpec with WebBrowser with BeforeAn
   it should "direct to payment form" in {
     go to host + "booking/1"
     textField(xpath("/html/body/div/div/form/div/dl[1]/dd/input")).value = "1/1/2021"
-    textField(xpath("/html/body/div/div/form/div/dl[1]/dd/input")).value = "John Doe"
+    textField(xpath("/html/body/div/div/form/div/dl[2]/dd/input")).value = "John Doe"
     textField(xpath("/html/body/div/div/form/div/dl[5]/dd/input")).value = "Burger"
     click on xpath("/html/body/div/div/form/div/button")
     assert(find(xpath("/html/body/div/div/h1")).get.text.contains("Payment Page"))

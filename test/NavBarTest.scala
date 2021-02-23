@@ -10,11 +10,11 @@ class NavBarTest extends flatspec.AnyFlatSpec with BeforeAndAfter with should.Ma
   "clicking on homepage in navbar" should "take you to homepage" in {
     org.slf4j.LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME)
       .asInstanceOf[ch.qos.logback.classic.Logger]
-      .setLevel(ch.qos.logback.classic.Level.WARN)
+      .setLevel(ch.qos.logback.classic.Level.ERROR)
 
     go to host
     click on xpath("/html/body/nav/div/div/ul/li[1]/a")
-    pageTitle should be ("Welcome to Play")
+    pageTitle should be ("QA Cinema")
   }
 
 }

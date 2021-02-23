@@ -26,4 +26,11 @@ class BookingDBUnitTest extends AnyFlatSpec with BeforeAndAfter{
       assert(false)
     }
   }
+
+  it should "return the last index in the table" in {
+    BookingDAO.getLastIndex() map { booking =>
+      if(booking.isDefined) assert(booking.get.id == 5)
+    }
+  }
+
 }

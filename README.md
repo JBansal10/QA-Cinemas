@@ -22,7 +22,7 @@ Download the following:
 
 ## Running the tests
 
-Instructions for running the tests 
+Open the terminal in IntelliJ and enter the following command:
 
 ```
 sbt test

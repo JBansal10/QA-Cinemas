@@ -13,6 +13,7 @@ Clone this repository to your PC.
 ### Prerequisites
 
 * Scala Play
+* jdk-14.0.1
 
 ### Installing
 

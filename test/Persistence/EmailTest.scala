@@ -14,9 +14,10 @@ class EmailTest extends AsyncFlatSpec with Matchers{
 
   it should "send an email" in {
     val email: Email = new Email("back@end.com", "Back End", "Testing")
-    val result = Await.result(emailing(email), Duration.Inf)
-    assert(result === "Email successfully sent!")
-
+    emailing(email) map {result =>
+      if (result.contains("Email successfully sent")) assert(true)
+      else assert(false)
+    }
   }
 
 }

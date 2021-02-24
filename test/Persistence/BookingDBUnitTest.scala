@@ -2,18 +2,19 @@ package Persistence
 
 import Persistence.DAO.BookingDAO
 import Persistence.Domain.BookingFormOBJ.Booking
-import Schema.Schemas.{createDrop, insertData}
+import Schema.Schemas.{booking, createDrop, insertData}
 import org.scalatest.BeforeAndAfter
-import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.concurrent.ScalaFutures.convertScalaFuture
+import org.scalatest.flatspec.AsyncFlatSpec
+import org.scalatest.matchers.should.Matchers
 import slick.jdbc.H2Profile.api._
 import slick.jdbc.MySQLProfile.backend.Database
 
+import scala.concurrent.duration.{Duration, DurationInt}
 import scala.concurrent.{Await, Future}
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration.Duration
-import scala.io.Source
 
-class BookingDBUnitTest extends AnyFlatSpec with BeforeAndAfter{
+
+class BookingDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with Matchers {
 
   lazy val db = Database.forConfig("mysqlDB")
 
@@ -29,20 +30,24 @@ class BookingDBUnitTest extends AnyFlatSpec with BeforeAndAfter{
     Await.result(futureFuncs, Duration.Inf)
   }
 
-  "Create" should "create a new booking" in {
+  it should "create a booking" in {
     val booking: Booking = new Booking(1, "20/2/2021", "Tester", 2, 1, "Test food", 1, 1)
-    val result = Await.result(BookingDAO.create(booking), Duration.Inf)
-    assert(result === "Booking succesfully added")
+    BookingDAO.create(booking).isReadyWithin(2.second) should be (true)
   }
 
-  "Read by ID" should "return a value of the specified ID" in {
-    val result = Await.result(BookingDAO.readById(1), Duration.Inf)
-    assert(result.get.cName === "Piers")
+  it should "return the first entry in the table" in {
+    BookingDAO.readById(1) map { booking =>
+      if(booking.isDefined) booking.get.cName should be ("Piers")
+      else assert(false)
+    }
   }
 
-  "Get lad index" should "return the last index" in {
-    val result = Await.result(BookingDAO.getLastIndex(), Duration.Inf)
-    assert(result.get.cName === "Iqra")
+  it should "return the last entry in the table" in {
+    BookingDAO.getLastIndex() map {booking =>
+      if(booking.isDefined) booking.get.cName should be ("Iqra")
+      else assert(false)
+    }
   }
+
 
 }

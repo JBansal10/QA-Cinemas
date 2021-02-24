@@ -1,6 +1,6 @@
 # QACinema
 
-This project implements a full-stack Web application for a Cinema chain called QA Cinemas. The website presents information about movies, listings and upcoming releases. The Scrum framework was used for agile development of this project, this was achieved with the JIRA software.
+This project implements a full-stack Web application for a Cinema chain called QA Cinemas. The website presents information about movies, listings and upcoming releases as well as provide functionality for bookings and payment. The Scrum framework was used for agile development of this project, this was achieved with the JIRA software.
 
 <a href="https://ibb.co/z4LZXPS"><img src="https://i.ibb.co/hmnVB2K/QAhome.png" alt="QAhome" border="0" /></a>
 

@@ -11,6 +11,7 @@ import Persistence.Domain.{Movie, SearchOBJ}
 import Persistence.DAO.{MovieDAO, ScreenTimeDAO}
 import Persistence.Domain.{EmailOBJ, Movie}
 import Persistence.Domain.ScreenTimesOBJ.ScreenTime
+import play.api.libs.Codecs.sha1
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import javax.inject._
@@ -125,10 +126,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       if (booking.isDefined) {
         MovieDAO.totalPrice(booking.get) map { price =>
           PaymentForm.submitForm.bindFromRequest().fold({ formWithErrors =>
-            BadRequest(views.html.payment(PaymentForm.submitForm.fill(Payment(0,"", 0, "", 0, booking.get.id)), price))
+            BadRequest(views.html.payment(PaymentForm.submitForm.fill(Payment(0,"", "", "", "", booking.get.id)), price))
           }, { widget =>
             println("form complete")
-            createP(widget)
+            createP(Payment(0, widget.cardHolderName, sha1(widget.cardNo), sha1(widget.expiryDate), sha1(widget.securityCode), widget.bookingID))
             Redirect("/bookingcomplete/" + booking.get.id)
           })
         }

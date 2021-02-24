@@ -8,16 +8,16 @@ import slick.jdbc.MySQLProfile.api._
 
 object paymentObj {
 
-  case class Payment(id: Int, cardHolderName: String, cardNo: Int, expiryDate: String, securityCode: Int, bookingID: Int)
+  case class Payment(id: Int = 0, cardHolderName: String, cardNo: String, expiryDate: String, securityCode: String, var bookingID: Int)
 
   val bookings = TableQuery[Bookings]
 
   case class Payments(tag: Tag) extends Table[Payment] (tag, "payment"){
     def id = column[Int]("PAYMENT_ID", O.AutoInc, O.PrimaryKey)
     def cardHolderName = column[String]("CARD_HOLDER_NAME")
-    def cardNo = column[Int]("CARD_NO")
+    def cardNo = column[String]("CARD_NO")
     def expiryDate = column[String]("EXPIRY_DATE")
-    def securityCode = column[Int]("SECURITY_CODE")
+    def securityCode = column[String]("SECURITY_CODE")
     def bookingID = column[Int]("BOOKING_ID")
 
     def booking = foreignKey("fk_booking_id", bookingID, bookings)(_.id, onDelete = ForeignKeyAction.Cascade)
@@ -31,9 +31,9 @@ object paymentObj {
         mapping(
           "id" -> default(number, 0),
           "cardHolderName" -> nonEmptyText,
-          "cardNo" -> number,
+          "cardNo" -> nonEmptyText,
           "expiryDate" -> nonEmptyText,
-          "securityCode" -> number,
+          "securityCode" -> nonEmptyText,
           "bookingID" -> number
         )(Payment.apply)(Payment.unapply)
       )

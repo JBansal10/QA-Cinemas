@@ -42,7 +42,13 @@ coding style tests here if we can
 
 ## Built With
 
-* [Play](https://www.playframework.com/) - Dependency Management
+* sbt: Dependency Management
+* Full-Stack Development Technologies: PLAY stack
+  * Database Management System: GCP instance of MySQL/MongoDB
+  *	Back-End Programming Language: Scala
+  *	API Development Platform: Play
+  *	Front-End Development Framework: Twirl
+
 
 
 ## Authors

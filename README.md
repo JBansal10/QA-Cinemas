@@ -2,8 +2,6 @@
 
 <a href="https://ibb.co/z4LZXPS"><img src="https://i.ibb.co/hmnVB2K/QAhome.png" alt="QAhome" border="0" /></a>
 
-Cinema website
-
 [JIRA](https://ihussain.atlassian.net/secure/RapidBoard.jspa?rapidView=4&projectKey=QAC&view=planning.nodetail&issueLimit=100&atlOrigin=eyJpIjoiYTg1NjYxMjA0ZWE5NDFhY2E0MzRhODZmOTU0YThiMGIiLCJwIjoiaiJ9)
 
 ## Getting Started

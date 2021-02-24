@@ -2,11 +2,11 @@
 
 Cinema website
 
+JIRA LINK: https://ihussain.atlassian.net/secure/RapidBoard.jspa?rapidView=4&projectKey=QAC&view=planning.nodetail&issueLimit=100&atlOrigin=eyJpIjoiYTg1NjYxMjA0ZWE5NDFhY2E0MzRhODZmOTU0YThiMGIiLCJwIjoiaiJ9
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-JIRA LINK HERE
 
 ### Prerequisites
 
@@ -14,7 +14,11 @@ JIRA LINK HERE
 
 ### Installing
 
-Instructions
+Download the following:
+
+	1. MySQL Workbench: https://dev.mysql.com/downloads/workbench/
+	2. IntelliJ IDEA: https://www.jetbrains.com/idea/download/#section=windows
+	3. sbt: https://www.scala-sbt.org/download.html
 
 ## Running the tests
 

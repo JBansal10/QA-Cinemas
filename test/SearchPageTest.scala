@@ -6,11 +6,16 @@ import org.scalatestplus.selenium.WebBrowser
 
 import java.util.concurrent.TimeUnit
 
-class SearchTests extends AnyFlatSpec with WebBrowser with Matchers{
+class SearchPageTest extends AnyFlatSpec with WebBrowser with Matchers{
 
   val host = "http://localhost:9000/"
   implicit val webDriver: WebDriver = new HtmlUnitDriver()
   webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
+
+  org.slf4j.LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME)
+    .asInstanceOf[ch.qos.logback.classic.Logger]
+    .setLevel(ch.qos.logback.classic.Level.ERROR)
+
 
   behavior of "Search function"
 

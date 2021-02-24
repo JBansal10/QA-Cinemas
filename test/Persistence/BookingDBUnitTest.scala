@@ -45,11 +45,4 @@ class BookingDBUnitTest extends AnyFlatSpec with BeforeAndAfter{
     assert(result.get.cName === "Iqra")
   }
 
-//  it should "return the first booking in the table" in {
-//    BookingDAO.readById(1) map {booking =>
-//      if (booking.isDefined) assert(booking.get.cName == "Piers")
-//      assert(false)
-//    }
-//  }
-
 }

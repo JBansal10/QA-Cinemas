@@ -89,6 +89,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
         exception.printStackTrace()
     }
   }
+
   def homepage = Action {
     Ok(views.html.homepage("Welcome to QA Cinemas!"))
   }
@@ -96,7 +97,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def aboutUs = Action {
     Ok(views.html.aboutUs())
   }
-
 
   def contactUs = Action { implicit request =>
     EmailOBJ.emailContactForm.submitForm.bindFromRequest().fold({ formWithErrors =>
@@ -125,7 +125,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       if (booking.isDefined) {
         MovieDAO.totalPrice(booking.get) map { price =>
           PaymentForm.submitForm.bindFromRequest().fold({ formWithErrors =>
-            BadRequest(views.html.payment(PaymentForm.submitForm.fill(Payment(0,"", 0, "", 0, booking.get.movieID)), price))
+            BadRequest(views.html.payment(PaymentForm.submitForm.fill(Payment(0,"", 0, "", 0, booking.get.id)), price))
           }, { widget =>
             println("form complete")
             createP(widget)
@@ -143,13 +143,19 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   }
 
-  def createBooking() = Action { implicit request =>
-    bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
-      BadRequest(views.html.booking(bookingFormWithErrors))
-    }, { widget =>
-      createB(widget)
-      Redirect("/payment")
-    })
+  def createBooking(id:Int) = Action.async { implicit request =>
+    MovieDAO.readById(id).flatMap { movie =>
+      if(movie.isDefined) {
+        ScreenTimeDAO.readByMID(id) map { screentimes =>
+          bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
+            BadRequest(views.html.booking(bookingForm.bookForm.fill(Booking(0, "", "", 1, 0, "", 1, movie.get.id)), id, movie.get, screentimes))
+          }, { widget =>
+            createB(widget)
+            Redirect("/payment")
+          })
+        }
+      }else Future {NotFound(views.html.error("Error 404", "Booking not found."))}
+    }
   }
 
   def createB(book: Booking): Unit = {
@@ -167,7 +173,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       case None => NotFound(views.html.error("Error 404", "Could not find the booking."))
     }
   }
-
 
   def search = Action.async { implicit request =>
     SearchOBJ.searchForm.bindFromRequest.fold(
@@ -189,5 +194,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def tempToDo = TODO
+
+  def bookings() = Action.async{ implicit request =>
+    MovieDAO.readAll() map(movies => Ok(views.html.bookings(movies.filter(_.released == true))))
+  }
+
 }
 

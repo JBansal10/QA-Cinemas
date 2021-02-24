@@ -19,6 +19,7 @@ class DiscussionBoardPageTest extends flatspec.AnyFlatSpec with WebBrowser with 
   implicit val webDriver: WebDriver = new HtmlUnitDriver()
   webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
 
+
   behavior of "Discussions page"
 
   before {
@@ -31,6 +32,10 @@ class DiscussionBoardPageTest extends flatspec.AnyFlatSpec with WebBrowser with 
     }
     Await.result(futureFuncs, Duration.Inf)
   }
+
+  org.slf4j.LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME)
+    .asInstanceOf[ch.qos.logback.classic.Logger]
+    .setLevel(ch.qos.logback.classic.Level.ERROR)
 
   it should "be accessed from the homepage" in {
     go to host

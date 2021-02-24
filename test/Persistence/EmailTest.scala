@@ -7,6 +7,7 @@ import org.scalatest.matchers.should.Matchers
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
+
 class EmailTest extends AsyncFlatSpec with Matchers{
 
   behavior of "Email backend"

@@ -42,7 +42,7 @@ coding style tests here if we can
 
 ## Built With
 
-* sbt: Dependency Management
+* sbt - Dependency Management
 
 ## Authors
 

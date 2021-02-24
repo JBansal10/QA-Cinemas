@@ -25,7 +25,7 @@ Download the following to your local machine:
 
 ## Running the tests
 
-Open the terminal in IntelliJ and enter the following command:
+To Open the terminal in IntelliJ and enter the following command:
 ```
 sbt test
 ```

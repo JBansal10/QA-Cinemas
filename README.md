@@ -1,6 +1,5 @@
 # QACinema
 
-![Alt text](https://ibb.co/z4LZXPS "QA Cinema")
 <a href="https://ibb.co/z4LZXPS"><img src="https://i.ibb.co/hmnVB2K/QAhome.png" alt="QAhome" border="0" /></a>
 
 Cinema website

@@ -1,22 +1,30 @@
 package Persistence
 
 import Persistence.DAO.MovieDAO
+import Schema.Schemas.{createDrop, insertData}
 import org.scalatest.BeforeAndAfter
-import org.scalatest.flatspec.{AnyFlatSpec, AsyncFlatSpec}
+import org.scalatest.flatspec.AsyncFlatSpec
 import org.scalatest.matchers.should.Matchers
 import slick.jdbc.H2Profile.api._
-import slick.jdbc.MySQLProfile.backend.Database
 
-import scala.concurrent.ExecutionContext
-import scala.io.Source
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future}
 
 class MovieDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with Matchers {
 
+  lazy val db = Database.forConfig("mysqlDB")
 
   behavior of "Movie table"
 
-  before { // runs before each test
-
+  before {
+    val futureFuncs: Future[_] = {
+      val funcs: DBIO[Unit] = DBIO.seq(
+        createDrop,
+        insertData
+      )
+      db.run(funcs)
+    }
+    Await.result(futureFuncs, Duration.Inf)
   }
 
   it should "return a few values when readAll is called" in {
@@ -35,11 +43,9 @@ class MovieDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with Matchers {
     }
   }
 
-  // vvv Search tests vvv
-
   it should "return titanic when searching for titanic" in {
     MovieDAO.search("titanic") map { movies =>
-      if (movies.length > 0) {
+      if (movies.nonEmpty) {
         movies.headOption.get.mName should be ("Titanic")
       } else assert(false)
     }

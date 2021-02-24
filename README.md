@@ -1,4 +1,6 @@
-# QACinemas
+# QACinema
+
+![Alt text](https://ibb.co/z4LZXPS "QA Cinema")
 
 Cinema website
 

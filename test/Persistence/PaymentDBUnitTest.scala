@@ -2,6 +2,7 @@ package Persistence
 
 import Persistence.DAO.PaymentDAO
 import Persistence.Domain.paymentObj.Payment
+import Schema.Schemas.{createDrop, insertData}
 import akka.actor.Status.Success
 import org.scalatest.BeforeAndAfter
 import org.scalatest.flatspec.AnyFlatSpec
@@ -10,7 +11,7 @@ import org.specs2.mock.Mockito.mock
 import slick.jdbc.MySQLProfile.backend.Database
 import slick.jdbc.H2Profile.api._
 
-import scala.concurrent.Await
+import scala.concurrent.{Await, Future}
 import scala.concurrent.duration.Duration
 import scala.io.Source
 
@@ -21,9 +22,14 @@ class PaymentDBUnitTest extends AnyFlatSpec with BeforeAndAfter with Matchers{
   behavior of "Payment table"
 
   before {
-    val statement = Source.fromFile("resources/test-data.sql").mkString
-    db.run(sqlu"#$statement")
-
+    val futureFuncs: Future[_] = {
+      val funcs: DBIO[Unit] = DBIO.seq(
+        createDrop,
+        insertData
+      )
+      db.run(funcs)
+    }
+    Await.result(futureFuncs, Duration.Inf)
   }
 
   it should "create a payment when when create is called" in {

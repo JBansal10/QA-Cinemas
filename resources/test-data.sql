@@ -18,6 +18,9 @@ CREATE TABLE `qacinemas`.`movie` (
      `DIRECTOR` VARCHAR(45) NULL,
      `IMAGE_URL` VARCHAR(255) NULL,
      `DESC` VARCHAR(1000) NULL,
+     `ADULT_PRICE` decimal(10,2) DEFAULT NULL,
+     `CHILD_PRICE` decimal(10,2) DEFAULT NULL,
+     `RELEASED` tinyint(1) DEFAULT '1',
      PRIMARY KEY (`MOVIE_ID`)
     );
 
@@ -39,13 +42,16 @@ CREATE TABLE `qacinemas`.`booking` (
    `CONCESSION`    varchar(100) DEFAULT NULL,
    `SCREEN_DATE`   varchar(50)  DEFAULT NULL,
    `SCREEN_ID`     int          DEFAULT NULL,
+   `MOVIE_ID`      int          DEFAULT NULL,
    PRIMARY KEY (`FORM_ID`),
-   FOREIGN KEY (`SCREEN_ID`) REFERENCES `qacinemas`.`screentime` (`SCREENTIME_ID`) ON DELETE CASCADE
+   FOREIGN KEY (`SCREEN_ID`) REFERENCES `qacinemas`.`screentime` (`SCREENTIME_ID`) ON DELETE CASCADE,
+   FOREIGN KEY (`MOVIE_ID`) REFERENCES `qacinemas`.`movie` (`MOVIE_ID`) ON DELETE CASCADE
 );
 
 CREATE TABLE `qacinemas`.`discussionboard`
 (
     `POST_ID`       int NOT NULL AUTO_INCREMENT,
+    `USERNAME`      varchar(100)  DEFAULT NULL,
     `CONTENT`       varchar(1000) DEFAULT NULL,
     `POST_DATETIME` varchar(100)  DEFAULT NULL,
     `MOVIE_ID`      int           DEFAULT NULL,
@@ -67,12 +73,16 @@ CREATE TABLE `qacinemas`.`payment` (
     );
 
 /* insert data */
-INSERT INTO `qacinemas`.`movie` (`MOVIE_ID`, `MOVIE_NAME`, `YEAR`, `GENRE`, `AGE_RATING`, `ACTORS`, `DIRECTOR`, `IMAGE_URL`, `DESC`)
+INSERT INTO `qacinemas`.`movie` (`MOVIE_ID`, `MOVIE_NAME`, `YEAR`, `GENRE`, `AGE_RATING`, `ACTORS`, `DIRECTOR`, `IMAGE_URL`, `DESC`, `ADULT_PRICE`, `CHILD_PRICE`, `RELEASED`)
 VALUES
-    (1, "Titanic", 123, "Sad", 3, "Fish probably", "Jeff Bezos", "titanic.png", "Boat drowning"),
-    (2, "Nemo", 432, "Scary", 5, "Fish", "Steve Erwin", "Nemo.png", "Fish looking for fish"),
-    (3, "Toy Story", 2000, "Happy", 6, "Toys", "Guy Fieri", "ToyStory.png", "Toys running away from their owner and doing other stuff"),
-    (4, "Transformers", 2002, "Epic", 7, "Robots", "Human", "Transformers.png", "Robots fighting other robots and humans are present");
+    (1, "Titanic", 123, "Sad", 3, "Fish probably", "Jeff Bezos", "titanic.png", "Boat drowning", 4.95, 10.95, 1),
+    (2, "Nemo", 432, "Scary", 5, "Fish", "Steve Erwin", "Nemo.png", "Fish looking for fish", 8.95, 6.95, 1),
+    (3, "Toy Story", 2000, "Happy", 6, "Toys", "Guy Fieri", "ToyStory.png", "Toys running away from their owner and doing other stuff", 9.95, 7.95, 1),
+    (4, "Transformers", 2002, "Epic", 7, "Robots", "Human", "Transformers.png", "Robots fighting other robots and humans are present", 8.95, 7.95, 1),
+    (5, "Sonic the movie", 2031, "Fast", 4, "The Pope", "Some guys", "sonic.jpg", "Fast Hedgehog beating up an egg", 12.95, 8.45, 0),
+    (6, "Minions", 2021, "Witty", 3, "Someone who directs movies", "Not humans", "minions.jpg", "I dont know, haven't seen it yet", 11.45, 9.60, 0),
+    (7, "The Matrix 4", 2021, "Action", 12, "Lana Wachowski", "Keanus Reeves", "matrix-4.png", "More matrix businesss", 12.15, 9.35, 0),
+    (8, "Space Jam: A New Legacy", 2021, "Family/Comedy", 2, "Malcolm D. Lee", "LeBron James and others", "space-jam.jpg", "Basketball moments", 12.15, 9.25, 0);
 
 INSERT INTO `qacinemas`.`screentime` (`SCREENTIME_ID`, `SCREENTIME_MOVIE`, `SCREENTIME_DAY`, `SCREENTIME_TIME`, `SCREEN_TYPE`)
 VALUES
@@ -89,19 +99,19 @@ VALUES
     (11, 1, "Sunday", "18:15", "Standard"),
     (12, 1, "Sunday", "20:30", "Standard");
 
-INSERT INTO `qacinemas`.`booking` (`FORM_ID`, `CUSTOMER_NAME`, `ADULTS`, `CHILDS`, `CONCESSION`, `SCREEN_DATE`, `SCREEN_ID`)
+INSERT INTO `qacinemas`.`booking` (`FORM_ID`, `CUSTOMER_NAME`, `ADULTS`, `CHILDS`, `CONCESSION`, `SCREEN_DATE`, `SCREEN_ID`, `MOVIE_ID`)
 VALUES
-    (1, "Piers", 1, 1, "Popcorn, HotDog", "30/2/2021", 1),
-    (2, "Ayub", 1, 1, "None", "30/2/2021", 1),
-    (3, "Jake", 1, 1, "Large Coke, medium popcorn", "30/2/2021", 1),
-    (4, "Jas", 1, 1, "Tango Ice Blast", "30/2/2021", 1),
-    (5, "Simon", 1, 1, "M&Ms", "30/2/2021", 1),
-    (6, "Iqra", 1, 1, "Minstrels", "30/2/2021", 1);
+    (1, "Piers", 1, 1, "Popcorn, HotDog", "30/2/2021", 1, 1),
+    (2, "Ayub", 1, 1, "None", "30/2/2021", 1, 2),
+    (3, "Jake", 1, 1, "Large Coke, medium popcorn", "30/2/2021", 1, 3),
+    (4, "Jas", 1, 1, "Tango Ice Blast", "30/2/2021", 1, 4),
+    (5, "Simon", 1, 1, "M&Ms", "30/2/2021", 1, 2),
+    (6, "Iqra", 1, 1, "Minstrels", "30/2/2021", 1, 3);
 
-INSERT INTO `qacinemas`.`discussionboard` (`POST_ID`, `CONTENT`, `POST_DATETIME`, `MOVIE_ID`, `MOVIE_RATING`)
+INSERT INTO `qacinemas`.`discussionboard` (`POST_ID`, `USERNAME`, `CONTENT`, `POST_DATETIME`, `MOVIE_ID`, `MOVIE_RATING`)
 VALUES
-(1, "Oh dear oh dear oh dear... Talks of Leonardo getting an oscar for this are poor.
+(1, "PCMBARBER", "Oh dear oh dear oh dear... Talks of Leonardo getting an oscar for this are poor.
 Why don't we not just just leave this were we found it... At the bottom of the ocean!",
  "17/02/2021 12:34", 1, 9),
-(2, "Welp, this was interesting, certainly expected us to feel for the toys but wow... they're awful!",
+(2, "JDBRAC","Welp, this was interesting, certainly expected us to feel for the toys but wow... they're awful!",
  "17/02/2021 12:48", 3, 9);

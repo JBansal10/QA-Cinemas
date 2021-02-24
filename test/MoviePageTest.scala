@@ -14,6 +14,10 @@ class MoviePageTest extends AnyFlatSpec with WebBrowser with BeforeAndAfter with
   implicit val webDriver: WebDriver = new HtmlUnitDriver()
   webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
 
+  org.slf4j.LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME)
+    .asInstanceOf[ch.qos.logback.classic.Logger]
+    .setLevel(ch.qos.logback.classic.Level.ERROR)
+
   behavior of "Movie page"
 
   it should "be able to be navigated to from the listings page" in {

@@ -1,27 +1,20 @@
 @import Persistence.Domain.Movie
-@(movies: Seq[Movie])
+@(title: String, movies: Seq[Movie])
 
 
-@main("Listings") {
+@main(title) {
     <!-- cards are not centered in their columns for some reason -->
-    <div class="container">
+    <div class="container text-light">
+        <h1 id="get">@title</h1>
         <div class="card-deck m-2 mb-20 text-dark">
             <div class="row">
                 @for(movie <- movies) {
                         <div class="col">
-                            <div class="card text-center m-2" style="width: 22rem;">
+                            <div class="card text-center m-2" style="width: 20rem;">
                                 <a href="/movie/@movie.id">
                                     <img id="@movie.mName poster" class="card-image-top" src='@routes.Assets.versioned("images/" + movie.imageURL)' alt="movie poster">
                                 </a>
                                 <div class="card-body">
-                                    <div class="Rating">
-                                        <!-- TODO actually get a rating from the database or get rid of this -->
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
                                     <h5 class="card-title">@movie.mName</h5>
                                     <p class="card-text">@movie.desc</p>
                                 </div>

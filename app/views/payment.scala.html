@@ -1,18 +1,51 @@
 @import views.html.helper.form
 @import Persistence.Domain.paymentObj.Payment
-@(form: Form[Payment])(implicit messages: Messages)
+@(form: Form[Payment], price: BigDecimal)(implicit messages: Messages)
 
 @main("payment page") {
-    <h1>Payment page</h1>
+    <div class="container text-light">
+        <br><h1 id="get">Payment Page</h1><hr/>
+    <h3>Total price: £@price</h3>
     @helper.form(routes.HomeController.createPayment()){
         <div class="form-floating">
-            @helper.inputText(form("cardHolderName"), Symbol("label") -> "cardHolderName", Symbol("showConstraints") -> false)
-            @helper.inputText(form("cardNo"), Symbol("label") -> "cardNo", Symbol("showConstraints") -> false)
-            @helper.inputText(form("expiryDate"), Symbol("label") -> "expiryDate", Symbol("showConstraints") -> false)
-            @helper.inputText(form("securityCode"), Symbol("label") -> "securityCode", Symbol("showConstraints") -> false)
-            @helper.inputText(form("bookingID"), Symbol("label") -> "bookingID", Symbol("showConstraints") -> false)
-            <button class="btn btn-primary" type="submit">Submit!</button>
+            <h4>Booking ID: @form("bookingID").value</h4>
+            <div style="display: none">
+                @helper.inputText(
+                    form("bookingID"),
+                    Symbol("label") -> "securityCode",
+                    Symbol("showConstraints") -> false,
+                    Symbol("readonly") -> "readonly"
+                )
+            </div>
+            @helper.inputText(
+                form("cardHolderName"),
+                Symbol("label") -> "cardHolderName",
+                Symbol("_showConstraints") -> false,
+                Symbol("_showErrors") -> false
+            )
+            @helper.inputText(
+                form("cardNo"),
+                Symbol("label") -> "cardNo",
+                Symbol("_showConstraints") -> false,
+                Symbol("_showErrors") -> false
+            )
+            @helper.inputText(
+                form("expiryDate"),
+                Symbol("label") -> "expiryDate",
+                Symbol("_showConstraints") -> false,
+                Symbol("_showErrors") -> false
+            )
+            @helper.inputText(
+                form("securityCode"),
+                Symbol("label") -> "securityCode",
+                Symbol("_showConstraints") -> false,
+                Symbol("_showErrors") -> false
+            )
+
+
+            <button class="btn btn-primary" type="submit" id="submit">Submit!</button>
         </div>
+    </div>
     }
 
 

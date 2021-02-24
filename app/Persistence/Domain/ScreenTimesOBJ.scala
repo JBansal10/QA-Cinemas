@@ -23,7 +23,7 @@ object ScreenTimesOBJ {
     def showTime = column[String]("SCREENTIME_TIME")
     def screenType = column[String]("SCREEN_TYPE")
 
-    def movie = foreignKey("fk_movie_id", mID, movies)(_.id, onDelete = ForeignKeyAction.Cascade)
+    def movie = foreignKey("fk_movie_id_screen", mID, movies)(_.id, onDelete = ForeignKeyAction.Cascade)
 
     def * = (id, mID, showDay, showTime, screenType) <> (ScreenTime.tupled, ScreenTime.unapply)
   }

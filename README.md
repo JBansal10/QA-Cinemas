@@ -17,7 +17,8 @@ Download the following to your local machine:
 
 ### Getting Started
 
-Clone this repository to your PC. Open MySQL Workbench and create a new connection with the following settings (these settings can be changed later in app/conf/extra-config.conf):
+1. Clone this repository to your PC. 
+2. Open MySQL Workbench and create a new connection with the following settings (these settings can be changed later in app/conf/extra-config.conf):
 
 * Port: 3306 
 * Default Schema: qacinemas
@@ -28,7 +29,7 @@ Clone this repository to your PC. Open MySQL Workbench and create a new connecti
 
 ## Running the tests
 
-To Open the terminal in IntelliJ and enter the following command:
+Navigate into the QA-cinemas folder and enter the following command in a command line interface:
 ```
 sbt test
 ```

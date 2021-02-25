@@ -28,7 +28,7 @@ Clone this repository to your PC. Open MySQL Workbench and create a new connecti
 
 ## Running the tests
 
-Navigate into the QA-cinemas folder and enter the following command in a command line interface:
+Navigate into the QA-cinemas folder and enter the following in a command line interface:
 ```
 sbt test
 ```

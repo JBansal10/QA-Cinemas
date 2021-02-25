@@ -27,9 +27,6 @@ Clone this repository to your PC. Open MySQL Workbench and create a new connecti
 ------------------- INSTRUCTIONS HERE ON HOW TO GET THE TABLES ----------------
 
 ------------------- INSTRUCTIONS HERE ON HOW TO RUN .SBT ----------------
-```
-sbt test
-```
 
 ## Running the tests
 

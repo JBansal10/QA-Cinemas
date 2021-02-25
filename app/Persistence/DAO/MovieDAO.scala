@@ -34,11 +34,9 @@ object MovieDAO {
     db.run(movieTable.filter(_.id === booking.movieID).result.headOption).map{ movie =>
       movie.get.aPrice * booking.adults + movie.get.cPrice * booking.childs
     }recover {
-      case exception: Exception => exception.printStackTrace();
-        bidDec
+      case exception: Exception => bidDec
     }
   }
-  def getLastIndex(): Future[Option[Booking]] = db.run(bookingTable.sortBy(_.id.desc).result.headOption)
 }
 
 

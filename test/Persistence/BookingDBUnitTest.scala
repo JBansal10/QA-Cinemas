@@ -48,6 +48,4 @@ class BookingDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with Matchers 
       else assert(false)
     }
   }
-
-
 }

@@ -29,4 +29,3 @@ libraryDependencies ++= Seq(
 libraryDependencies += "javax.mail" % "mail" % "1.4.7"
 libraryDependencies += "com.github.daddykotex" %% "courier" % "3.0.0-M2a"
 libraryDependencies += "javax.mail" % "javax.mail-api" % "1.6.0"
-

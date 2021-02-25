@@ -31,10 +31,16 @@ class PaymentDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with Matchers 
   }
 
   it should "create a payment when when create is called" in {
-    val pay: Payment = new Payment(1,"john",1243131, "12/20", 123, 1)
+    val pay: Payment = new Payment(1,"john","1243131", "12/20", "123", 1)
     PaymentDAO.create(pay) map {result =>
       if (result.contains("payment details submitted successfully")) assert(true)
       else assert(false)
+    }
+  }
+
+  it should "return the index of the last payment in the test data" in {
+    PaymentDAO.getLastIndex() map { result =>
+      assert(result == 1)
     }
   }
 }

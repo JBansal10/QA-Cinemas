@@ -4,6 +4,10 @@ This project implements a full-stack Web application for a Cinema chain called Q
 
 <img src="https://i.ibb.co/hmnVB2K/QAhome.png" alt="QAhome" border="0" />
 
+### Prerequisites
+
+* jdk-14.0.1
+
 ### Installing
 
 Download the following to your local machine:
@@ -19,11 +23,6 @@ Clone this repository to your PC. Open MySQL Workbench and create a new connecti
 * Default Schema: qacinemas
 * Username: root
 * Password: root
-
-### Prerequisites
-
-* jdk-14.0.1
-
 
 ## Running the tests
 

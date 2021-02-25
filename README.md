@@ -24,6 +24,8 @@ Clone this repository to your PC. Open MySQL Workbench and create a new connecti
 * Username: root
 * Password: root
 
+------------------- INSTRUCTIONS HERE ON HOW TO GET THE TABLES ----------------
+
 ## Running the tests
 
 To Open the terminal in IntelliJ and enter the following command:

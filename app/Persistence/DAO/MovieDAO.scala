@@ -1,5 +1,8 @@
 package Persistence.DAO
 
+
+import Persistence.DAO.BookingDAO.bookingTable
+
 import Persistence.Domain.BookingFormOBJ.Booking
 import Persistence.Domain._
 import slick.jdbc.MySQLProfile.backend.Database
@@ -18,7 +21,7 @@ object MovieDAO {
 
   def readById(id: Int): Future[Option[Movie]] = db.run(movieTable.filter(_.id === id).result.headOption)
 
-  def search(term: String): Future[Seq[Movie]] = { // TODO need to test this
+  def search(term: String): Future[Seq[Movie]] = {
     val formedTerm = "%" + term + "%"
     // cant reduce the below statement
     val query = movieTable.filter(m => (m.mName like formedTerm) || (m.director like formedTerm) || (m.actors like formedTerm))
@@ -31,8 +34,9 @@ object MovieDAO {
     db.run(movieTable.filter(_.id === booking.movieID).result.headOption).map{ movie =>
       movie.get.aPrice * booking.adults + movie.get.cPrice * booking.childs
     }recover {
-      case exception: Exception => exception.printStackTrace();
-        bidDec
+      case exception: Exception => bidDec
     }
   }
 }
+
+

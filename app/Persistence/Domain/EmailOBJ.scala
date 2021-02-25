@@ -17,18 +17,19 @@ object EmailOBJ {
       .as("teamfireqa@gmail.com", "A12345678B!")
       .startTls(true)()
 
-
   def emailing(email: Email) = {
     val text = new StringBuilder()
     text.append("From: ").append(email.name).append(" <").append(email.from).append(">\n").append(email.content)
     mailer(Envelope.from("teamfireqa" `@` "gmail.com")
       .to("teamfireqa" `@` "gmail.com") // can change destination
       .subject("QACinemas website from " + email.name)
-      .content(Text(text.mkString))).onComplete {
-      case Success(value) => println("message delivered")
-      case Failure(exception) => exception.printStackTrace()
+      .content(Text(text.mkString))).map(res => "Email successfully sent!").recover{
+      case ex: Exception =>
+        ex.getCause.getMessage
     }
-  }
+
+    }
+
 
   object emailContactForm {
     val submitForm = Form(
@@ -39,5 +40,4 @@ object EmailOBJ {
       )(Email.apply)(Email.unapply)
     )
   }
-
 }

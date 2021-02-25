@@ -12,6 +12,10 @@ class MovieClassificationTest extends flatspec.AnyFlatSpec with BeforeAndAfter w
   implicit val webDriver: WebDriver = new HtmlUnitDriver()
   webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS)
 
+  org.slf4j.LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME)
+    .asInstanceOf[ch.qos.logback.classic.Logger]
+    .setLevel(ch.qos.logback.classic.Level.ERROR)
+
   "clicking on About Us in navbar" should "take you to About Us page" in {
     go to host
     click on id("aboutusDropdown")

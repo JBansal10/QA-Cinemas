@@ -5,7 +5,10 @@
     <div class="container text-light">
     <h1>Discussion Board Moderation</h1>
         @for(dboard <- readDBoard){
-            <li>@dboard </li>
+            <ul>
+                <li>@dboard</li>
+                <li><a href="deletedboard/@dboard.id">Delete!</a></li>
+            </ul>
         }
     </div>
 }

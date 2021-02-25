@@ -11,6 +11,7 @@ import Persistence.Domain.{Movie, SearchOBJ}
 import Persistence.DAO.{MovieDAO, ScreenTimeDAO}
 import Persistence.Domain.{EmailOBJ, Movie}
 import Persistence.Domain.ScreenTimesOBJ.ScreenTime
+import play.api.libs.Codecs.sha1
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import javax.inject._
@@ -39,7 +40,11 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def listingsGallery = Action.async { implicit request =>
-    MovieDAO.readAll() map(movies => Ok(views.html.listingsgallery(movies)))
+    MovieDAO.readAll() map(movies => Ok(views.html.listingsgallery("Listings gallery", movies.filter(_.released == true))))
+  }
+
+  def newReleases = Action.async { implicit request =>
+    MovieDAO.readAll() map(movies => Ok(views.html.listingsgallery("Upcoming releases", movies.filter(_.released == false))))
   }
 
   def readID(id: Int) = Action.async(implicit request =>
@@ -51,6 +56,18 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       }
     }
   )
+
+  def deleteDiscBoard(id: Int) = Action { implicit request =>
+    DiscussionBoardDAO.delete(id).onComplete{
+      case Success(1) =>
+        println("Discussion board entry has been deleted!")
+      case Success(0) =>
+        println("Something went wrong and the entry was not deleted")
+      case Failure(error) =>
+        error.printStackTrace()
+    }
+    Redirect("/adminboard")
+  }
 
   def discBoardRead() = Action.async {implicit request => DiscussionBoardDAO.readAll() map (working => Ok(views.html.AdminDiscBoard(working)))}
 
@@ -73,6 +90,7 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
         exception.printStackTrace()
     }
   }
+
   def homepage = Action {
     Ok(views.html.homepage("Welcome to QA Cinemas!"))
   }
@@ -81,15 +99,13 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     Ok(views.html.aboutUs())
   }
 
-
   def contactUs = Action { implicit request =>
     EmailOBJ.emailContactForm.submitForm.bindFromRequest().fold({ formWithErrors =>
-      println("not sneding")
-      BadRequest(views.html.contactUs(formWithErrors))
+       BadRequest(views.html.contactUs(formWithErrors))
     }, { widget =>
-      println("sending email")
+      // could send to an error page on failure to send
       EmailOBJ.emailing(widget)
-      Ok(views.html.contactUs(EmailOBJ.emailContactForm.submitForm))
+      Ok(views.html.emailconfirmation())
     })
   }
 
@@ -110,10 +126,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       if (booking.isDefined) {
         MovieDAO.totalPrice(booking.get) map { price =>
           PaymentForm.submitForm.bindFromRequest().fold({ formWithErrors =>
-            BadRequest(views.html.payment(PaymentForm.submitForm.fill(Payment(0,"", 0, "", 0, booking.get.movieID)), price))
+            BadRequest(views.html.payment(PaymentForm.submitForm.fill(Payment(0,"", "", "", "", booking.get.id)), price))
           }, { widget =>
             println("form complete")
-            createP(widget)
+            createP(Payment(0, widget.cardHolderName, sha1(widget.cardNo), sha1(widget.expiryDate), sha1(widget.securityCode), widget.bookingID))
             Redirect("/bookingcomplete/" + booking.get.id)
           })
         }
@@ -128,13 +144,19 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
     }
   }
 
-  def createBooking() = Action { implicit request =>
-    bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
-      BadRequest(views.html.booking(bookingFormWithErrors))
-    }, { widget =>
-      createB(widget)
-      Redirect("/payment")
-    })
+  def createBooking(id:Int) = Action.async { implicit request =>
+    MovieDAO.readById(id).flatMap { movie =>
+      if(movie.isDefined) {
+        ScreenTimeDAO.readByMID(id) map { screentimes =>
+          bookingForm.bookForm.bindFromRequest().fold({ bookingFormWithErrors =>
+            BadRequest(views.html.booking(bookingForm.bookForm.fill(Booking(0, "", "", 1, 0, "", 1, movie.get.id)), id, movie.get, screentimes))
+          }, { widget =>
+            createB(widget)
+            Redirect("/payment")
+          })
+        }
+      }else Future {NotFound(views.html.error("Error 404", "Booking not found."))}
+    }
   }
 
   def createB(book: Booking): Unit = {
@@ -152,7 +174,6 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
       case None => NotFound(views.html.error("Error 404", "Could not find the booking."))
     }
   }
-
 
   def search = Action.async { implicit request =>
     SearchOBJ.searchForm.bindFromRequest.fold(
@@ -174,5 +195,10 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   }
 
   def tempToDo = TODO
+
+  def bookings() = Action.async{ implicit request =>
+    MovieDAO.readAll() map(movies => Ok(views.html.bookings(movies.filter(_.released == true))))
+  }
+
 }
 

@@ -1,51 +1,80 @@
-# QACinemas
+# QA Cinema
 
-Cinema website
+This project implements a full-stack Web application for a Cinema chain called QA Cinemas. The website presents information about movies, listings and upcoming releases as well as functionality for bookings and payment. The Scrum framework was used for agile development of this project, this was achieved with the software JIRA. [Link to JIRA project](https://ihussain.atlassian.net/secure/RapidBoard.jspa?rapidView=4&projectKey=QAC&view=planning.nodetail&issueLimit=100&atlOrigin=eyJpIjoiYTg1NjYxMjA0ZWE5NDFhY2E0MzRhODZmOTU0YThiMGIiLCJwIjoiaiJ9)
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
-JIRA LINK HERE
+<img src="https://i.ibb.co/hmnVB2K/QAhome.png" alt="QAhome" border="0" />
 
 ### Prerequisites
 
-* Scala Play
+* jdk-14.0.1
 
 ### Installing
 
-Instructions
+Download the following to your local machine:
+
+1. [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
+2. [sbt](https://www.scala-sbt.org/download.html)
+
+### Getting Started
+
+Clone this repository to your PC. Open MySQL Workbench and create a new connection with the following settings (these settings can be changed later in app/conf/extra-config.conf):
+
+* Port: 3306 
+* Default Schema: qacinemas
+* Username: root
+* Password: root
+
+Navigate to:
+```
+/QA-Cinemas
+```
+Open the terminal and enter the following command:
+```
+$ sbt dist
+```
+Navigate to the following directory and unzip the file "qa-cinemas-1.0" into the same directory:
+```
+C:\Users\Ayub\Desktop\team scala proj\QA-Cinemas\target\universal
+```
+Navigate to the following directory:
+```
+C:\Users\Ayub\Desktop\team scala proj\QA-Cinemas\target\universal\qa-cinemas-1.0\qa-cinemas-1.0\bin
+```
+Enter the following command:
+```
+$ qa-cinemas -Dplay.http.secret.key=team-fire
+```
+
+Open a browser and enter the following address:
+```
+http://localhost:9000/
+```
 
 ## Running the tests
 
-Instructions for running the tests 
-
+Navigate into the QA-cinemas folder and enter the following in a command line interface:
 ```
-sbt test
+$ sbt test
 ```
-### Unit Tests
+### Unit & Integration Tests
 
-unit tests details here
-### Integration Tests
+All tests passed. Classes that were tested exceeded the industry standard coverage of 80%.
 
-integration tests here
+<img src="https://i.ibb.co/9n0Smnz/pasted-image-0.png" alt="pasted-image-0" border="0" />
 
-### And coding style tests
-
-coding style tests here if we can
+<img src="https://i.ibb.co/6sdp8jt/Microsoft-Teams-image.png" alt="Microsoft-Teams-image" border="0" />
 
 ## Built With
 
-* [Play](https://www.playframework.com/) - Dependency Management
-
+* sbt - Dependency Management
 
 ## Authors
 
-* **Jasdeep Bansal**
-* **Simon Forster**  - [sforsteracademytrainee](https://github.com/sforsteracademytrainee)
-* **Iqra Hussain**
-* **Jake Reid**
-* **Ayub Yusuf**
+* **Jasdeep Bansal** - [JBansal10](https://github.com/JBansal10)
+* **Simon Forster** - [sforsteracademytrainee](https://github.com/sforsteracademytrainee)
+* **Iqra Hussain** - [qa-ihussain](https://github.com/qa-ihussain)
+* **Jake Reid** - [JakeReid2020](https://github.com/JakeReid2020)
+* **Ayub Yusuf** - [ayub96](https://github.com/ayub96)
 
 ## License
 

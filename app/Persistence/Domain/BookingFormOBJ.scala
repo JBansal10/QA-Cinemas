@@ -26,7 +26,7 @@ object BookingFormOBJ {
     def movieID = column[Int]("MOVIE_ID")
 
     def screentimes = foreignKey("fk_screentime_id", screenID, screentime)(_.id, onDelete = ForeignKeyAction.Cascade)
-    def movies = foreignKey("fk_movie_id", movieID, movie)(_.id, onDelete = ForeignKeyAction.Cascade)
+    def movies = foreignKey("fk_movie_id_booking", movieID, movie)(_.id, onDelete = ForeignKeyAction.Cascade)
 
     def * = (id, screenDate, cName, adults, childs, concession, screenID, movieID) <> (Booking.tupled, Booking.unapply)
 

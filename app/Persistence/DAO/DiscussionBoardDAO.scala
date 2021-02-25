@@ -20,6 +20,8 @@ object DiscussionBoardDAO {
     }
   }
 
-    def readAll(): Future[Seq[DiscussionBoard]] = db.run(boardTable.result)
+  def readAll(): Future[Seq[DiscussionBoard]] = db.run(boardTable.result)
+
+  def delete(id: Int): Future[Int] = db.run(boardTable.filter(_.id === id).delete)
 
 }

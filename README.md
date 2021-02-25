@@ -4,15 +4,16 @@ This project implements a full-stack Web application for a Cinema chain called Q
 
 <img src="https://i.ibb.co/hmnVB2K/QAhome.png" alt="QAhome" border="0" />
 
-
-
 ## Getting Started
 
-Clone this repository to your PC.
+Clone this repository to your PC. Open MySQL Workbench and create a new connection with the following settings:
+
+* Port: 3306 
+* Username: root
+* Password: root
 
 ### Prerequisites
 
-* Scala Play
 * jdk-14.0.1
 
 ### Installing

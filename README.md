@@ -32,7 +32,7 @@ Open the terminal and enter the following command:
 ```
 $ sbt dist
 ```
-Navigate to the following directory and unzip the file "qa-cinemas-1.0" into the same directory
+Navigate to the following directory and unzip the file "qa-cinemas-1.0" into the same directory:
 ```
 C:\Users\Ayub\Desktop\team scala proj\QA-Cinemas\target\universal
 ```

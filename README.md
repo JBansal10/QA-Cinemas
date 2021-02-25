@@ -36,7 +36,7 @@ Navigate to the following directory and unzip the file "qa-cinemas-1.0" into the
 ```
 C:\Users\Ayub\Desktop\team scala proj\QA-Cinemas\target\universal
 ```
-Navigate the the following directory:
+Navigate to the following directory:
 ```
 C:\Users\Ayub\Desktop\team scala proj\QA-Cinemas\target\universal\qa-cinemas-1.0\qa-cinemas-1.0\bin
 ```
@@ -49,7 +49,6 @@ Open a browser and enter the following address:
 ```
 http://localhost:9000/
 ```
-
 
 ## Running the tests
 

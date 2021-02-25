@@ -30,7 +30,7 @@ Navigate to:
 ```
 Open the terminal and enter the following command:
 ```
-sbt dist
+$ sbt dist
 ```
 Navigate to the following directory and unzip the file "qa-cinemas-1.0" into the same directory
 ```
@@ -42,7 +42,7 @@ C:\Users\Ayub\Desktop\team scala proj\QA-Cinemas\target\universal\qa-cinemas-1.0
 ```
 Enter the following command:
 ```
-qa-cinemas -Dplay.http.secret.key=team-fire
+$ qa-cinemas -Dplay.http.secret.key=team-fire
 ```
 
 Open a browser and enter the following address:
@@ -55,7 +55,7 @@ http://localhost:9000/
 
 Navigate into the QA-cinemas folder and enter the following in a command line interface:
 ```
-sbt test
+$ sbt test
 ```
 ### Unit & Integration Tests
 

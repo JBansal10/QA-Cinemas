@@ -46,11 +46,11 @@ coding style tests here if we can
 
 ## Authors
 
-* **Jasdeep Bansal**
-* **Simon Forster**  - [sforsteracademytrainee](https://github.com/sforsteracademytrainee)
-* **Iqra Hussain**
-* **Jake Reid**
-* **Ayub Yusuf**
+* **Jasdeep Bansal** - [JBansal10](https://github.com/JBansal10)
+* **Simon Forster** - [sforsteracademytrainee](https://github.com/sforsteracademytrainee)
+* **Iqra Hussain** - [qa-ihussain](https://github.com/qa-ihussain)
+* **Jake Reid** - [JakeReid2020](https://github.com/JakeReid2020)
+* **Ayub Yusuf** - [ayub96](https://github.com/ayub96)
 
 ## License
 

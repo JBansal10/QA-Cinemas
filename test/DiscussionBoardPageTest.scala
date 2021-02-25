@@ -52,7 +52,7 @@ class DiscussionBoardPageTest extends flatspec.AnyFlatSpec with WebBrowser with 
     click on xpath("/html/body/div/div/div/div[1]/form/div/button")
 
     go to host + "adminboard"
-    assert(find(xpath("/html/body/div/div/ul[3]/li[1]")).get.text.contains("This is test content"))
+    assert(find(xpath("/html/body/div/div/ul[4]/li[1]")).get.text.contains("This is test content"))
   }
 
 }

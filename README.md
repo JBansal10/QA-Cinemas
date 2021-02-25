@@ -26,6 +26,11 @@ Clone this repository to your PC. Open MySQL Workbench and create a new connecti
 
 ------------------- INSTRUCTIONS HERE ON HOW TO GET THE TABLES ----------------
 
+Navigate to the QA-cinemas folder and enter the following in a command line interface:
+```
+sbt test
+```
+
 ## Running the tests
 
 Navigate into the QA-cinemas folder and enter the following in a command line interface:

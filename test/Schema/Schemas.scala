@@ -53,7 +53,9 @@ object Schemas {
     sqlu"INSERT INTO booking values (6, '30/2/2021', 'Iqra', 1, 1, 'Minstrels', 1, 1)",
 
     sqlu"INSERT INTO discussionboard values (1, 'PCMBARBER', 'Oh dear oh dear oh dear... Talks of Leonardo getting an oscar for this are poor. Why dont we not just just leave this were we found it... At the bottom of the ocean!',  '17/02/2021 12:34', 1, 9, false)",
-    sqlu"INSERT INTO discussionboard values (2, 'JDBRAC','Welp, this was interesting, certainly expected us to feel for the toys but wow... they are awful!', '17/02/2021 12:48', 3, 9, false)"
+    sqlu"INSERT INTO discussionboard values (2, 'JDBRAC','Welp, this was interesting, certainly expected us to feel for the toys but wow... they are awful!', '17/02/2021 12:48', 3, 9, false)",
+
+    sqlu"INSERT INTO payment values (1, 'John', 'QWAFSHG', 'ARHAGEFSDA', 'JTREHGEGSGF', 1)"
   )
 
 

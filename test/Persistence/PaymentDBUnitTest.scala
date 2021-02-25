@@ -37,4 +37,10 @@ class PaymentDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with Matchers 
       else assert(false)
     }
   }
+
+  it should "return the index of the last payment in the test data" in {
+    PaymentDAO.getLastIndex() map { result =>
+      assert(result == 1)
+    }
+  }
 }

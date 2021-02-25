@@ -16,73 +16,75 @@
                         <p class="lead">Directed by @movie.director and featuring @(movie.actors+ ".") Rated @(movie.aRating + ".")</p>
                         <hr class="my-4">
                         <p>@movie.desc</p>
-                        <table class="table text-light">
-                            <thead>
-                                <tr>
-                                    <td scope="col">Day</td>
-                                    <td scope="col">Times</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Monday</th>
-                                    <td>
+                        @if(movie.released) {
+                            <table class="table text-light">
+                                <thead>
+                                    <tr>
+                                        <td scope="col">Day</td>
+                                        <td scope="col">Times</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Monday</th>
+                                        <td>
                                         @for(t <- times.filter(_.showDay == "Monday")) {
-                                            @(t.showTime + " (" +t.screenType+") ")
+                                            @(t.showTime + " (" + t.screenType + ") ")
                                         }
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Tuesday</th>
-                                    <td>
-                                    @for(t <- times.filter(_.showDay == "Tuesday")) {
-                                        @(t.showTime + " (" +t.screenType+") ")
-                                    }
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Wednesday</th>
-                                    <td>
-                                    @for(t <- times.filter(_.showDay == "Wednesday")) {
-                                        @(t.showTime + " (" +t.screenType+") ")
-                                    }
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Thursday</th>
-                                    <td>
-                                    @for(t <- times.filter(_.showDay == "Thursday")) {
-                                        @(t.showTime + " (" +t.screenType+") ")
-                                    }
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Friday</th>
-                                    <td>
-                                    @for(t <- times.filter(_.showDay == "Friday")) {
-                                        @(t.showTime + " (" +t.screenType+") ")
-                                    }
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Saturday</th>
-                                    <td>
-                                    @for(t <- times.filter(_.showDay == "Saturday")) {
-                                        @(t.showTime + " (" +t.screenType+") ")
-                                    }
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Sunday</th>
-                                    <td>
-                                    @for(t <- times.filter(_.showDay == "Sunday")) {
-                                        @(t.showTime + " (" +t.screenType+") ")
-                                    }
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Tuesday</th>
+                                        <td>
+                                        @for(t <- times.filter(_.showDay == "Tuesday")) {
+                                            @(t.showTime + " (" + t.screenType + ") ")
+                                        }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Wednesday</th>
+                                        <td>
+                                        @for(t <- times.filter(_.showDay == "Wednesday")) {
+                                            @(t.showTime + " (" + t.screenType + ") ")
+                                        }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Thursday</th>
+                                        <td>
+                                        @for(t <- times.filter(_.showDay == "Thursday")) {
+                                            @(t.showTime + " (" + t.screenType + ") ")
+                                        }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Friday</th>
+                                        <td>
+                                        @for(t <- times.filter(_.showDay == "Friday")) {
+                                            @(t.showTime + " (" + t.screenType + ") ")
+                                        }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Saturday</th>
+                                        <td>
+                                        @for(t <- times.filter(_.showDay == "Saturday")) {
+                                            @(t.showTime + " (" + t.screenType + ") ")
+                                        }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Sunday</th>
+                                        <td>
+                                        @for(t <- times.filter(_.showDay == "Sunday")) {
+                                            @(t.showTime + " (" + t.screenType + ") ")
+                                        }
+                                        </td>
+                                    </tr>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        }
                     </div>
                 </div>
             </div>

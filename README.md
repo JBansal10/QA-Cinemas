@@ -17,13 +17,12 @@ Download the following to your local machine:
 
 ### Getting Started
 
-1. Clone this repository to your PC. 
-2. Open MySQL Workbench and create a new connection with the following settings (these settings can be changed later in app/conf/extra-config.conf):
+Clone this repository to your PC. Open MySQL Workbench and create a new connection with the following settings (these settings can be changed later in app/conf/extra-config.conf):
 
-  ** Port: 3306 
-  ** Default Schema: qacinemas
-  ** Username: root
-  ** Password: root
+* Port: 3306 
+* Default Schema: qacinemas
+* Username: root
+* Password: root
 
 ------------------- INSTRUCTIONS HERE ON HOW TO GET THE TABLES ----------------
 

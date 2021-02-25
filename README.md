@@ -24,15 +24,42 @@ Clone this repository to your PC. Open MySQL Workbench and create a new connecti
 * Username: root
 * Password: root
 
-------------------- INSTRUCTIONS HERE ON HOW TO RUN .SBT ----------------
+Navigate to:
+```
+/QA-Cinemas
+```
+Open the terminal and enter the following command:
+```
+$ sbt dist
+```
+Navigate to the following directory and unzip the file "qa-cinemas-1.0" into the same directory:
+```
+C:\Users\Ayub\Desktop\team scala proj\QA-Cinemas\target\universal
+```
+Navigate the the following directory:
+```
+C:\Users\Ayub\Desktop\team scala proj\QA-Cinemas\target\universal\qa-cinemas-1.0\qa-cinemas-1.0\bin
+```
+Enter the following command:
+```
+$ qa-cinemas -Dplay.http.secret.key=team-fire
+```
+
+Open a browser and enter the following address:
+```
+http://localhost:9000/
+```
+
 
 ## Running the tests
 
 Navigate into the QA-cinemas folder and enter the following in a command line interface:
 ```
-sbt test
+$ sbt test
 ```
 ### Unit & Integration Tests
+
+All tests passed. Classes that were tested exceeded the industry standard coverage of 80%.
 
 <img src="https://i.ibb.co/9n0Smnz/pasted-image-0.png" alt="pasted-image-0" border="0" />
 

@@ -56,7 +56,7 @@ class DiscussionBoardDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with M
 
   it should "return an error if creating a disc board fails" in {
     try {
-      val dBoard: DiscussionBoard = new DiscussionBoard(3,"", "", "", 3, 8, false)
+      val dBoard: DiscussionBoard = new DiscussionBoard(4,"", "", "", 3, 8, false)
       DiscussionBoardDAO.create(dBoard) map {result =>
         assert(true)
       }

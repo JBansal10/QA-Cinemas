@@ -24,7 +24,6 @@ Clone this repository to your PC. Open MySQL Workbench and create a new connecti
 * Username: root
 * Password: root
 
-
 ------------------- INSTRUCTIONS HERE ON HOW TO RUN .SBT ----------------
 
 ## Running the tests
@@ -33,16 +32,11 @@ Navigate into the QA-cinemas folder and enter the following in a command line in
 ```
 sbt test
 ```
-### Unit Tests
+### Unit & Integration Tests
 
-unit tests details here
-### Integration Tests
+<img src="https://i.ibb.co/9n0Smnz/pasted-image-0.png" alt="pasted-image-0" border="0" />
 
-integration tests here
-
-### And coding style tests
-
-coding style tests here if we can
+<img src="https://i.ibb.co/6sdp8jt/Microsoft-Teams-image.png" alt="Microsoft-Teams-image" border="0" />
 
 ## Built With
 

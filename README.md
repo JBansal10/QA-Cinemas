@@ -34,6 +34,8 @@ sbt test
 ```
 ### Unit & Integration Tests
 
+46/46 tests passed.
+
 <img src="https://i.ibb.co/9n0Smnz/pasted-image-0.png" alt="pasted-image-0" border="0" />
 
 <img src="https://i.ibb.co/6sdp8jt/Microsoft-Teams-image.png" alt="Microsoft-Teams-image" border="0" />

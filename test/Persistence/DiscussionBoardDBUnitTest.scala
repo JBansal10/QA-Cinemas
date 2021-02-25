@@ -33,8 +33,10 @@ class DiscussionBoardDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with M
   }
 
   it should "create a new disc board" in {
-    val dBoard: DiscussionBoard = new DiscussionBoard(3,"TestUser", "This is test data", "15/02/2021 14:28", 3, 8, false)
-    DiscussionBoardDAO.create(dBoard).isReadyWithin(2.second) should be (true)
+    val dBoard: DiscussionBoard = new DiscussionBoard(4,"TestUser", "This is test data", "15/02/2021 14:28", 3, 8, false)
+    DiscussionBoardDAO.create(dBoard) map {result =>
+      assert(true)
+    }
   }
 
   it should "return some values" in {
@@ -47,8 +49,20 @@ class DiscussionBoardDBUnitTest extends AsyncFlatSpec with BeforeAndAfter with M
   }
 
   it should "delete an entry" in {
-    DiscussionBoardDAO.delete(1).isReadyWithin(2.second) should be (true)
+    DiscussionBoardDAO.delete(1) map {result =>
+      assert(true)
+    }
   }
 
+  it should "return an error if creating a disc board fails" in {
+    try {
+      val dBoard: DiscussionBoard = new DiscussionBoard(3,"", "", "", 3, 8, false)
+      DiscussionBoardDAO.create(dBoard) map {result =>
+        assert(true)
+      }
+    } catch {
+      case e: Exception => assert(false)
+    }
+  }
 
 }

@@ -34,7 +34,7 @@ sbt test
 ```
 ### Unit & Integration Tests
 
-46/46 tests passed.
+All tests passed. Classes that were tested exceeded the industry standard coverage of 80%.
 
 <img src="https://i.ibb.co/9n0Smnz/pasted-image-0.png" alt="pasted-image-0" border="0" />
 
